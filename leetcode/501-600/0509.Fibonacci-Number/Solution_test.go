@@ -51,3 +51,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func TestFib5(t *testing.T) {
+	fmt.Println(fib_5(30))
+}

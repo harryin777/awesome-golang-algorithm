@@ -1,6 +1,8 @@
 package Solution
 
-import "math"
+import (
+	"math"
+)
 
 func coinChange(coins []int, amount int) int {
 	dp := make([]int, amount+1)
@@ -78,4 +80,64 @@ func coinChange3(coins []int, amount int) int {
 	} else {
 		return dp[amount]
 	}
+}
+
+func CoinChange4(coins []int, amount int) int {
+
+	dpMap := make(map[int]int)
+
+	return dpCoin(coins, amount, dpMap)
+}
+
+var mm = int(^uint(0) >> 1)
+
+func dpCoin(coins []int, amount int, dpMap map[int]int) int {
+	if val, exists := dpMap[amount]; exists {
+		return val
+	}
+
+	if amount < 0 {
+		return -1
+	}
+	if amount == 0 {
+		return 0
+	}
+	val := mm
+	for i := 0; i < len(coins); i++ {
+		res := dpCoin(coins, amount-coins[i], dpMap)
+		if res == -1 {
+			continue
+		}
+		val = min(val, res+1)
+		dpMap[amount] = val
+	}
+	if val == mm {
+		return -1
+	}
+
+	return val
+}
+
+// 为啥 dp 数组中的值都初始化为 amount + 1 呢，因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币）.
+func CoinChange5(coins []int, amount int) int {
+	dp := make([]int, amount+1)
+	for i := 1; i < len(dp); i++ {
+		dp[i] = amount + 1
+	}
+	dp[0] = 0
+
+	for i := 1; i < len(dp); i++ {
+		for j := 0; j < len(coins); j++ {
+			if i-coins[j] < 0 {
+				continue
+			}
+			dp[i] = int(math.Min(float64(dp[i]), float64(dp[i-coins[j]]+1)))
+		}
+	}
+
+	if dp[amount] == amount+1 {
+		return -1
+	}
+
+	return dp[amount]
 }

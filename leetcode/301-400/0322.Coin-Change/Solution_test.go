@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"runtime"
 	"testing"
@@ -55,4 +56,11 @@ func TestSolution(t *testing.T) {
 			})
 		}
 	}
+}
+
+func TestCoinChange4(t *testing.T) {
+	//fmt.Println(CoinChange5([]int{1, 2, 5}, 11))
+	fmt.Println(CoinChange5([]int{2}, 3))
+	//fmt.Println(CoinChange5([]int{1}, 0))
+	//fmt.Println(CoinChange5([]int{2, 5, 10, 1}, 27))
 }

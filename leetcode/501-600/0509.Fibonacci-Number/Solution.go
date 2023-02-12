@@ -44,3 +44,20 @@ func fib_4(n int) int {
 	}
 	return r
 }
+
+func fib_5(n int) int {
+	if n < 2 {
+		return n
+	}
+	var tmp1 = 0
+	var tmp2 = 1
+
+	res := 0
+	for i := 2; i <= n; i++ {
+		res = tmp1 + tmp2
+		tmp1 = tmp2
+		tmp2 = res
+	}
+
+	return res
+}

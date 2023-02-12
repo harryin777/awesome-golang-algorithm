@@ -70,3 +70,27 @@ func lengthOfLIS2(nums []int) int {
 	}
 	return len(t)
 }
+
+// dp记录的是以index为末尾的最长递增子序列的长度
+func lengthOfLIS3(nums []int) int {
+	if len(nums) == 1 {
+		return 1
+	}
+
+	dp := make([]int, len(nums))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = -1
+	}
+
+	dp[0] = 1
+	var count = 0
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > nums[i-1] {
+			dp[i] = dp[i] + 1
+		} else {
+			dp[i] = max(dp[i-1], count)
+		}
+	}
+
+	return dp[len(nums)-1]
+}

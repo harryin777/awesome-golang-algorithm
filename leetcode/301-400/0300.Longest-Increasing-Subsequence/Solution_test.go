@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -55,4 +56,8 @@ func BenchmarkSolution(b *testing.B) {
 
 //	使用案列
 func ExampleSolution() {
+}
+
+func TestLengthOfLIS3(t *testing.T) {
+	fmt.Println(lengthOfLIS3([]int{4, 10, 4, 3, 8, 9}))
 }
