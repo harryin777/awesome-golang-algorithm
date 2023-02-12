@@ -59,5 +59,5 @@ func ExampleSolution() {
 }
 
 func TestLengthOfLIS3(t *testing.T) {
-	fmt.Println(lengthOfLIS3([]int{4, 10, 4, 3, 8, 9}))
+	fmt.Println(lengthOfLIS3([]int{10, 9, 2, 5, 3, 7, 101, 18}))
 }
