@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
@@ -30,10 +31,15 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func TestLongestCommonSubsequence(t *testing.T) {
+	fmt.Println(longestCommonSubsequence("adc", "dcd"))
+	//fmt.Println(longestCommonSubsequence2("adc", "dcd"))
 }

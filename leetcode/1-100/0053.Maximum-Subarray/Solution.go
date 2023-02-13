@@ -42,3 +42,42 @@ func calc(l, r int, nums []int) int {
 
 	return max(max(calc(l, mid, nums), calc(mid+1, r, nums)), lmax+rmax)
 }
+
+func maxSubArray3(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	dp := make([]int, len(nums))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = nums[i]
+	}
+
+	for i := 1; i < len(nums); i++ {
+		dp[i] = max(dp[i], dp[i-1]+dp[i])
+	}
+
+	res := ^int(^uint(0) >> 1)
+	for i := 0; i < len(dp); i++ {
+		res = max(res, dp[i])
+	}
+
+	return res
+}
+
+func maxSubArray4(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	dp0 := nums[0]
+	dp1, res := 0, dp0
+
+	for i := 1; i < len(nums); i++ {
+		dp1 = max(nums[i], dp0+nums[i])
+		dp0 = dp1
+		res = max(res, dp1)
+	}
+
+	return res
+}

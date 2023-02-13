@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -29,10 +30,15 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func TestMinDistance2(t *testing.T) {
+	fmt.Println(minDistance2("horse", "ros"))
+	fmt.Println(minDistance3("horse", "ros"))
 }

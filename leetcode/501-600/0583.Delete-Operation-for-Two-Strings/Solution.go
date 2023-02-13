@@ -31,3 +31,32 @@ func Solution(word1, word2 string) int {
 	}
 	return dp[1-loop][len(word2)]
 }
+
+func minDistance(word1 string, word2 string) int {
+	if len(word1) == 0 || len(word2) == 0 {
+		return 0
+	}
+
+	dp := make([][]int, len(word1)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, len(word2)+1)
+	}
+	for i := 0; i < len(word1); i++ {
+		for j := 0; j < len(word2); j++ {
+			if word1[i] == word2[j] {
+				dp[i+1][j+1] = dp[i][j] + 1
+			} else {
+				dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1])
+			}
+		}
+	}
+
+	return len(word2) - dp[len(word1)][len(word2)] + len(word1) - dp[len(word1)][len(word2)]
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}

@@ -7,7 +7,7 @@ func max(x, y int) int {
 	return y
 }
 
-//	动态规划
+// 动态规划
 func lengthOfLIS(nums []int) int {
 	dp, ans := []int{}, 0
 	for i := 0; i < len(nums); i++ {
@@ -22,7 +22,7 @@ func lengthOfLIS(nums []int) int {
 	return ans
 }
 
-//	贪心 + 动态规划
+// 贪心 + 动态规划
 func lengthOfLIS2(nums []int) int {
 	dp, ans := make([]int, len(nums)), 0
 	for _, v := range nums {
