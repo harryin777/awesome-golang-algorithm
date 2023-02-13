@@ -1,5 +1,7 @@
 package Solution
 
+import "fmt"
+
 func Solution(x bool) bool {
 	return x
 }
@@ -12,13 +14,16 @@ func longestPalindromeSubseq(s string) int {
 	}
 	for i := n - 1; i >= 0; i-- {
 		dp[i][i] = 1
+		fmt.Printf("i :%v  ", i)
 		for j := i + 1; j < n; j++ {
+			fmt.Printf("j :%v ", j)
 			if s[i] == s[j] {
 				dp[i][j] = dp[i+1][j-1] + 2
 			} else {
 				dp[i][j] = max(dp[i+1][j], dp[i][j-1])
 			}
 		}
+		fmt.Println()
 	}
 	return dp[0][n-1]
 }

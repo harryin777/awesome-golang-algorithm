@@ -40,6 +40,7 @@ func ExampleSolution() {
 }
 
 func TestLongestCommonSubsequence(t *testing.T) {
-	fmt.Println(longestCommonSubsequence("adc", "dcd"))
-	//fmt.Println(longestCommonSubsequence2("adc", "dcd"))
+	//fmt.Println(longestCommonSubsequence("adc", "dcd"))
+	fmt.Println(longestCommonSubsequence2("adc", "dcd"))
+	fmt.Println(longestCommonSubsequence3("adc", "dcd"))
 }
