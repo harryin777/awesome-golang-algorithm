@@ -2,6 +2,7 @@ package Solution
 
 /*
 操作
+
 	dp[i][0] 没有操作
 
 	dp[i][1] 第一次买入
@@ -31,4 +32,35 @@ func max(x, y int) int {
 		return x
 	}
 	return y
+}
+
+// dp[i][k][n] i是天数,k 是当前状态还剩余的交易次数,n 是是否持有股票,0 不持有,1 持有
+// k理解成 fee 的概念,都是在买卖操作的时候扣减 1
+func maxProfit_2(prices []int) int {
+	dp := make([][][]int, len(prices)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([][]int, 3)
+		for j := 0; j < len(dp[i]); j++ {
+			dp[i][j] = make([]int, 2)
+		}
+	}
+
+	for i := 0; i < len(dp); i++ {
+		for j := 0; j <= 2; j++ {
+			if i == 0 {
+				dp[i][j][0] = 0
+				dp[i][j][0] = -prices[i]
+				continue
+			}
+			if j == 0 {
+				dp[i][j][0] = dp[i-1][j][0]
+				dp[i][j][1] = dp[i-1][j][1]
+				continue
+			}
+			dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j][1]+prices[i-1])
+			dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0]-prices[i-1])
+		}
+	}
+
+	return dp[len(prices)][2][0]
 }

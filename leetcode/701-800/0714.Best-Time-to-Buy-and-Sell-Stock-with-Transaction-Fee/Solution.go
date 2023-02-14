@@ -29,3 +29,20 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+func maxProfit_3(prices []int, fee int) int {
+	dp := make([][]int, len(prices)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, 2)
+	}
+	dp[0][0] = 0
+	dp[0][1] = -prices[0]
+
+	for i := 1; i < len(dp); i++ {
+		// 注意这里的费用可以在买入的时候减去,也可以在卖出的时候减去,但是只能减去一次
+		dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i-1]-fee)
+		dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i-1])
+	}
+
+	return dp[len(prices)][0]
+}

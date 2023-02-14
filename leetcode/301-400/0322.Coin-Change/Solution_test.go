@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//	solution func Info
+// solution func Info
 type SolutionFuncType func([]int, int) int
 
 var SolutionFuncList = []SolutionFuncType{
@@ -18,7 +18,7 @@ var SolutionFuncList = []SolutionFuncType{
 	coinChange3,
 }
 
-//	test info struct
+// test info struct
 type Case struct {
 	name   string
 	coins  []int
@@ -26,7 +26,7 @@ type Case struct {
 	expect int
 }
 
-// 	test case
+// test case
 var cases = []Case{
 	{
 		name:   "TestCase 1",
@@ -59,8 +59,9 @@ func TestSolution(t *testing.T) {
 }
 
 func TestCoinChange4(t *testing.T) {
-	//fmt.Println(CoinChange5([]int{1, 2, 5}, 11))
-	fmt.Println(CoinChange5([]int{2}, 3))
+	fmt.Println(CoinChange4([]int{1, 2, 5}, 11))
+	fmt.Println(coinChange4([]int{1, 2, 5}, 11))
+	//fmt.Println(CoinChange5([]int{2}, 3))
 	//fmt.Println(CoinChange5([]int{1}, 0))
 	//fmt.Println(CoinChange5([]int{2, 5, 10, 1}, 27))
 }

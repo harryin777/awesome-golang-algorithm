@@ -48,3 +48,8 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func TestMaxProfit4(t *testing.T) {
+	fmt.Println(maxProfit4([]int{7, 1, 5, 3, 6, 4}))
+	fmt.Println(maxProfit4([]int{7, 6, 4, 3, 1}))
+}

@@ -45,3 +45,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func Test1(t *testing.T) {
+	fmt.Println(maxProfit_2([]int{3, 3, 5, 0, 0, 3, 1, 4}))
+}

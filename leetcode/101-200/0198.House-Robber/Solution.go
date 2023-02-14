@@ -1,6 +1,6 @@
 package Solution
 
-//	普通的动态规划
+// 普通的动态规划
 func rob(nums []int) int {
 	dp := make([][2]int, len(nums)+1)
 
@@ -12,7 +12,7 @@ func rob(nums []int) int {
 	return max(dp[len(nums)][0], dp[len(nums)][1])
 }
 
-//	优化空间
+// 优化空间
 func rob2(nums []int) int {
 	prevNo, prevYes := 0, 0
 
@@ -57,4 +57,51 @@ func max(x, y int) int {
 		return x
 	}
 	return y
+}
+
+// dp[i] 前 i 个数字 两数字的最大和
+func rob11(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+	dp := make([]int, len(nums))
+	dp[0] = nums[0]
+	dp[1] = max(nums[1], dp[0])
+
+	//这里可以优化,只使用了 i, i-1, i-2 所以你懂的
+	for i := 2; i < len(nums); i++ {
+		dp[i] = max(dp[i], max(dp[i-1], dp[i-2]+nums[i]))
+	}
+
+	res := 0
+	for i := 0; i < len(dp); i++ {
+		res = max(res, dp[i])
+	}
+
+	return res
+}
+
+// 这种才是 dp[i] i 是以 num[i] 结尾的做法
+func rob12(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+	dp := make([]int, len(nums))
+	dp[0] = nums[0]
+	dp[1] = nums[1]
+
+	for i := 2; i < len(nums); i++ {
+		val := 0
+		for j := 0; j < i-1; j++ {
+			val = max(val, dp[j])
+		}
+		dp[i] = val + nums[i]
+	}
+
+	res := 0
+	for i := 0; i < len(dp); i++ {
+		res = max(res, dp[i])
+	}
+
+	return res
 }

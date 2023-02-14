@@ -141,3 +141,26 @@ func CoinChange5(coins []int, amount int) int {
 
 	return dp[amount]
 }
+
+// dp[i] 凑成i 金额的硬币,的最少个数
+func coinChange4(coins []int, amount int) int {
+	if amount == 0 {
+		return 0
+	}
+	if amount < 0 {
+		return -1
+	}
+	val := mm
+	for _, coin := range coins {
+		res := coinChange4(coins, amount-coin)
+		if res < 0 {
+			continue
+		}
+		val = min(val, res+1)
+	}
+	if val == mm {
+		return -1
+	}
+
+	return val
+}

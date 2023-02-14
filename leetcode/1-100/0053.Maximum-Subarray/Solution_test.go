@@ -61,4 +61,5 @@ func ExampleSolution() {
 
 func TestMaxSubArray3(t *testing.T) {
 	fmt.Println(maxSubArray3([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}))
+	fmt.Println(maxSubArray31([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}))
 }

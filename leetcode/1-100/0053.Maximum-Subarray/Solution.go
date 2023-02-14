@@ -81,3 +81,28 @@ func maxSubArray4(nums []int) int {
 
 	return res
 }
+
+var minOne = ^int(^uint(0) >> 1)
+
+// dp[i]以 num[i] 结尾的最大连续子数组的和
+func maxSubArray31(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	dp := make([]int, len(nums))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = nums[i]
+	}
+
+	for i := 1; i < len(nums); i++ {
+		dp[i] = max(dp[i], dp[i-1]+nums[i])
+	}
+
+	res := minOne
+	for _, val := range dp {
+		res = max(res, val)
+	}
+
+	return res
+}

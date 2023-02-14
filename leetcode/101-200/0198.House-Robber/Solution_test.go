@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
@@ -102,10 +103,17 @@ func TestSolution4(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	//fmt.Println(rob11([]int{2, 7, 9, 3, 1}))
+	//fmt.Println(rob11([]int{1, 1}))
+	fmt.Println(rob11([]int{1, 3, 1, 3, 100}))
+	fmt.Println(rob12([]int{1, 3, 1, 3, 100}))
 }
