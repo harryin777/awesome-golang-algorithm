@@ -18,3 +18,20 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	}
 	return p
 }
+
+func getIntersectionNode2(headA, headB *ListNode) *ListNode {
+	m := make(map[*ListNode]struct{})
+	for headA != nil {
+		m[headA] = struct{}{}
+		headA = headA.Next
+	}
+
+	for headB != nil {
+		if _, ok := m[headB]; ok {
+			return headB
+		}
+		headB = headB.Next
+	}
+
+	return nil
+}

@@ -49,3 +49,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func Test1(t *testing.T) {
+	fmt.Println(removeDuplicates2([]int{0, 0, 1, 1, 1, 2, 2, 2, 2}))
+}

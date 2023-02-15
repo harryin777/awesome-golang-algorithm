@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"awesome-golang-algorithm/utils"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -41,4 +42,9 @@ func ExampleSolution() {
 
 func TestLongestPalindromeSubseq(t *testing.T) {
 	fmt.Println(longestPalindromeSubseq("cbbd"))
+}
+
+func Test2(t *testing.T) {
+	fmt.Println(pre(utils.MakePreTreeNode([]int{6, 2, 8, 4, 5})))
+	fmt.Println(Mid(utils.MakePreTreeNode([]int{6, 2, 8, 4, 5})))
 }

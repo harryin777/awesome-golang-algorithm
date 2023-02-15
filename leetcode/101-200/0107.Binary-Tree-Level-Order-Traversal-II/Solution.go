@@ -34,3 +34,35 @@ func Solution(root *TreeNode) [][]int {
 	}
 	return res
 }
+
+var depth int
+
+var res int
+
+func maxDepth(root *TreeNode) int {
+	pre(root)
+	return res
+}
+
+func pre(root *TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	depth++
+	order := []int{root.Val}
+	if root.Left == nil && root.Right == nil {
+		res = max(res, depth)
+	}
+	order = append(order, pre(root.Left)...)
+	order = append(order, pre(root.Right)...)
+	depth--
+	return order
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+
+	return y
+}

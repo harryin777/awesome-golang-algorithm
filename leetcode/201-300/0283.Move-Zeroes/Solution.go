@@ -25,3 +25,16 @@ func moveZeroes_2(nums []int) []int {
 	}
 	return nums
 }
+
+func moveZeroes_3(nums []int) []int {
+	fast, slow := 0, 0
+	for fast < len(nums) {
+		if nums[fast] != 0 {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+		fast++
+	}
+
+	return nums
+}

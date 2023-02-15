@@ -1,6 +1,9 @@
 package Solution
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestSolution(t *testing.T) {
 	t.Run("Test-1", func(t *testing.T) {
@@ -22,4 +25,8 @@ func TestSolution(t *testing.T) {
 			t.Error("GOT:", got, "WANT:", want)
 		}
 	})
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(removeElement2([]int{3, 2, 2, 3}, 3))
 }

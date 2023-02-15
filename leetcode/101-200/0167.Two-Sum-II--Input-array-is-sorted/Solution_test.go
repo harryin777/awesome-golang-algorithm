@@ -48,3 +48,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func Test1(t *testing.T) {
+	fmt.Println(twoSum3([]int{2, 3, 4}, 6))
+}

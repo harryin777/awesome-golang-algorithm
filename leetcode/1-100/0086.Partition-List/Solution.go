@@ -28,25 +28,23 @@ func partition(head *ListNode, x int) *ListNode {
 		} else {
 			rAarr = append(rAarr, head.Val)
 		}
+		head = head.Next
 	}
-	for i := len(rAarr) - 1; i >= 0; i-- {
+	for i := 0; i < len(rAarr); i++ {
 		lAarr = append(lAarr, rAarr[i])
 	}
-	res := ListNode{
+	res := &ListNode{
 		Val:  0,
 		Next: nil,
 	}
-	res.Next = &ListNode{
-		Val:  lAarr[0],
-		Next: nil,
-	}
-	tmp := res
-	for i := len(lAarr); i >= 0; i++ {
-		tmp.Next = &ListNode{
+	tmp2 := res
+	for i := 0; i < len(lAarr); i++ {
+		newOne := &ListNode{
 			Val:  lAarr[i],
 			Next: nil,
 		}
-		tmp = tmp.Next
+		tmp2.Next = newOne
+		tmp2 = tmp2.Next
 	}
-	return head
+	return res.Next
 }

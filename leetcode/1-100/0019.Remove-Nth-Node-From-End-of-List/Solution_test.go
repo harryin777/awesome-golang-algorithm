@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"awesome-golang-algorithm/utils"
 	"reflect"
 	"testing"
 )
@@ -31,4 +32,8 @@ func TestSolution(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test1(t *testing.T) {
+	removeNthFromEnd2(utils.MakeListNode([]int{1, 2}), 2)
 }

@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -54,7 +55,7 @@ func TestSolution1(t *testing.T) {
 //	}
 //}
 
-//	Manacher
+// Manacher
 func TestSolution3(t *testing.T) {
 	//	测试用例
 	cases := []struct {
@@ -131,4 +132,8 @@ func TestSolution5(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(longestPalindrome("weraba"))
 }

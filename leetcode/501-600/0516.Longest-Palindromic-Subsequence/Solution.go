@@ -1,6 +1,9 @@
 package Solution
 
-import "fmt"
+import (
+	"awesome-golang-algorithm/utils"
+	"fmt"
+)
 
 func Solution(x bool) bool {
 	return x
@@ -33,4 +36,47 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func mirrorTree(root *TreeNode) *TreeNode {
+
+	return nil
+}
+
+// 前序遍历
+func pre(root *utils.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	order := []int{root.Val}
+	if root.Left != nil {
+		order = append(order, pre(root.Left)...)
+	}
+	if root.Right != nil {
+		order = append(order, pre(root.Right)...)
+	}
+
+	return order
+}
+
+func Mid(root *utils.TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	order := make([]int, 0, 10)
+	if root.Left != nil {
+		order = append(order, pre(root.Left)...)
+	}
+	order = append(order, root.Val)
+	if root.Right != nil {
+		order = append(order, pre(root.Right)...)
+	}
+
+	return order
 }

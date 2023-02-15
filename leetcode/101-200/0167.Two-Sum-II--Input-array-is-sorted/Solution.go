@@ -31,3 +31,19 @@ func twoSum_2(numbers []int, target int) []int {
 	}
 	return []int{-1, -1}
 }
+
+func twoSum3(numbers []int, target int) []int {
+
+	res := make([]int, 0, 2)
+	for i := 0; i < len(numbers); i++ {
+		for j := i + 1; j < len(numbers); j++ {
+			if numbers[i]+numbers[j] == target {
+				res = append(res, i+1, j+1)
+				goto here
+			}
+		}
+	}
+here:
+
+	return res
+}

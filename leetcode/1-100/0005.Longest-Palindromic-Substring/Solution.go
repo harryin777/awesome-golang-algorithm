@@ -2,7 +2,7 @@ package Solution
 
 import "fmt"
 
-//	暴力查找
+// 暴力查找
 func longestPalindrome1(s string) string {
 	if len(s) == 1 {
 		return s
@@ -87,7 +87,7 @@ func longestPalindrome3(s string) string {
 	return longestPalindromeLinear(s)
 }
 
-//	初始化Manacher需要的字符串
+// 初始化Manacher需要的字符串
 func initManacherStr(s string) string {
 	ans := make([]rune, 0)
 	ans = append(ans, '$')
@@ -97,7 +97,7 @@ func initManacherStr(s string) string {
 	return string(ans)
 }
 
-//	Manacher
+// Manacher
 func longestPalindromeLinear(in string) string {
 	/*
 	*	初始化字符串，在字符串的没个字符左右都插入一个字符"$"
@@ -152,7 +152,7 @@ func extractLongest(s string, P []int) string {
 	return s[offset : offset+longestLength]
 }
 
-//	DP
+// DP
 func longestPalindrome4(s string) string {
 	n := len(s)
 	dp := [][]bool{}
@@ -215,4 +215,39 @@ func Print(x [][]bool) {
 		fmt.Println(x[i])
 	}
 	fmt.Println()
+}
+
+func longestPalindrome6(s string) string {
+	res := ""
+	for i := 0; i < len(s); i++ {
+		str1 := longestStr(s, i, i)
+		str2 := longestStr(s, i, i+1)
+		res = maxLen(res, maxLen(str1, str2))
+	}
+	return res
+}
+
+func maxLen(str1, str2 string) string {
+	if len(str1) > len(str2) {
+		return str1
+	}
+
+	return str2
+}
+
+func longestStr(s string, i, j int) string {
+	l := len(s)
+
+	left, right := i, j
+
+	for left >= 0 && right < l {
+		if s[left] == s[right] {
+			left--
+			right++
+		} else {
+			break
+		}
+	}
+
+	return s[left+1 : right]
 }
