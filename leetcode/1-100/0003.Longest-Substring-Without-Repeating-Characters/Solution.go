@@ -115,3 +115,25 @@ func Max(x, y int) int {
 	}
 	return y
 }
+
+func lengthOfLongestSubstring3(s string) int {
+	left := 0
+
+	var res []string
+	for i := 0; i < len(s); i++ {
+		res = append(res, string(s[i]))
+	}
+
+	for left < len(res) {
+		data := res[0 : left+1]
+		for i := left; i < len(res); i++ {
+			if res[left] != res[i] {
+				data = append(data, res[i])
+			}
+		}
+		res = data
+		left++
+	}
+
+	return len(res)
+}
