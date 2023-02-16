@@ -14,8 +14,8 @@ import (
 type SolutionFuncType func(*TreeNode) int
 
 var SolutionFuncList = []SolutionFuncType{
-	diameterOfBinaryTree_1,
-	//diameterOfBinaryTree_2,
+	//diameterOfBinaryTree_1,
+	//largestValues,
 }
 
 // Test case info struct
@@ -66,4 +66,26 @@ func TestSolution(t *testing.T) {
 			})
 		}
 	}
+}
+
+func Test1(t *testing.T) {
+	largestValues(&TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val: 4,
+			Left: &TreeNode{
+				Val:   11,
+				Left:  &TreeNode{Val: 7},
+				Right: &TreeNode{Val: 2},
+			},
+		},
+		Right: &TreeNode{
+			Val:  8,
+			Left: &TreeNode{Val: 13},
+			Right: &TreeNode{
+				Val:   4,
+				Left:  &TreeNode{Val: 5},
+				Right: &TreeNode{Val: 1},
+			},
+		}})
 }

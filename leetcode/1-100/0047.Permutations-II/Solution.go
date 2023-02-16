@@ -33,3 +33,39 @@ func helper(nums, res []int, visited map[int]bool, final *[][]int) {
 		res = res[:len(res)-1]
 	}
 }
+
+func permuteUnique(nums []int) [][]int {
+	if len(nums) == 0 {
+		return [][]int{}
+	}
+
+	var result [][]int
+	var dfs func([]int, map[int]bool)
+	dfs = func(path []int, indexMap map[int]bool) {
+		if len(path) == len(nums) {
+			data := make([]int, 0, len(nums))
+			for _, v := range path {
+				data = append(data, v)
+			}
+			result = append(result, data)
+		}
+
+		levelMap := make(map[int]bool)
+		for i := 0; i < len(nums); i++ {
+			if indexMap[i] || levelMap[nums[i]] {
+				continue
+			}
+			levelMap[nums[i]] = true
+			indexMap[i] = true
+			path = append(path, nums[i])
+			dfs(path, indexMap)
+			indexMap[i] = false
+			path = path[:len(path)-1]
+		}
+	}
+
+	indexMap := make(map[int]bool)
+	dfs([]int{}, indexMap)
+
+	return result
+}

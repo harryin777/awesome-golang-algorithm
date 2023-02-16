@@ -71,3 +71,68 @@ func DFS2(nums []int, curr []int) (res [][]int) {
 
 	return
 }
+
+func permute3(nums []int) [][]int {
+
+	var res [][]int
+	var dfs func(map[int]bool, []int)
+	dfs = func(used map[int]bool, path []int) {
+		if len(path) == len(nums) {
+			data := make([]int, 0, len(path))
+			for _, v := range path {
+				data = append(data, v)
+			}
+			res = append(res, data)
+		}
+
+		for _, val := range nums {
+			if used[val] {
+				continue
+			}
+			path = append(path, val)
+			used[val] = true
+			dfs(used, path)
+			used[val] = false
+			path = path[:len(path)-1]
+		}
+	}
+
+	used := make(map[int]bool, len(nums))
+	for _, val := range nums {
+		used[val] = false
+	}
+	dfs(used, []int{})
+
+	return res
+}
+
+func permute4(nums []int) [][]int {
+
+	var res [][]int
+	var dfs func([]int, int, int)
+	dfs = func(path []int, pos int, level int) {
+		if len(path) == len(nums) {
+			data := make([]int, 0, len(path))
+			for _, v := range path {
+				data = append(data, v)
+			}
+			res = append(res, data)
+		}
+
+		if level > len(nums) {
+			return
+		}
+
+		for i := pos; i < len(nums); i++ {
+			path = append(path, nums[i])
+			level++
+			dfs(path, i, level)
+			level--
+			path = path[:len(path)-1]
+		}
+	}
+
+	dfs([]int{}, 0, 1)
+
+	return res
+}

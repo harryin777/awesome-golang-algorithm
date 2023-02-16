@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -31,4 +32,8 @@ func TestSolution(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(validCheck("()()(()))", 1))
 }

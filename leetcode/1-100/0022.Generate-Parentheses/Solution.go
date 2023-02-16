@@ -17,3 +17,19 @@ func dp(prefix string, depth int, n int) []string {
 	}
 	return output
 }
+
+func validCheck(str string, n int) bool {
+	count := 0
+	for i := 0; i < len(str); i++ {
+		if str[i] == '(' {
+			count++
+		}
+		if str[i] == ')' && count == 0 {
+			return false
+		} else if str[i] == ')' {
+			count--
+		}
+	}
+
+	return true
+}

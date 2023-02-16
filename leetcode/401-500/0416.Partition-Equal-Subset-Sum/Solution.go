@@ -63,3 +63,34 @@ func canPartition2(nums []int) bool {
 
 	return dp[len(nums)][volume]
 }
+
+func canPartition3(nums []int) bool {
+	var sum int
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+	}
+
+	if sum%2 != 0 {
+		return false
+	}
+
+	sum = sum / 2
+
+	dp := make([][]bool, len(nums)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]bool, sum+1)
+		dp[i][0] = true
+	}
+
+	for i := 1; i <= len(nums); i++ {
+		for j := 1; j <= sum; j++ {
+			if j < nums[i-1] {
+				dp[i][j] = dp[i-1][j]
+			} else {
+				dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i-1]]
+			}
+		}
+	}
+
+	return dp[len(nums)][sum]
+}
