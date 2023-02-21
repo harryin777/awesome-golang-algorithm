@@ -51,3 +51,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func TestMoveZeroes_3(t *testing.T) {
+	fmt.Println(moveZeroes_3([]int{12, 3, 4, 5}))
+}

@@ -1,6 +1,9 @@
 package Solution
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func minWindow(s string, t string) string {
 	hash := make(map[uint8]int)
@@ -32,4 +35,56 @@ func minWindow(s string, t string) string {
 
 	}
 	return res
+}
+
+// 这个解法是可以的，但是超时了
+func minWindow2(s string, t string) string {
+	left, right := 0, 1
+	if !isContain(s, t) {
+		return ""
+	}
+
+	res := s
+
+	for right < len(s) {
+		tmp := s[left:right]
+		if !isContain(tmp, t) {
+			right++
+		}
+
+		tmp = s[left:right]
+		for isContain(tmp, t) {
+			if len(res) > right-left {
+				res = tmp
+			}
+			left++
+			tmp = s[left:right]
+		}
+	}
+
+	return res
+}
+
+func isContain(s, t string) bool {
+	//list := make([]int, 256)
+	for _, val := range t {
+		//list[val]++
+		if strings.Count(s, string(val)) < strings.Count(t, string(val)) {
+			return false
+		}
+	}
+
+	//for _, val := range s {
+	//	if strings.Contains(t, string(val)) {
+	//		list[val]--
+	//	}
+	//}
+	//
+	//for _, val := range list {
+	//	if val > 0 {
+	//		return false
+	//	}
+	//}
+
+	return true && len(s) >= len(t)
 }

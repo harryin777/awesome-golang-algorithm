@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
@@ -36,4 +37,8 @@ func BenchmarkSolution(b *testing.B) {
 
 //	使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(findAnagrams("cbaebabacd", "abc"))
 }

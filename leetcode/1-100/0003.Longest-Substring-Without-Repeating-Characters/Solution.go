@@ -38,13 +38,6 @@ func lengthOfLongestSubstring_1(s string) int {
 	return ans
 }
 
-func max(x, y int) int {
-	if x < y {
-		return y
-	}
-	return x
-}
-
 func lengthOfLongestSubstring_2(s string) int {
 	ans, left, m := 0, 0, map[rune]int{}
 	for right, v := range s {
@@ -56,7 +49,7 @@ func lengthOfLongestSubstring_2(s string) int {
 }
 
 // O(n) time O(1) space Solution
-func lengthOfLongestSubstring(s string) int {
+func lengthOfLongestSubstring33(s string) int {
 	var chPosition [256]int // [0, 0, 0, ...]
 	maxLength, substringLen, lastRepeatPos := 0, 0, 0
 
@@ -116,24 +109,47 @@ func Max(x, y int) int {
 	return y
 }
 
-func lengthOfLongestSubstring3(s string) int {
-	left := 0
+func lengthOfLongestSubstring(s string) int {
+	left, right := 0, 1
+	ans := ^int(^uint(0) >> 1)
+	for right <= len(s) {
+		tmp := s[left:right]
+		_ = tmp
+		c := check(s[left:right])
+		if c {
+			ans = max(ans, len(s[left:right]))
+			right++
+		}
 
-	var res []string
-	for i := 0; i < len(s); i++ {
-		res = append(res, string(s[i]))
-	}
-
-	for left < len(res) {
-		data := res[0 : left+1]
-		for i := left; i < len(res); i++ {
-			if res[left] != res[i] {
-				data = append(data, res[i])
+		for !c {
+			left++
+			c = check(s[left:right])
+			if c {
+				ans = max(ans, len(s[left:right]))
 			}
 		}
-		res = data
-		left++
 	}
 
-	return len(res)
+	return ans
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
+}
+
+func check(s string) bool {
+	duplicateMap := make(map[int32]struct{})
+	for _, val := range s {
+		if _, e := duplicateMap[val]; e {
+			return false
+		} else {
+			duplicateMap[val] = struct{}{}
+		}
+	}
+
+	return true
 }

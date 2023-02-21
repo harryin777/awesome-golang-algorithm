@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 )
@@ -33,4 +34,8 @@ func BenchmarkSolution(b *testing.B) {
 
 //	使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(minWindow2("bbaa", "aba"))
 }

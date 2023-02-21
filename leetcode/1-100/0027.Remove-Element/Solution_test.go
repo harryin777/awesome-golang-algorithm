@@ -28,5 +28,5 @@ func TestSolution(t *testing.T) {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(removeElement2([]int{3, 2, 2, 3}, 3))
+	fmt.Println(removeElement2([]int{2, 2, 3}, 2))
 }

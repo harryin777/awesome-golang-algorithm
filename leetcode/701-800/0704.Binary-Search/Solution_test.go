@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"runtime"
 	"testing"
@@ -43,4 +44,8 @@ func TestSolution(t *testing.T) {
 			})
 		}
 	}
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(search([]int{-1, 0, 3, 3, 5, 9, 12}, 3))
 }

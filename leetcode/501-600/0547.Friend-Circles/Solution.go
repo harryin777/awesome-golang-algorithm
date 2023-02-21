@@ -49,3 +49,27 @@ func union(x, y int) {
 		ans--
 	}
 }
+
+func findCircleNum2(isConnected [][]int) int {
+	var res int
+	met := make([]bool, len(isConnected))
+	for i, val := range met {
+		res++
+		if !val {
+			queue := make([]int, 0, 10)
+			queue = append(queue, i)
+			for len(queue) > 0 {
+				city := queue[0]
+				queue = queue[1:]
+				for j := 0; j < len(isConnected[city]); j++ {
+					if isConnected[city][j] == 1 {
+						queue = append(queue, j)
+						met[j] = true
+					}
+				}
+			}
+		}
+	}
+
+	return res
+}

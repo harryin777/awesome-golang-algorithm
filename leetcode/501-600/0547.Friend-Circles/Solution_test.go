@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -40,4 +41,8 @@ func BenchmarkSolution(b *testing.B) {
 
 //	使用案列
 func ExampleSolution() {
+}
+
+func TestFindCircleNum2(t *testing.T) {
+	fmt.Println(findCircleNum2([][]int{{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}))
 }

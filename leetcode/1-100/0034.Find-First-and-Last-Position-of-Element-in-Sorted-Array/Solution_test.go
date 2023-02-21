@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -57,4 +58,21 @@ func BenchmarkSolution(b *testing.B) {
 
 //	使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	//fmt.Println(searchRange3([]int{5, 7, 7, 8, 8}, 8))
+	//fmt.Println(searchRange3([]int{5, 7, 7, 8, 8, 10}, 8))
+	//fmt.Println(searchRange6([]int{5, 7, 7, 8, 8, 10}, 8))
+	//fmt.Println(LeftBound([]int{5, 7, 7, 8, 8, 10}, 8))
+	//fmt.Println(RightBound([]int{5, 7, 7, 8, 8, 10}, 8))
+	//fmt.Println(searchRange4([]int{5, 7, 7, 8, 8}, 8))
+
+	fmt.Println(LeftBound([]int{5, 7, 7, 8, 8, 8}, 10))
+	fmt.Println(RightBound([]int{5, 7, 7, 8, 8, 8}, 10))
+
+}
+
+func Test2(t *testing.T) {
+	fmt.Println(search([]int{2, 2}, 3))
 }
