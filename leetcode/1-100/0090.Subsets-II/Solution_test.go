@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -29,10 +30,15 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(subsetsWithDup([]int{4, 4, 4, 4, 1}))
+	fmt.Println(subsetsWithDup([]int{4, 4, 4, 1, 4}))
 }

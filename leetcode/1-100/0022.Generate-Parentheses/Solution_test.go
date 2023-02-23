@@ -35,5 +35,6 @@ func TestSolution(t *testing.T) {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(validCheck("()()(()))", 1))
+	//fmt.Println(validCheck("()()(()))", 1))
+	fmt.Println(generateParenthesis2(3))
 }

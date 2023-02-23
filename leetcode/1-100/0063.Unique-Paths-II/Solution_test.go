@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -31,10 +32,17 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test1(t *testing.T) {
+	fmt.Println(uniquePathsWithObstacles2([][]int{
+		{0, 0},
+		{1, 1},
+		{0, 0}}))
 }

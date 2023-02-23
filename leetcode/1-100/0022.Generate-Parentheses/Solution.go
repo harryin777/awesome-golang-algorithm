@@ -33,3 +33,35 @@ func validCheck(str string, n int) bool {
 
 	return true
 }
+
+func generateParenthesis2(n int) []string {
+	var res []string
+	var dfs func(string, int, int)
+	dfs = func(data string, open int, close int) {
+		if len(data) == n*2 {
+			res = append(res, data)
+			return
+		}
+
+		if open < n {
+			data += "("
+			open++
+			dfs(data, open, close)
+			open--
+			data = data[:len(data)-1]
+		}
+
+		if close < open {
+			data += ")"
+			close++
+			dfs(data, open, close)
+			close--
+			data = data[:len(data)-1]
+		}
+
+	}
+
+	dfs("", 0, 0)
+
+	return res
+}
