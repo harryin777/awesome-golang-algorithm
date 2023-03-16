@@ -164,3 +164,33 @@ func coinChange4(coins []int, amount int) int {
 
 	return val
 }
+
+func coinChange6(coins []int, amount int) int {
+	dp := make([][]int, len(coins)+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, amount+1)
+		for j := 0; j < len(dp[i]); j++ {
+			if i == 0 && j == 0 {
+				dp[i][j] = 0
+			} else {
+				dp[i][j] = j
+			}
+		}
+	}
+
+	for i := 1; i <= len(coins); i++ {
+		for j := 1; j <= amount; j++ {
+			if j < coins[i-1] {
+				dp[i][j] = dp[i-1][j]
+			} else {
+				dp[i][j] = min(dp[i-1][j], dp[i-1][j-coins[i-1]]+1)
+			}
+		}
+	}
+
+	if dp[len(coins)][amount] == 0 {
+		return -1
+	}
+
+	return dp[len(coins)][amount]
+}

@@ -72,3 +72,24 @@ func merge_3(nums1 []int, m int, nums2 []int, n int) {
 		tail--
 	}
 }
+
+func merge(nums1 []int, m int, nums2 []int, n int) {
+	i, j := 0, 0
+	sort := make([]int, 0, m+n)
+	for i < m && j < n {
+		if nums1[i] < nums2[j] {
+			sort = append(sort, nums1[i])
+			i++
+		} else {
+			sort = append(sort, nums2[j])
+			j++
+		}
+	}
+	if i != m {
+		sort = append(sort, nums1[i:]...)
+	}
+	if j != n {
+		sort = append(sort, nums2[j:]...)
+	}
+	copy(nums1, sort)
+}

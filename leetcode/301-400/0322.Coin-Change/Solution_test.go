@@ -61,7 +61,6 @@ func TestSolution(t *testing.T) {
 func TestCoinChange4(t *testing.T) {
 	fmt.Println(CoinChange4([]int{1, 2, 5}, 11))
 	fmt.Println(coinChange4([]int{1, 2, 5}, 11))
-	//fmt.Println(CoinChange5([]int{2}, 3))
-	//fmt.Println(CoinChange5([]int{1}, 0))
-	//fmt.Println(CoinChange5([]int{2, 5, 10, 1}, 27))
+	fmt.Println(coinChange6([]int{1, 2, 5}, 11))
+
 }

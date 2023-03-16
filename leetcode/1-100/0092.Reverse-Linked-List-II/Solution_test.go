@@ -48,3 +48,7 @@ func BenchmarkSolution(b *testing.B) {
 //	使用案列
 func ExampleSolution() {
 }
+
+func TestReverseBetween1(t *testing.T) {
+	reverseBetween1(UnmarshalListBySlice([]int{3, 5}), 1, 2)
+}

@@ -41,4 +41,5 @@ func ExampleSolution() {
 func TestMinDistance2(t *testing.T) {
 	fmt.Println(minDistance2("horse", "ros"))
 	fmt.Println(minDistance3("horse", "ros"))
+	fmt.Println(minDistance4("a", "a"))
 }

@@ -74,3 +74,7 @@ func TestSolution(t *testing.T) {
 		}
 	}
 }
+
+func TestMerge(t *testing.T) {
+	merge([]int{1, 2, 3, 0, 0, 0}, 3, []int{4, 5, 6}, 3)
+}

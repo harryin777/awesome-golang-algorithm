@@ -37,3 +37,19 @@ func BenchmarkSolution(b *testing.B) {
 //	使用案列
 func ExampleSolution() {
 }
+
+func Test917(t *testing.T) {
+	flipMatchVoyage(&TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val:   2,
+			Left:  nil,
+			Right: nil,
+		},
+		Right: &TreeNode{
+			Val:   3,
+			Left:  nil,
+			Right: nil,
+		},
+	}, []int{1, 3, 2})
+}

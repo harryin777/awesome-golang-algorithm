@@ -71,3 +71,33 @@ func reverseList(head *ListNode, cnt int) (*ListNode, *ListNode) {
 	head.Next = restHead
 	return newHead, restHead
 }
+
+func reverseBetween1(head *ListNode, left int, right int) *ListNode {
+	queue := make([]int, 0, right-left)
+	tmp := head
+	ans := new(ListNode)
+	ans.Next = head
+	count := 1
+	for tmp != nil {
+		if count >= left && count <= right {
+			queue = append(queue, tmp.Val)
+		} else if count > right {
+			break
+		}
+		count++
+		tmp = tmp.Next
+	}
+	count = 1
+	for head != nil {
+		if len(queue) != 0 && count >= left && count <= right {
+			head.Val = queue[len(queue)-1]
+			queue = queue[:len(queue)-1]
+		} else if count > right {
+			break
+		}
+		count++
+		head = head.Next
+	}
+
+	return ans.Next
+}
