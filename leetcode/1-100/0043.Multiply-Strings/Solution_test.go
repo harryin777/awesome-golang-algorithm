@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -63,4 +64,12 @@ func BenchmarkSolution(b *testing.B) {
 			b.Error("test fail")
 		}
 	})
+}
+
+func TestMultiply2(t *testing.T) {
+	fmt.Println(multiply2("25", "32"))
+}
+
+func TestAaddStrings(t *testing.T) {
+	fmt.Println(addStrings("19999", "1"))
 }

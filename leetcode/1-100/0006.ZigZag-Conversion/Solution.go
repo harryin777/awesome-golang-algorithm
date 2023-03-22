@@ -79,3 +79,46 @@ func convert3(s string, numRows int) string {
 
 	return buf.String()
 }
+
+func convert4(s string, numRows int) string {
+	if len(s) == 0 {
+		return ""
+	}
+	grid := make([][]string, numRows)
+	for i := 0; i < len(grid); i++ {
+		grid[i] = make([]string, len(s))
+	}
+
+	index := 0
+	var i, j int
+	for index < len(s) {
+		for ; i < len(grid); i++ {
+			if index == len(s) {
+				goto end
+			}
+			grid[i][j] = string(s[index])
+			index++
+		}
+
+		j++
+		for i = i - 2; i > 0; i-- {
+			if index == len(s) {
+				goto end
+			}
+			grid[i][j] = string(s[index])
+			j++
+			index++
+		}
+		i = 0
+	}
+
+end:
+	var ans string
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			ans += grid[i][j]
+		}
+	}
+
+	return ans
+}

@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -38,4 +39,9 @@ func TestSolution(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestConvert4(t *testing.T) {
+	fmt.Println(convert4("PAYPALISHIRING", 3))
+	fmt.Println(convert4("AB", 1))
 }
