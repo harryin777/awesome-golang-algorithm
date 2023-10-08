@@ -46,18 +46,24 @@ func fib_4(n int) int {
 }
 
 func fib_5(n int) int {
+	if n == 1 {
+		return 1
+	} else if n == 0 {
+		return 0
+	}
+
+	return fib_5(n-1) + fib_5(n-2)
+}
+
+func fib_6(n int) int {
 	if n < 2 {
 		return n
 	}
-	var tmp1 = 0
-	var tmp2 = 1
-
-	res := 0
+	dp := make([]int, n+1)
+	dp[0] = 0
+	dp[1] = 1
 	for i := 2; i <= n; i++ {
-		res = tmp1 + tmp2
-		tmp1 = tmp2
-		tmp2 = res
+		dp[i] = dp[i-1] + dp[i-2]
 	}
-
-	return res
+	return dp[n]
 }

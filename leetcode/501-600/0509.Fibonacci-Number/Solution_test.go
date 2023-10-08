@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//	solution func Info
+// solution func Info
 type SolutionFuncType func(int) int
 
 var SolutionFuncList = []SolutionFuncType{
@@ -20,14 +20,14 @@ var SolutionFuncList = []SolutionFuncType{
 	fib_4,
 }
 
-//	Test info struct
+// Test info struct
 type Case struct {
 	name   string
 	input  int
 	expect int
 }
 
-// 	test case
+// test case
 var cases = []Case{
 	{"TestCase 1", 2, 1},
 	{"TestCase 2", 3, 2},
@@ -50,6 +50,11 @@ func TestSolution(t *testing.T) {
 			})
 		}
 	}
+}
+
+func Test_t1(t *testing.T) {
+	fmt.Println(fib_5(9))
+	fmt.Println(fib_6(9))
 }
 
 func TestFib5(t *testing.T) {
