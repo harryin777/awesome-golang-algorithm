@@ -194,3 +194,23 @@ func coinChange6(coins []int, amount int) int {
 
 	return dp[len(coins)][amount]
 }
+
+// 这里自底向上的方法, 是从最基础的情况一步步向 amount 逼近的,所以虽然最终没有把当前数字,i 减为 0,实际上在 i 的子问题里已经构成了 i
+func coinChange7(coins []int, amount int) int {
+	if amount < 1 && len(coins) < 1 {
+		return -1
+	}
+	memo := make([]int, amount+1)
+	for i := 1; i <= amount; i++ {
+		memo[i] = math.MaxInt32
+		for _, c := range coins {
+			if i >= c && memo[i] > memo[i-c]+1 {
+				memo[i] = memo[i-c] + 1
+			}
+		}
+	}
+	if memo[amount] == math.MaxInt32 {
+		return -1
+	}
+	return memo[amount]
+}

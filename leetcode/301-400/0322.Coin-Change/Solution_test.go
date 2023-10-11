@@ -64,3 +64,7 @@ func TestCoinChange4(t *testing.T) {
 	fmt.Println(coinChange6([]int{1, 2, 5}, 11))
 
 }
+
+func TestLeastCoins(t *testing.T) {
+	fmt.Println(coinChange7([]int{5, 2}, 8))
+}

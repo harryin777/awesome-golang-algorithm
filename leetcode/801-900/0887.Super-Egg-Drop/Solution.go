@@ -1,5 +1,6 @@
 package Solution
 
-func Solution(x bool) bool {
-	return x
+func superEggDrop(k int, n int) int {
+
+	return 0
 }
