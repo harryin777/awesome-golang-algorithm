@@ -214,3 +214,28 @@ func coinChange7(coins []int, amount int) int {
 	}
 	return memo[amount]
 }
+
+func coinChange8(coins []int, amount int) int {
+	if amount == 0 {
+		return 0
+	}
+
+	if amount < 0 {
+		return -1
+	}
+
+	res := math.MaxInt32
+	for _, coin := range coins {
+		subProblem := coinChange8(coins, amount-coin)
+		if subProblem == -1 {
+			continue
+		}
+		res = min(res, subProblem+1)
+	}
+
+	if res == math.MaxInt32 {
+		return -1
+	}
+
+	return res
+}

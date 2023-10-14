@@ -97,3 +97,31 @@ func lengthOfLIS3(nums []int) int {
 
 	return res
 }
+
+func lengthOfLIS4(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	dp := make([]int, len(nums))
+	var res int
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 1
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				dp[i] = maxV(dp[i], dp[j]+1)
+				res = maxV(res, dp[i])
+			}
+		}
+	}
+
+	return res
+}
+
+func maxV(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}

@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -43,10 +44,20 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
-func BenchmarkSolution(b *testing.B) {
+// 压力测试
+func TestMinPathSum(t *testing.T) {
+	//fmt.Println(minPathSum([][]int{
+	//	{1, 3, 1},
+	//	{1, 5, 1},
+	//	{4, 2, 1},
+	//}))
+
+	fmt.Println(minPathSum([][]int{
+		{1, 2},
+		{1, 1},
+	}))
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

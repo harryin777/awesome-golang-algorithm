@@ -50,14 +50,15 @@ func TestSolution2(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }
 
 func TestLengthOfLIS3(t *testing.T) {
-	fmt.Println(lengthOfLIS3([]int{10, 9, 2, 5, 3, 7, 101, 18}))
+	//fmt.Println(lengthOfLIS3([]int{10, 9, 2, 5, 3, 7, 101, 18}))
+	fmt.Println(lengthOfLIS4([]int{10, 9, 2, 5, 3, 7, 101, 18}))
 }
