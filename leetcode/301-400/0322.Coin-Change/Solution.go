@@ -200,19 +200,19 @@ func coinChange7(coins []int, amount int) int {
 	if amount < 1 && len(coins) < 1 {
 		return -1
 	}
-	memo := make([]int, amount+1)
+	dp := make([]int, amount+1)
 	for i := 1; i <= amount; i++ {
-		memo[i] = math.MaxInt32
+		dp[i] = math.MaxInt32
 		for _, c := range coins {
-			if i >= c && memo[i] > memo[i-c]+1 {
-				memo[i] = memo[i-c] + 1
+			if i >= c && dp[i] > dp[i-c]+1 {
+				dp[i] = dp[i-c] + 1
 			}
 		}
 	}
-	if memo[amount] == math.MaxInt32 {
+	if dp[amount] == math.MaxInt32 {
 		return -1
 	}
-	return memo[amount]
+	return dp[amount]
 }
 
 func coinChange8(coins []int, amount int) int {
