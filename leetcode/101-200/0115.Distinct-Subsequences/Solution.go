@@ -1,5 +1,9 @@
 package Solution
 
+import (
+	"fmt"
+)
+
 func numDistinct(word1 string, word2 string) int {
 	dp := make([][]int, len(word1)+1)
 	for i := 0; i < len(word1)+1; i++ {
@@ -31,4 +35,33 @@ func min(x int, y int, z int) int {
 		x = z
 	}
 	return x
+}
+
+// 这个递归解法是正确的，但是时间过长
+func numDistinct2(s string, t string) int {
+	var res *int
+	res = new(int)
+	cal(s, t, "", 0, 0, res)
+
+	return *res
+}
+
+func cal(s, t, tmp string, position, nextLevel int, res *int) {
+	for i := nextLevel; i < len(s); i++ {
+		if len(s[i:]) < len(t) && nextLevel == 0 {
+			return
+		}
+		if position >= len(t) {
+			return
+		}
+		if s[i] != t[position] {
+			continue
+		}
+		tmp = fmt.Sprintf("%s%s", tmp, string(s[i]))
+		if tmp == t {
+			*res += 1
+		}
+		cal(s, t, tmp, position+1, i+1, res)
+		tmp = tmp[0 : len(tmp)-1]
+	}
 }
