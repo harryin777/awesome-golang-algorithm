@@ -1,74 +1,80 @@
 package Solution
 
-//	暴力遍历 比较 时间复杂度到 O(N3)
-func wordBreak(s string, wordDict []string) bool {
-	dp := make([]bool, len(s)+1)
-	dp[0] = true
-
-	for i := 1; i <= len(s); i++ {
-		for j := 0; j <= i-1; j++ {
-			if dp[j] == true {
-				for _, word := range wordDict {
-					if s[j:i] == word {
-						dp[i] = true
-						break
-					}
-				}
-			}
-		}
-	}
-	return dp[len(s)]
-}
-
-//	一次遍历时间复杂度 O(N2)
-func wordBreak2(s string, wordDict []string) bool {
-	dp := make([]bool, len(s)+1)
-	dp[0] = true
-
-	for i := 0; i < len(dp); i++ {
-		if dp[i] {
-			for _, word := range wordDict {
-				//	巧妙的运用 i + word len 避免2层循环
-				if i+len(word) <= len(s) && s[i:i+len(word)] == word {
-					dp[i+len(word)] = true
-				}
-			}
-		}
-	}
-	return dp[len(s)]
-}
-
-//	递归遍历
-func wordBreak3(s string, wordDict []string) bool {
-	dict := make(map[string]bool)
-	return dfs(s, wordDict, dict)
-}
-
-//	s 每次比对的字符串
-//	wordDict 目标字典列表
-// 	匹配结果
-func dfs(s string, wordDict []string, dict map[string]bool) bool {
-	//	终止条件
-	if len(s) == 0 {
+func canBreak(start int, s string, wordMap map[string]bool) bool {
+	if start == len(s) {
 		return true
 	}
-
-	if res, ok := dict[s]; ok {
-		return res
-	}
-
-	for _, word := range wordDict {
-		if len(word) > len(s) || word != s[:len(word)] {
-			continue
-		}
-
-		if dfs(s[len(word):], wordDict, dict) {
-			dict[s] = true
+	for i := start + 1; i <= len(s); i++ {
+		prefix := s[start:i]
+		if wordMap[prefix] && canBreak(i, s, wordMap) {
 			return true
 		}
-
 	}
-	dict[s] = false
+	return false
+}
 
+func wordBreak(s string, wordDict []string) bool {
+	wordMap := map[string]bool{}
+	for _, v := range wordDict {
+		wordMap[v] = true
+	}
+	return canBreak(0, s, wordMap)
+}
+
+func canBreak2(start int, s string, wordMap map[string]bool, memo map[int]bool) bool {
+	if start == len(s) {
+		return true
+	}
+	if res, ok := memo[start]; ok {
+		return res
+	}
+	for i := start + 1; i <= len(s); i++ {
+		prefix := s[start:i]
+		if wordMap[prefix] && canBreak2(i, s, wordMap, memo) {
+			memo[start] = true
+			return true
+		}
+	}
+	memo[start] = false
+	return false
+}
+
+func wordBreak2(s string, wordDict []string) bool {
+	wordMap := map[string]bool{}
+	for _, v := range wordDict {
+		wordMap[v] = true
+	}
+	memo := make(map[int]bool)
+	return canBreak2(0, s, wordMap, memo)
+}
+
+func wordBreakBFS(s string, wordDict []string) bool {
+	l := len(s)
+	wordMap := map[string]bool{}
+	for _, v := range wordDict {
+		wordMap[v] = true
+	}
+	queue := []int{}
+	queue = append(queue, 0)
+	visited := map[int]bool{}
+
+	for len(queue) != 0 {
+		start := queue[0]
+		queue = queue[1:]
+		if visited[start] {
+			continue
+		}
+		visited[start] = true
+		for i := start + 1; i <= l; i++ {
+			prefix := s[start:i]
+			if wordMap[prefix] {
+				if i < l {
+					queue = append(queue, i)
+				} else {
+					return true
+				}
+			}
+		}
+	}
 	return false
 }
