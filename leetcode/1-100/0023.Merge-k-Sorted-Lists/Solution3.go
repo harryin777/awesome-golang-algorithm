@@ -33,3 +33,38 @@ func mergeKLists3(lists []*ListNode) *ListNode {
 
 	return result
 }
+
+func mergeKLists(lists []*ListNode) *ListNode {
+	head := &ListNode{
+		-1,
+		nil,
+	}
+	tmp := head
+
+	goThrough := true
+	for goThrough {
+		goThrough = false
+		index := 0
+		currentVal := int(^uint(0) >> 1)
+		for i := 0; i < len(lists); i++ {
+			if lists[i] != nil {
+				goThrough = true
+				if lists[i].Val < currentVal {
+					currentVal = lists[i].Val
+					index = i
+				}
+			}
+		}
+		if !goThrough {
+			break
+		}
+		lists[index] = lists[index].Next
+		tmp.Next = &ListNode{
+			currentVal,
+			nil,
+		}
+		tmp = tmp.Next
+	}
+
+	return head.Next
+}

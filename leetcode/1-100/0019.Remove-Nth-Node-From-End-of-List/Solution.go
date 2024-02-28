@@ -47,3 +47,21 @@ func removeNthFromEnd2(head *utils.ListNode, n int) *utils.ListNode {
 
 	return head
 }
+
+func removeNthFromEnd3(head *ListNode, n int) *ListNode {
+	slow, fast := head, head
+	for i := 0; i < n; i++ {
+		fast = fast.Next
+	}
+	if fast != nil {
+		for fast.Next != nil {
+			fast = fast.Next
+			slow = slow.Next
+		}
+		slow.Next = slow.Next.Next
+	} else {
+		head = head.Next
+	}
+
+	return head
+}

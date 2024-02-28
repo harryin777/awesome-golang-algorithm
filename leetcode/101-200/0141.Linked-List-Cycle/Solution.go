@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -9,7 +10,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-//	设置时间
+// 设置时间
 func hasCycle1(head *ListNode) bool {
 	start := time.Now()
 
@@ -24,27 +25,20 @@ func hasCycle1(head *ListNode) bool {
 	return true
 }
 
-//	HashMap
+// HashMap
 func hasCycle2(head *ListNode) bool {
-	// listMap := make(map[string]int)
-
-	// fmt.Println(listMap[fmt.Sprintf("%s",&head)])
-
+	listMap := make(map[string]int)
 	for head != nil {
-		// fmt.Sprintf("%s",&head)
-
-		//if listMap[fmt.Sprintf("%s", &head)] > 1 {
-		//	//fmt.Println(listMap[fmt.Sprintf("%s", &head)])
-		//	//fmt.Println(listMap)
-		//	return true
-		//}
+		if listMap[fmt.Sprintf("%v", &head)] > 1 {
+			return true
+		}
 
 		head = head.Next
 	}
 	return false
 }
 
-//	快慢指针
+// 快慢指针
 func hasCycle3(head *ListNode) bool {
 	quick := head
 	slow := head
@@ -57,4 +51,17 @@ func hasCycle3(head *ListNode) bool {
 		}
 	}
 	return false
+}
+
+func MakeListNode(x []int) *ListNode {
+	list := &ListNode{}
+	head := list
+
+	list.Val = x[0]
+	for i := 1; i < len(x); i++ {
+		list.Next = &ListNode{}
+		list = list.Next
+		list.Val = x[i]
+	}
+	return head
 }

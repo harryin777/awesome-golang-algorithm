@@ -24,7 +24,7 @@ func TestSolution3(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := mergeKLists3(c.inputs)
+			got := mergeKLists(c.inputs)
 			if !isEqual(got, c.expect) {
 				PrintList(got)
 				PrintList(c.expect)

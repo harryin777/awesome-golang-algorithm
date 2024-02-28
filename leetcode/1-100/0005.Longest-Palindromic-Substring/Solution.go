@@ -1,6 +1,8 @@
 package Solution
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 暴力查找
 func longestPalindrome1(s string) string {

@@ -45,6 +45,6 @@ func ExampleSolution() {
 }
 
 func TestDFS(t *testing.T) {
-	fmt.Println(permute3([]int{1, 2, 3}))
-	fmt.Println(permute4([]int{1, 2, 3}))
+	//fmt.Println(permute3([]int{1, 2, 3}))
+	fmt.Println(permute5([]int{1, 2, 3}))
 }

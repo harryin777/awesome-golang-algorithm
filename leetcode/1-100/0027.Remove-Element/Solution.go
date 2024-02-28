@@ -23,3 +23,23 @@ func removeElement2(nums []int, val int) int {
 
 	return slow
 }
+
+func removeElement3(nums []int, val int) int {
+	left, right := 0, 0
+	for right < len(nums) {
+		if nums[right] == val {
+			right++
+		} else {
+			if left == right {
+				left++
+				right++
+			} else {
+				nums[left], nums[right] = nums[right], nums[left]
+				left++
+				right++
+			}
+		}
+	}
+
+	return left
+}

@@ -239,3 +239,34 @@ func coinChange8(coins []int, amount int) int {
 
 	return res
 }
+
+func coinChange9(coins []int, amount int) int {
+	if amount == 0 {
+		return 0
+	}
+	dp := make(map[int]int)
+	var dfs func(coins []int, balance int) int
+	dfs = func(coins []int, balance int) int {
+		if balance < 0 {
+			return -1
+		}
+		if balance == 0 {
+			return 0
+		}
+		if val, ok := dp[amount]; ok {
+			return val
+		}
+		res := int(^uint(0) >> 1)
+		for i := 0; i < len(coins); i++ {
+			ans := dfs(coins, balance-coins[i])
+			if ans < 0 {
+				continue
+			}
+			res = min(res, ans+1)
+		}
+		dp[amount] = res
+		return res
+	}
+
+	return dfs(coins, amount)
+}

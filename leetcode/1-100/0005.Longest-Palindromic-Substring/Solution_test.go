@@ -135,5 +135,8 @@ func TestSolution5(t *testing.T) {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(longestPalindrome("weraba"))
+	//fmt.Println(longestPalindrome6("weraba"))
+	fmt.Println(^uint(0))
+	fmt.Println(^uint(0) >> 1)
+	fmt.Println(^int(^uint(0) >> 1))
 }

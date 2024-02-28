@@ -1,5 +1,7 @@
 package Solution
 
+import "strings"
+
 func lengthOfLongestSubstring_3(s string) int {
 	ans, left, m := 0, 0, map[rune]int{}
 	for right, v := range s {
@@ -75,7 +77,7 @@ func lengthOfLongestSubstring33(s string) int {
 	return Max(maxLength, substringLen)
 }
 
-//	暴力求解(会超时)
+// 暴力求解(会超时)
 func lengthOfLongestSubstring2(s string) int {
 	ans := 0
 
@@ -152,4 +154,33 @@ func check(s string) bool {
 	}
 
 	return true
+}
+
+func lengthOfLongestSubstring3(s string) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	if len(s) == 1 {
+		return 1
+	}
+
+	left, right := 0, 1
+	var res int
+	for right < len(s) {
+		tmp := s[left:right]
+		if strings.Contains(tmp, string(s[right])) {
+			res = max(res, len(tmp))
+			left = right
+		}
+		right++
+	}
+
+	res = max(res, len(s[left:right]))
+
+	if left == 0 {
+		return len(s)
+	}
+
+	return res
 }

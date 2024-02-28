@@ -156,3 +156,8 @@ func Min(args ...int) int {
 	}
 	return min
 }
+
+func minDistance5(word1 string, word2 string) int {
+
+	return 0
+}

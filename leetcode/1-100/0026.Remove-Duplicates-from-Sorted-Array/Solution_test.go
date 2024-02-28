@@ -51,6 +51,5 @@ func TestSolution(t *testing.T) {
 }
 
 func Test1(t *testing.T) {
-	//fmt.Println(removeDuplicates2([]int{0, 0, 1, 1, 1, 2, 2, 2, 2}))
-	fmt.Println(removeDuplicates2([]int{2, 2, 2, 3, 5}))
+	fmt.Println(removeDuplicates4([]int{1, 1, 2}))
 }

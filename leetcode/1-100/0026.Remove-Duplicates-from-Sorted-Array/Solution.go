@@ -28,3 +28,46 @@ func removeDuplicates2(nums []int) int {
 	fmt.Println(nums)
 	return slow + 1
 }
+
+func removeDuplicates3(nums []int) int {
+	if len(nums) == 1 {
+		return 1
+	}
+
+	slow, quick := 0, 1
+	for quick < len(nums) {
+		if nums[slow] == nums[quick] {
+			if quick == len(nums)-1 {
+				nums = nums[:quick]
+			} else {
+				nums = append(nums[:slow+1], nums[slow+2:]...)
+			}
+		} else {
+			slow++
+			quick++
+		}
+	}
+
+	return len(nums)
+}
+
+func removeDuplicates4(nums []int) int {
+	if len(nums) == 1 {
+		return 1
+	}
+
+	slow, quick := 0, 1
+	for quick < len(nums) {
+		if nums[slow] != nums[quick] {
+			if quick-slow > 1 {
+				nums[slow+1] = nums[quick]
+			}
+			slow++
+			quick++
+		} else {
+			quick++
+		}
+	}
+
+	return slow
+}
