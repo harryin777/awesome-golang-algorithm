@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -37,7 +38,7 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	检测结果
+// 检测结果
 func IsEuqual(x, y [][]int) bool {
 	if len(x) != len(y) {
 		return false
@@ -56,10 +57,14 @@ func IsEuqual(x, y [][]int) bool {
 	return true
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func TestCombinationSum4(t *testing.T) {
+	fmt.Println(combinationSum4(3, 7))
 }
