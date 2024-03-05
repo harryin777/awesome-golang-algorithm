@@ -1,6 +1,10 @@
 package Solution
 
-import "strings"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 func Solution(x int) [][]string {
 	board := make([][]string, x)
@@ -49,5 +53,59 @@ func isValid(board [][]string, r, c int) bool {
 			return false
 		}
 	}
+	return true
+}
+
+func solveNQueens(n int) [][]string {
+	res := make([][]string, 0, 10)
+	var str string
+	for i := 0; i < n; i++ {
+		str = str + "."
+	}
+	var dfs func(c []string, used map[string]struct{}, row int)
+	dfs = func(c []string, used map[string]struct{}, row int) {
+		for i := 0; i < n; i++ {
+			pos := fmt.Sprintf("%v:%v", row, i)
+
+			if !checkUnusedMap(row, i, used) {
+				continue
+			}
+			str1 := []byte(str)
+			str1[i] = 'Q'
+			str2 := string(str1)
+			c = append(c, str2)
+			used[pos] = struct{}{}
+			dfs(c, used, row+1)
+			delete(used, pos)
+			c = c[:len(c)-1]
+		}
+
+		if len(c) == n {
+			tmp := make([]string, len(c))
+			copy(tmp, c)
+			res = append(res, tmp)
+			return
+		}
+	}
+	used := make(map[string]struct{})
+	dfs([]string{}, used, 0)
+
+	return res
+}
+
+func checkUnusedMap(x, y int, used map[string]struct{}) bool {
+
+	for val, _ := range used {
+		arrs := strings.Split(val, ":")
+		x1, _ := strconv.ParseInt(arrs[0], 10, 64)
+		y1, _ := strconv.ParseInt(arrs[1], 10, 64)
+		if (x1-y1) == int64(x-y) || (x1+y1) == int64(x+y) {
+			return false
+		}
+		if x1 == int64(x) || y1 == int64(y) {
+			return false
+		}
+	}
+
 	return true
 }

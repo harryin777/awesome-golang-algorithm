@@ -29,6 +29,7 @@ func combinationSum4(k int, n int) (ans [][]int) {
 		temp = nil
 		sum := 0
 		for i := 0; i < 9; i++ {
+			// 这里移位就是为了看1-9这几个数字，哪个出现在当前这个mask里了
 			if 1<<i&mask > 0 {
 				temp = append(temp, i+1)
 				sum += i + 1

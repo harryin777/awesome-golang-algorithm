@@ -69,3 +69,24 @@ func permuteUnique(nums []int) [][]int {
 
 	return result
 }
+
+func permuteUnique2(nums []int) [][]int {
+	res := make([][]int, 0, 100)
+	var dfs func(pos int, arr []int)
+	dfs = func(pos int, arr []int) {
+		if len(arr) == len(nums) {
+			res = append(res, append([]int(nil), arr...))
+			return
+		}
+		levelMap := make(map[int]struct{})
+		for i := pos; i < len(nums); i++ {
+			levelMap[nums[i]] = struct{}{}
+			arr = append(arr, nums[i])
+			dfs(i+1, arr)
+			arr = arr[:len(arr)-1]
+		}
+	}
+	dfs(0, []int{})
+
+	return res
+}

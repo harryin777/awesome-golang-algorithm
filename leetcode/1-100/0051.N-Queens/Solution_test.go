@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -28,10 +29,11 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
-func ExampleSolution() {
+// 使用案列
+func TestQQQ(t *testing.T) {
+	fmt.Println(solveNQueens(6))
 }
