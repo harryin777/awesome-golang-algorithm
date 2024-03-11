@@ -88,3 +88,56 @@ func isContain(s, t string) bool {
 
 	return true && len(s) >= len(t)
 }
+
+func minWindow3(s string, t string) string {
+	if len(s) < len(t) {
+		return ""
+	}
+
+	res := s + t
+	var tCount [58]int
+	for i := 0; i < len(t); i++ {
+		tCount[t[i]-'A']++
+	}
+	left, right := 0, len(t)
+	for right <= len(s) {
+		if !check(s[left:right], t, tCount) {
+			right++
+			continue
+		}
+		res = min(res, s[left:right])
+		left++
+		for check(s[left:right], t, tCount) {
+			res = min(res, s[left:right])
+			left++
+		}
+	}
+
+	if res == s+t {
+		return ""
+	}
+
+	return res
+}
+
+func min(s1, s2 string) string {
+	if len(s1) > len(s2) {
+		return s2
+	}
+
+	return s1
+}
+
+func check(str1, str2 string, tCount [58]int) bool {
+	var s1 [58]int
+	for i := 0; i < len(str1); i++ {
+		s1[str1[i]-'A']++
+	}
+	for i := 0; i < len(str2); i++ {
+		if s1[str2[i]-'A'] < tCount[str2[i]-'A'] {
+			return false
+		}
+	}
+
+	return true
+}

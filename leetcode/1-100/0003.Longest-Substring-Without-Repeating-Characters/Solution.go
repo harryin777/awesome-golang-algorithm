@@ -156,7 +156,7 @@ func check(s string) bool {
 	return true
 }
 
-func lengthOfLongestSubstring3(s string) int {
+func lengthOfLongestSubstring4(s string) int {
 	if len(s) == 0 {
 		return 0
 	}
@@ -165,22 +165,19 @@ func lengthOfLongestSubstring3(s string) int {
 		return 1
 	}
 
+	res := 0
 	left, right := 0, 1
-	var res int
 	for right < len(s) {
-		tmp := s[left:right]
-		if strings.Contains(tmp, string(s[right])) {
-			res = max(res, len(tmp))
-			left = right
+		rightByte := s[right]
+		if strings.Contains(s[left:right], string(rightByte)) {
+			res = max(res, right-left)
+			left++
+			continue
 		}
 		right++
 	}
 
-	res = max(res, len(s[left:right]))
-
-	if left == 0 {
-		return len(s)
-	}
+	res = max(res, right-left)
 
 	return res
 }

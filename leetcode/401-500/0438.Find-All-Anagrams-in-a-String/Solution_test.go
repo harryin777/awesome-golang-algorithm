@@ -31,14 +31,14 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(findAnagrams("cbaebabacd", "abc"))
+	fmt.Println(findAnagrams2("abab", "ab"))
 }
