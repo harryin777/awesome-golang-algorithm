@@ -125,3 +125,29 @@ func maxV(a, b int) int {
 
 	return b
 }
+
+func lengthOfLIS5(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	// dp 数组的定义是以i为结尾的最长递增子序列的长度
+	var dp []int
+	dp = make([]int, len(nums))
+	for i := 0; i < len(dp); i++ {
+		dp[i] = 1
+	}
+	for i := 1; i < len(nums); i++ {
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				dp[i] = max(dp[i], dp[j]+1)
+			}
+		}
+	}
+
+	res := 0
+	for i := 0; i < len(dp); i++ {
+		res = max(res, dp[i])
+	}
+
+	return res
+}

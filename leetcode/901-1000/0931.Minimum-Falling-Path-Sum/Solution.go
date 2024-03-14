@@ -1,6 +1,8 @@
 package Solution
 
-import "math"
+import (
+	"math"
+)
 
 func minFallingPathSum(matrix [][]int) int {
 	if len(matrix) == 0 {
@@ -71,4 +73,45 @@ func minFallingPathSum2(matrix [][]int) int {
 		}
 	}
 	return minVal
+}
+
+func minFallingPathSum3(matrix [][]int) int {
+	var dp [][]int
+	rowCount := len(matrix)
+	dp = make([][]int, rowCount)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, len(matrix[0]))
+	}
+	for i := 0; i < len(dp[0]); i++ {
+		dp[0][i] = matrix[0][i]
+	}
+
+	for i := 1; i < rowCount; i++ {
+		for j := 0; j < len(dp[i]); j++ {
+			dp[i][j] = cal(dp[i-1], j-1, j+1) + matrix[i][j]
+		}
+	}
+
+	res := 99999
+	for i := 0; i < len(dp[rowCount-1]); i++ {
+		res = min(res, dp[rowCount-1][i])
+	}
+
+	return res
+}
+
+func cal(lastRow []int, begin, end int) int {
+	if begin < 0 {
+		begin = 0
+	}
+	if end >= len(lastRow) {
+		end = len(lastRow) - 1
+	}
+
+	res := 99999
+	for i := begin; i <= end; i++ {
+		res = min(res, lastRow[i])
+	}
+
+	return res
 }

@@ -12,4 +12,9 @@ func Test_minFallingPathSum(t *testing.T) {
 		{-58, -51, 82, 89},
 		{51, 81, 69, -51},
 	}))
+	fmt.Println(minFallingPathSum3([][]int{
+		{2, 1, 3},
+		{6, 5, 4},
+		{7, 8, 9},
+	}))
 }

@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
@@ -33,10 +34,14 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func TestWorkBreaking(t *testing.T) {
+	fmt.Println(wordBreak2("catsanddog", []string{"cat", "cats", "and", "sand", "dog"}))
 }
