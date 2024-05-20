@@ -55,9 +55,9 @@ func jump2(nums []int) int {
 	return res
 }
 
-/**
+/*
+*
 1
-
 */
 func jump3(nums []int) int {
 	//	如果数组小于2，则说明不用跳跃返回0
@@ -88,4 +88,33 @@ func Min(x, y int) int {
 		return y
 	}
 	return x
+}
+
+func jump4(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	dp := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 100000
+	}
+	dp[0] = 0
+	for i := 1; i < len(nums); i++ {
+		for j := 0; j < i; j++ {
+			if j+nums[j] >= i {
+				dp[i] = min(dp[i], dp[j]+1)
+			}
+
+		}
+	}
+
+	return dp[len(nums)-1]
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+
+	return y
 }

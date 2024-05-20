@@ -21,3 +21,33 @@ func Solution(s string) []int {
 	}
 	return partLength
 }
+
+func partitionLabels(s string) []int {
+	lastPos := make([]int, 26)
+	for i := 0; i < len(s); i++ {
+		lastPos[s[i]-'a'] = i
+	}
+
+	res := make([]int, 0, 10)
+	end := 0
+	count := 0
+	for i := 0; i < len(s); i++ {
+		end = max(end, lastPos[s[i]-'a'])
+		if i == end {
+			res = append(res, count+1)
+			count = 0
+			continue
+		}
+		count++
+	}
+
+	return res
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
+}

@@ -30,3 +30,56 @@ func isPalindrome(s string) bool {
 	}
 	return true
 }
+
+func partition(s string) [][]string {
+	res := make([][]string, 0, 10)
+	var getPalindrome func(arr []string, nextIndex int)
+	getPalindrome = func(arr []string, nextIndex int) {
+		if nextIndex >= len(s) {
+			res = append(res, arr)
+			return
+		}
+		for i := nextIndex; i < len(s); i++ {
+			currStr := s[nextIndex : i+1]
+			if isPalindrome2(currStr) {
+				arr = append(arr, currStr)
+				getPalindrome(arr, i+1)
+				arr = arr[0 : len(arr)-1]
+			}
+		}
+	}
+	getPalindrome([]string{}, 0)
+
+	return res
+}
+
+func isPalindrome2(str string) bool {
+	reversedStr := ""
+	for _, char := range str {
+		reversedStr = string(char) + reversedStr
+	}
+
+	return str == reversedStr
+}
+
+func partition3(s string) (ans [][]string) {
+	n := len(s)
+
+	splits := []string{}
+	var dfs func(int)
+	dfs = func(i int) {
+		if i == n {
+			ans = append(ans, append([]string(nil), splits...))
+			return
+		}
+		for j := i; j < n; j++ {
+			if isPalindrome2(s[i : j+1]) {
+				splits = append(splits, s[i:j+1])
+				dfs(j + 1)
+				splits = splits[:len(splits)-1]
+			}
+		}
+	}
+	dfs(0)
+	return
+}

@@ -80,3 +80,19 @@ func change2(amount int, coins []int) int {
 
 	return dp[len(coins)][amount]
 }
+
+func change3(amount int, coins []int) int {
+	dp := make([][]int, len(coins)+1)
+	for i := 0; i <= len(coins); i++ {
+		dp[i] = make([]int, amount+1)
+	}
+	dp[0][0] = 1
+	for i := 1; i <= len(coins); i++ {
+		for j := 0; j <= amount; j++ {
+			for k := 0; k <= j/coins[i-1]; k++ {
+				dp[i][j] += dp[i-1][j-k*coins[i-1]]
+			}
+		}
+	}
+	return dp[len(coins)][amount]
+}

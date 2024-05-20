@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -39,10 +40,10 @@ func TestSolution2(t *testing.T) {
 		inputs []string
 		expect bool
 	}{
-		{"TestCase", []string{
+		{"TestCase1", []string{
 			"aabcc", "dbbca", "aadbbcbcac",
 		}, true},
-		{"TestCase", []string{
+		{"TestCase2", []string{
 			"aabcc", "dbbca", "aadbbbaccc",
 		}, false},
 	}
@@ -50,7 +51,7 @@ func TestSolution2(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := isInterleave2(c.inputs[0], c.inputs[1], c.inputs[2])
+			got := isInterleave3(c.inputs[0], c.inputs[1], c.inputs[2])
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.inputs)
@@ -59,10 +60,14 @@ func TestSolution2(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test_isInterleave3(t *testing.T) {
+	fmt.Println(isInterleave3("aabcc", "dbbca", "aadbbcbcac"))
 }

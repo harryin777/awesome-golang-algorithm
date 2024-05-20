@@ -2,12 +2,13 @@ package Solution
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 )
 
 var minSum = 99999
 
-//	dfs solution
+// dfs solution
 func minimumTotal(triangle [][]int) int {
 	if len(triangle) == 0 || len(triangle[0]) == 0 {
 		return 0
@@ -43,7 +44,7 @@ func _dfs(triangle [][]int, i, j int, path string, sum int) int {
 	return 0
 }
 
-//	dp solution
+// dp solution
 func minimumTotal1(triangle [][]int) int {
 	if len(triangle) == 0 || len(triangle[0]) == 0 {
 		return 0
@@ -58,7 +59,7 @@ func minimumTotal1(triangle [][]int) int {
 	return triangle[0][0]
 }
 
-//	dp solution
+// dp solution
 func minimumTotal2(triangle [][]int) int {
 	if len(triangle) == 0 || len(triangle[0]) == 0 {
 		return 0
@@ -77,4 +78,32 @@ func min(x, y int) int {
 		return y
 	}
 	return x
+}
+
+func minimumTotal3(triangle [][]int) int {
+	if len(triangle) == 0 {
+		return 0
+	}
+
+	q := make([]int, len(triangle[0]))
+	for i := 0; i < len(triangle[0]); i++ {
+		q[i] += triangle[0][i]
+		index := i
+		for j := 1; j < len(triangle); j++ {
+			if triangle[j][index] < triangle[j][index+1] {
+				q[i] += triangle[j][index]
+				index = index
+			} else {
+				q[i] += triangle[j][index+1]
+				index = index + 1
+			}
+		}
+	}
+
+	res := math.MaxInt32
+	for i := 0; i < len(q); i++ {
+		res = min(res, q[i])
+	}
+
+	return res
 }

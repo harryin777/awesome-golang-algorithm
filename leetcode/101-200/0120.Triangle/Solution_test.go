@@ -13,6 +13,15 @@ func TestSolution(t *testing.T) {
 		expect int
 	}{
 		{
+			name: "testCase3",
+			inputs: [][]int{
+				{-1},
+				{2, 3},
+				{1, -1, 3},
+			},
+			expect: -1,
+		},
+		{
 			"TestCacse 1",
 			[][]int{
 				{2},
@@ -35,7 +44,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := minimumTotal(c.inputs)
+			got := minimumTotal3(c.inputs)
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.inputs)
@@ -122,10 +131,10 @@ func TestSolution2(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

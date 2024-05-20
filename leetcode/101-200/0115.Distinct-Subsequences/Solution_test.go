@@ -34,6 +34,6 @@ func BenchmarkSolution(b *testing.B) {
 }
 
 func Test_2(t *testing.T) {
-	fmt.Println(numDistinct2("rabbbitt", "rabbit"))
+	fmt.Println(numDistinct3("rabbbitt", "rabbit"))
 	//fmt.Println(numDistinct2("abbbc", "abc"))
 }

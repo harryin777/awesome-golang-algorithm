@@ -1,7 +1,5 @@
 package Solution
 
-import "strings"
-
 func canBreak(start int, s string, wordMap map[string]bool) bool {
 	if start == len(s) {
 		return true
@@ -82,19 +80,40 @@ func wordBreakBFS(s string, wordDict []string) bool {
 }
 
 func wordBreak3(s string, wordDict []string) bool {
-	for len(s) > 0 {
-		flag := false
-		for i := 0; i < len(wordDict); i++ {
-			if strings.HasSuffix(s, wordDict[i]) {
-				s = s[:len(s)-len(wordDict[i])]
-				flag = true
+	dp := make([]bool, len(s)+1)
+	dp[0] = false
+	j := 0
+	for i := 0; i <= len(s); i++ {
+		for k := 0; k < len(wordDict); k++ {
+			if s[j:i] == wordDict[k] {
+				if j == 0 {
+					dp[i] = true
+				} else {
+					dp[i] = dp[j] && true
+				}
+				j = i
+			}
+		}
+
+	}
+
+	return dp[len(s)]
+}
+
+func wordBreak4(s string, wordDict []string) bool {
+	wordDictSet := make(map[string]bool)
+	for _, w := range wordDict {
+		wordDictSet[w] = true
+	}
+	dp := make([]bool, len(s)+1)
+	dp[0] = true
+	for i := 1; i <= len(s); i++ {
+		for j := 0; j < i; j++ {
+			if dp[j] && wordDictSet[s[j:i]] {
+				dp[i] = true
 				break
 			}
 		}
-		if !flag {
-			return false
-		}
 	}
-
-	return true
+	return dp[len(s)]
 }

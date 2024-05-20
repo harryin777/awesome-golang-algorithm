@@ -63,3 +63,24 @@ func p(x [][]bool) {
 		fmt.Println(x[i])
 	}
 }
+
+func isInterleave3(s1 string, s2 string, s3 string) bool {
+	dp := make([][]bool, len(s1)+1)
+	for i := 0; i < len(s1)+1; i++ {
+		dp[i] = make([]bool, len(s2)+1)
+	}
+
+	for i := 1; i < len(s1)+1; i++ {
+		for j := 1; j < len(s2)+1; j++ {
+			p := i + j - 1
+			if s1[i-1] == s3[p] {
+				dp[i][j] = dp[i][j] || dp[i-1][j]
+			}
+			if s2[j-1] == s3[p] {
+				dp[i][j] = dp[i][j] || dp[i][j-1]
+			}
+		}
+	}
+
+	return dp[len(s1)][len(s2)]
+}
