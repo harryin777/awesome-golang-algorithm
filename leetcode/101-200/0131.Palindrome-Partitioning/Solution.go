@@ -33,24 +33,24 @@ func isPalindrome(s string) bool {
 
 func partition2(s string) [][]string {
 	res := make([][]string, 0, 10)
-	var getPalindrome func(str string, arr []string)
-	getPalindrome = func(str string, arr []string) {
-		if len(str) == 0 {
-			res = append(res, arr)
+	var getPalindrome func(arr []string, nextIndex int)
+	getPalindrome = func(arr []string, nextIndex int) {
+		if nextIndex >= len(s) {
+			tmp := make([]string, len(arr))
+			copy(tmp, arr)
+			res = append(res, tmp)
 			return
 		}
-		currArr := make([]string, len(arr))
-		copy(currArr, arr)
-		for i := 0; i < len(str); i++ {
-			currStr := str[:i+1]
+		for i := nextIndex; i < len(s); i++ {
+			currStr := s[nextIndex : i+1]
 			if isPalindrome2(currStr) {
-				currArr = append(currArr, currStr)
-				getPalindrome(str[i+1:], currArr)
+				arr = append(arr, currStr)
+				getPalindrome(arr, i+1)
+				arr = arr[0 : len(arr)-1]
 			}
-
 		}
 	}
-	getPalindrome(s, []string{})
+	getPalindrome([]string{}, 0)
 
 	return res
 }

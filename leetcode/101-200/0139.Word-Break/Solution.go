@@ -80,21 +80,18 @@ func wordBreakBFS(s string, wordDict []string) bool {
 }
 
 func wordBreak3(s string, wordDict []string) bool {
+	wordMap := make(map[string]string)
+	for _, s2 := range wordDict {
+		wordMap[s2] = s2
+	}
 	dp := make([]bool, len(s)+1)
-	dp[0] = false
-	j := 0
-	for i := 0; i <= len(s); i++ {
-		for k := 0; k < len(wordDict); k++ {
-			if s[j:i] == wordDict[k] {
-				if j == 0 {
-					dp[i] = true
-				} else {
-					dp[i] = dp[j] && true
-				}
-				j = i
+	dp[0] = true
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j <= len(s); j++ {
+			if _, ok := wordMap[s[i:j]]; ok {
+				dp[j] = dp[j] || dp[i]
 			}
 		}
-
 	}
 
 	return dp[len(s)]
@@ -116,4 +113,26 @@ func wordBreak4(s string, wordDict []string) bool {
 		}
 	}
 	return dp[len(s)]
+}
+
+func wordBreak5(s string, wordDict []string) bool {
+	dp := make([]bool, len(s))
+	dp[0] = false
+	j := 0
+	for i := 0; i <= len(s); i++ {
+		for k := 0; k < len(wordDict); k++ {
+			if s[j:i] == wordDict[k] {
+				if j == 0 {
+					dp[i] = true
+				} else {
+					dp[i] = dp[j] && true
+				}
+				j = i
+				break
+			}
+		}
+
+	}
+
+	return dp[len(s)-1]
 }
