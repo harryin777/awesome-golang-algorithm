@@ -1,6 +1,7 @@
 package Solution
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 )
@@ -36,10 +37,14 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test_diffWaysToCompute2(t *testing.T) {
+	fmt.Println(diffWaysToCompute2("2-1-1"))
 }
