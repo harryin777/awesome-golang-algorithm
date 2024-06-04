@@ -1,5 +1,7 @@
 package Solution
 
+import "math"
+
 func maxSubArray(nums []int) int {
 	dp, ans := make([]int, len(nums)), nums[0]
 	dp[0] = nums[0]
@@ -105,4 +107,27 @@ func maxSubArray31(nums []int) int {
 	}
 
 	return res
+}
+
+func maxSubArray5(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	dp := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		dp[i] = nums[i]
+	}
+
+	res := math.MinInt32
+	for i := 1; i < len(nums); i++ {
+		dp[i] = max(dp[i], dp[i-1]+dp[i])
+	}
+
+	for i := 0; i < len(dp); i++ {
+		res = max(res, dp[i])
+	}
+
+	return res
+
 }
