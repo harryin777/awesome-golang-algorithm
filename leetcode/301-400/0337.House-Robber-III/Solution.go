@@ -7,32 +7,29 @@ func rob(root *utils.TreeNode) int {
 	return max(val[0], val[1])
 }
 
-func dfs(node *utils.TreeNode) []int {
-	if node == nil {
-		return []int{0, 0}
-	}
-	l, r := dfs(node.Left), dfs(node.Right)
-	selected := node.Val + l[1] + r[1]
-	notSelected := max(l[0], l[1]) + max(r[0], r[1])
-	return []int{selected, notSelected}
+func rob(root *TreeNode) int {
+	robRoot, notRob := getAmt(root)
+
+	return max(robRoot, notRob)
 }
 
-func rob2(root *utils.TreeNode) int {
-	return getAmt(root)
-}
-
-func getAmt(root *utils.TreeNode) int {
+func getAmt(root *TreeNode) (int, int) {
 	if root == nil {
-		return 0
+		return 0, 0
 	}
-	leftAmt := getAmt(root.Left)
-	rightAmt := getAmt(root.Right)
+	leftRob, leftNotRob := getAmt(root.Left)
+	rightRob, rightNotRob := getAmt(root.Right)
+	robRoot := root.Val + leftNotRob + rightNotRob
+	notRob := max(leftRob, leftNotRob) + max(rightRob, rightNotRob)
+	return robRoot, notRob
+}
 
-	if root.Val > (leftAmt + rightAmt) {
-		return root.Val
+func max(x, y int) int {
+	if x > y {
+		return x
 	}
 
-	return leftAmt + rightAmt
+	return y
 }
 
 func max(x, y int) int {
