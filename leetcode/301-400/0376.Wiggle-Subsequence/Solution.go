@@ -56,3 +56,54 @@ func wiggleMaxLength1(nums []int) int {
 	}
 	return b
 }
+
+func wiggleMaxLength2(nums []int) int {
+	if len(nums) == 1 {
+		return 1
+	}
+	dp := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 1
+	}
+	recordPN := make([]int, len(nums))
+	res := 1
+	for i := 1; i < len(nums); i++ {
+		for j := i - 1; j >= 0; j-- {
+			if dp[j] != 1 {
+				if (nums[i]-nums[j])*recordPN[j] < 0 {
+					if dp[i] < dp[j]+1 {
+						dp[i] = dp[j] + 1
+						if nums[i]-nums[j] > 0 {
+							recordPN[i] = 1
+						} else {
+							recordPN[i] = -1
+						}
+						res = max(res, dp[i])
+					}
+				}
+			} else {
+				if nums[i]-nums[j] != 0 {
+					if dp[i] < dp[j]+1 {
+						dp[i] = dp[j] + 1
+						res = max(res, dp[i])
+						if nums[i]-nums[j] > 0 {
+							recordPN[i] = 1
+						} else {
+							recordPN[i] = -1
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return res
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
+}
