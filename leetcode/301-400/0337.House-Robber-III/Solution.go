@@ -1,9 +1,10 @@
 package Solution
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+import "awesome-golang-algorithm/utils"
+
+func rob(root *utils.TreeNode) int {
+	val := dfs(root)
+	return max(val[0], val[1])
 }
 
 func rob(root *TreeNode) int {
@@ -21,6 +22,14 @@ func getAmt(root *TreeNode) (int, int) {
 	robRoot := root.Val + leftNotRob + rightNotRob
 	notRob := max(leftRob, leftNotRob) + max(rightRob, rightNotRob)
 	return robRoot, notRob
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+
+	return y
 }
 
 func max(x, y int) int {
