@@ -32,3 +32,31 @@ func Min(x, y int) int {
 	}
 	return x
 }
+
+// 方法可行,但是超出时间限制
+func maxArea2(height []int) int {
+	res := 0
+	for i := 0; i < len(height); i++ {
+		for j := 1; j < len(height); j++ {
+			res = max(res, (j-i)*min(height[i], height[j]))
+		}
+	}
+
+	return res
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+
+	return y
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
+}

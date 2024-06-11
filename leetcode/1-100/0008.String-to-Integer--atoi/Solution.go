@@ -47,3 +47,41 @@ func myAtoi(str string) int {
 	}
 	return num * sign
 }
+
+func myAtoi2(s string) int {
+	var i, num int
+	if len(s) == 0 {
+		return 0
+	}
+
+	for i < len(s) && s[i] == ' ' {
+		i++
+	}
+
+	if i >= len(s) {
+		return 0
+	}
+	sign := 1
+	if s[i] == '-' {
+		sign = -1
+		i++
+	} else if s[i] == '+' {
+		sign = 1
+		i++
+	}
+
+	for ; i < len(s); i++ {
+		if s[i] != 0 && !(s[i] >= '0' && s[i] <= '9') {
+			return num * sign
+		}
+
+		val, _ := strconv.ParseInt(string(s[i]), 0, 64)
+		num = num*10 + int(val)
+		if num*sign < math.MinInt32 {
+			return math.MinInt32
+		} else if num*sign > math.MaxInt32 {
+			return math.MaxInt32
+		}
+	}
+	return num * sign
+}
