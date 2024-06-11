@@ -15,16 +15,16 @@ func TestSolution(t *testing.T) {
 	}{
 		{
 			"Test Case ",
-			&ListNode{Val: 2, Next: &ListNode{Val: 4, Next: &ListNode{Val: 3, Next: nil}}},
-			&ListNode{Val: 5, Next: &ListNode{Val: 6, Next: &ListNode{Val: 4, Next: nil}}},
-			&ListNode{Val: 7, Next: &ListNode{Val: 0, Next: &ListNode{Val: 8, Next: nil}}},
+			MarshalSliceToListNode([]int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}),
+			MarshalSliceToListNode([]int{5, 6, 4}),
+			MarshalSliceToListNode([]int{6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}),
 		},
 	}
 
 	//	开始测试
 	for i, c := range cases {
 		t.Run(c.name+strconv.Itoa(i), func(t *testing.T) {
-			got := addTwoNumbers(c.input1, c.input2)
+			got := addTwoNumbers2(c.input1, c.input2)
 			if !isEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.input1)
