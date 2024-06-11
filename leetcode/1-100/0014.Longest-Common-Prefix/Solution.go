@@ -27,3 +27,40 @@ func longestCommonPrefix(strs []string) string {
 
 	return result
 }
+
+func longestCommonPrefix2(strs []string) string {
+	if len(strs) == 0 {
+		return ""
+	}
+
+	res := strs[0]
+	for i := 1; i < len(strs); i++ {
+		len := min(len(res), len(strs[i]))
+		j := 0
+		tmp := ""
+		for ; j < len; j++ {
+			if res[j] == strs[i][j] {
+				tmp += string(res[j])
+				continue
+			} else {
+				break
+			}
+		}
+		if j == 0 {
+			res = ""
+			break
+		}
+
+		res = tmp
+	}
+
+	return res
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+
+	return y
+}

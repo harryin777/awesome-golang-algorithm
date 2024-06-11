@@ -40,3 +40,71 @@ func threeSum_1(nums []int) [][]int {
 
 	return ans
 }
+
+func threeSum_2(nums []int) [][]int {
+	res := make([][]int, 0, len(nums))
+	var dfs func(int, []int, map[int]struct{})
+	dfs = func(count int, currArr []int, visitedMap map[int]struct{}) {
+		if count == 0 && len(currArr) == 3 {
+			tmp := make([]int, len(currArr))
+			copy(tmp, currArr)
+			res = append(res, tmp)
+			return
+		}
+
+		if len(visitedMap) == len(nums) {
+			return
+		}
+
+		for i := 0; i < len(nums); i++ {
+			if _, ok := visitedMap[nums[i]]; ok {
+				continue
+			}
+			visitedMap[nums[i]] = struct{}{}
+			currArr = append(currArr, nums[i])
+			dfs(count+nums[i], currArr, visitedMap)
+			delete(visitedMap, nums[i])
+			currArr = currArr[0 : len(currArr)-1]
+		}
+	}
+	visitedMap := make(map[int]struct{})
+	dfs(0, []int{}, visitedMap)
+
+	return res
+}
+
+// 这个解法可以，但是超出时间限制
+func threeSum_3(nums []int) [][]int {
+	res := make([][]int, 0, len(nums))
+	sort.Slice(nums, func(i, j int) bool {
+		return nums[i] < nums[j]
+	})
+	removeDup := make(map[int]struct{})
+	for i := 0; i < len(nums); i++ {
+		if _, ok := removeDup[nums[i]]; ok {
+			continue
+		}
+		removeDup[nums[i]] = struct{}{}
+		removeDup2 := make(map[int]struct{})
+		for j := i + 1; j < len(nums); j++ {
+
+			if _, ok := removeDup2[nums[j]]; ok {
+				continue
+			}
+			removeDup2[nums[j]] = struct{}{}
+			removeDup3 := make(map[int]struct{})
+			for z := j + 1; z < len(nums); z++ {
+
+				if _, ok := removeDup3[nums[z]]; ok {
+					continue
+				}
+				removeDup3[nums[z]] = struct{}{}
+				if nums[i]+nums[j]+nums[z] == 0 {
+					res = append(res, []int{nums[i], nums[j], nums[z]})
+				}
+			}
+		}
+	}
+
+	return res
+}

@@ -18,12 +18,12 @@ func TestSolution1(t *testing.T) {
 
 	t.Run("Test-2", func(t *testing.T) {
 		data := []string{
-			"dog",
-			"racecar",
-			"car",
+			"aaa",
+			"aa",
+			"aaa",
 		}
-		got := longestCommonPrefix(data)
-		want := ""
+		got := longestCommonPrefix2(data)
+		want := "aa"
 		if got != want {
 			t.Error("GOT:", got, "WANT:", want)
 		}

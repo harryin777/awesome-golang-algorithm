@@ -1,39 +1,49 @@
 package Solution
 
-import (
-	"reflect"
-	"strconv"
-	"testing"
-)
+import "testing"
 
-func TestSolution(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs bool
-		expect bool
-	}{
-		{"TestCase", true, true},
-		{"TestCase", true, true},
-		{"TestCase", false, false},
+func Test_findPaths(t *testing.T) {
+	type args struct {
+		m           int
+		n           int
+		maxMove     int
+		startRow    int
+		startColumn int
 	}
-
-	//	开始测试
-	for i, c := range cases {
-		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := Solution(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		//{
+		//	name: "t1",
+		//	args: args{
+		//		m:           2,
+		//		n:           2,
+		//		maxMove:     2,
+		//		startRow:    0,
+		//		startColumn: 0,
+		//	},
+		//	want: 6,
+		//},
+		{
+			name: "t1",
+			args: args{
+				m:           8,
+				n:           7,
+				maxMove:     16,
+				startRow:    1,
+				startColumn: 5,
+			},
+			want: 6,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findPaths(tt.args.m, tt.args.n, tt.args.maxMove, tt.args.startRow, tt.args.startColumn); got != tt.want {
+				t.Errorf("findPaths() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-//	压力测试
-func BenchmarkSolution(b *testing.B) {
-}
-
-//	使用案列
-func ExampleSolution() {
 }
