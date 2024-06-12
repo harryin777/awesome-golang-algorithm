@@ -80,3 +80,45 @@ func moveIndex(index, wordLen, count int, s string, remainNum map[string]int) (i
 	index += wordLen
 	return index, count
 }
+
+func findSubstring2(s string, words []string) []int {
+	l := len(words)
+	subStrs := make([]string, 0, l)
+	var dfs func(int, string, map[int]struct{})
+	dfs = func(level int, curStr string, dup map[int]struct{}) {
+		if level == l {
+			subStrs = append(subStrs, curStr)
+			return
+		}
+		for i := 0; i < l; i++ {
+			if _, ok := dup[i]; ok {
+				continue
+			}
+			dup[i] = struct{}{}
+			nStr := curStr + words[i]
+			dfs(level+1, nStr, dup)
+			delete(dup, i)
+		}
+	}
+	dup := make(map[int]struct{})
+	dfs(0, "", dup)
+	res := make([]int, 0, l)
+	for i := 0; i < len(subStrs); i++ {
+		x, y, begin := 0, 0, -1
+		for x < len(s) && y < len(subStrs[i]) {
+			if s[x] == subStrs[i][y] {
+				x++
+				y++
+			} else {
+				begin++
+				y = 0
+				x = begin
+			}
+		}
+		if y == len(subStrs[i]) {
+			res = append(res, x-y)
+		}
+	}
+
+	return res
+}

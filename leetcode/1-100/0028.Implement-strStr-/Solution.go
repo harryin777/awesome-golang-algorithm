@@ -23,3 +23,25 @@ func strStr(haystack string, needle string) int {
 	}
 	return -1
 }
+
+func strStr2(haystack string, needle string) int {
+	i, j, count := 0, 0, -1
+	for i < len(haystack) && j < len(needle) {
+		if haystack[i] == needle[j] {
+			i++
+			j++
+		} else {
+			count++
+			i = count
+			j = 0
+		}
+	}
+	if i == len(haystack) && j != len(needle) {
+		return -1
+	}
+	if j == len(needle) {
+		return i - j
+	}
+
+	return -1
+}

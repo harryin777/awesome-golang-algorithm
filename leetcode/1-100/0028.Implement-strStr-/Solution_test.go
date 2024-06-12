@@ -12,8 +12,8 @@ func TestSolution(t *testing.T) {
 	})
 
 	t.Run("Test-2", func(t *testing.T) {
-		got := strStr("aaaaa", "bba")
-		want := -1
+		got := strStr2("mississippi", "issip")
+		want := 4
 		if got != want {
 			t.Error("GOT:", got, "WANT:", want)
 		}

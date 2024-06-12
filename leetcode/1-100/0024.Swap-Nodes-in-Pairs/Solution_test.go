@@ -14,8 +14,9 @@ import (
 type SolutionFuncType func(*ListNode) *ListNode
 
 var SolutionFuncList = []SolutionFuncType{
-	swapPairs_1,
-	swapPairs_2,
+	//swapPairs_1,
+	//swapPairs_2,
+	swapPairs3,
 }
 
 // Test case info struct
