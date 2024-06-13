@@ -1,5 +1,9 @@
 package Solution
 
+import (
+	"sort"
+)
+
 func groupAnagrams(ss []string) [][]string {
 	tmp := make(map[int][]string, len(ss)/2)
 	for _, s := range ss {
@@ -23,5 +27,43 @@ func encode(s string) int {
 	for i := range s {
 		res *= prime[s[i]-'a']
 	}
+	return res
+}
+
+func groupAnagrams2(strs []string) [][]string {
+	strMap := make(map[string]string)
+	emptyOne := make([]string, 0, len(strs))
+	for i := 0; i < len(strs); i++ {
+		if len(strs[i]) == 0 {
+			emptyOne = append(emptyOne, "")
+			continue
+		}
+		tmp := make([]byte, 0, len(strs[i]))
+		for j := 0; j < len(strs[i]); j++ {
+			tmp = append(tmp, strs[i][j])
+		}
+		sort.Slice(tmp, func(x, y int) bool {
+			return tmp[x] < tmp[y]
+		})
+		sortedStr := ""
+		for j := 0; j < len(tmp); j++ {
+			sortedStr += string(tmp[j])
+		}
+		strMap[strs[i]] = sortedStr
+	}
+
+	res := make([][]string, 0, len(strs))
+	fMap := make(map[string][]string)
+	for key, val := range strMap {
+		fMap[val] = append(fMap[val], key)
+	}
+
+	for _, val := range fMap {
+		res = append(res, val)
+	}
+	if len(emptyOne) != 0 {
+		res = append(res, emptyOne)
+	}
+
 	return res
 }

@@ -43,7 +43,7 @@ func isValidSudoku2(board [][]byte) bool {
 						return false
 					}
 				}
-				if 3%(i+1) == 0 && 3%(j+1) == 0 {
+				if i%3 == 0 && j%3 == 0 {
 					if !checkBlock(i, j, board) {
 						return false
 					}
