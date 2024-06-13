@@ -33,3 +33,79 @@ func isValidSudoku(board [][]byte) bool {
 	}
 	return true
 }
+
+func isValidSudoku2(board [][]byte) bool {
+	for i := 0; i < len(board); i++ {
+		if checkRow(board, i) {
+			for j := 0; j < len(board[i]); j++ {
+				if i == 0 {
+					if !checkColumn(board, j) {
+						return false
+					}
+				}
+				if 3%(i+1) == 0 && 3%(j+1) == 0 {
+					if !checkBlock(i, j, board) {
+						return false
+					}
+				}
+
+			}
+		} else {
+			return false
+		}
+	}
+
+	return true
+}
+
+func checkBlock(row, column int, board [][]byte) bool {
+	c := make(map[byte]int)
+	for i := row; i < row+3; i++ {
+		for j := column; j < column+3; j++ {
+			if board[i][j] != '.' {
+				c[board[i][j]]++
+			}
+		}
+	}
+	for _, val := range c {
+		if val > 1 {
+			return false
+		}
+	}
+	return true
+}
+
+func checkColumn(board [][]byte, index int) bool {
+	c := make(map[byte]int)
+	for i := 0; i < len(board); i++ {
+		if board[i][index] != '.' {
+			c[board[i][index]]++
+		}
+
+	}
+
+	for _, val := range c {
+		if val > 1 {
+			return false
+		}
+	}
+
+	return true
+}
+
+func checkRow(board [][]byte, index int) bool {
+	c := make(map[byte]int)
+	for i := 0; i < len(board); i++ {
+		if board[index][i] != '.' {
+			c[board[index][i]]++
+		}
+	}
+
+	for _, val := range c {
+		if val > 1 {
+			return false
+		}
+	}
+
+	return true
+}

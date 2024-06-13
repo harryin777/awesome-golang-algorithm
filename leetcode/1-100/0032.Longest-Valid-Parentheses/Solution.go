@@ -1,6 +1,6 @@
 package Solution
 
-//	动态规划
+// 动态规划
 func longestValidParentheses(s string) int {
 	maxans := 0
 	dp := make([]int, len(s))
@@ -33,7 +33,7 @@ func Max(x, y int) int {
 	return y
 }
 
-//	Stack
+// Stack
 func longestValidParentheses2(s string) int {
 	maxans := 0
 	stk := Stack{}
@@ -53,4 +53,69 @@ func longestValidParentheses2(s string) int {
 		}
 	}
 	return maxans
+}
+
+// 可以但是超出时间限制
+func longestValidParentheses3(s string) int {
+	res := 0
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j <= len(s); j++ {
+			sub := s[i:j]
+			if isValid(sub) {
+				res = max(res, len(sub))
+			}
+		}
+	}
+
+	return res
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
+}
+
+func isValid(s string) bool {
+	stack := make([]rune, len(s))
+	top := 0
+	for _, val := range s {
+		if val == '(' {
+			stack[top] = ')'
+			top++
+		} else if val == '{' {
+			stack[top] = '}'
+			top++
+		} else if val == '[' {
+			stack[top] = ']'
+			top++
+		} else {
+			if top == 0 || stack[top-1] != val {
+				return false
+			}
+
+			top--
+		}
+	}
+
+	return top == 0
+}
+
+func longestValidParentheses4(s string) int {
+	stack := ""
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			stack += string(s[i])
+		} else if s[i] == ')' {
+			if len(stack) != 0 && stack[len(stack)-1] == '(' {
+				stack = stack[0 : len(stack)-1]
+			} else {
+				stack += string(s[i])
+			}
+		}
+	}
+
+	return len(s) - len(stack)
 }
