@@ -108,3 +108,36 @@ func threeSum_3(nums []int) [][]int {
 
 	return res
 }
+
+func threeSum_4(nums []int) [][]int {
+	sort.Slice(nums, func(x, y int) bool {
+		return nums[x] < nums[y]
+	})
+	res := make([][]int, 0, len(nums))
+	for i := 0; i < len(nums)-2; i++ {
+		if i == 0 || (i > 0 && nums[i] != nums[i-1]) {
+			l, r := i+1, len(nums)-1
+			for l < r {
+				if nums[i]+nums[l]+nums[r] == 0 {
+					res = append(res, []int{nums[i], nums[l], nums[r]})
+					for l < r && nums[l] == nums[l+1] {
+						l++
+					}
+					for l < r && nums[r] == nums[r-1] {
+						r--
+					}
+					l++
+					r--
+				} else if nums[i]+nums[l]+nums[r] < 0 {
+					l++
+				} else {
+					r--
+				}
+			}
+
+		}
+
+	}
+
+	return res
+}

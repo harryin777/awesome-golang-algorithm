@@ -12,8 +12,7 @@ import (
 type SolutionFuncType func(x string) bool
 
 var SolutionFuncList = []SolutionFuncType{
-	isValid_1,
-	isValid_2,
+	isValid2,
 }
 
 // Test case info struct

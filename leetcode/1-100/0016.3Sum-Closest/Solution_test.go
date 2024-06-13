@@ -12,7 +12,8 @@ func TestSolution(t *testing.T) {
 		inputs [][]int
 		expect int
 	}{
-		{"1 test 1", [][]int{{-1, 2, 1, -4}, {1}}, 2},
+		//{"1 test 1", [][]int{{-1, 2, 1, -4}, {1}}, 2},
+		{"1 test 1", [][]int{{1, 1, 1, 1}, {3}}, 2},
 	}
 
 	//	开始测试

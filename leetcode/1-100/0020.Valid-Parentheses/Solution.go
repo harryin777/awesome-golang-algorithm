@@ -46,3 +46,28 @@ func isValid_2(s string) bool {
 	}
 	return len(stack) == 0
 }
+
+func isValid2(s string) bool {
+	stack := make([]rune, len(s))
+	top := 0
+	for _, val := range s {
+		if val == '(' {
+			stack[top] = ')'
+			top++
+		} else if val == '{' {
+			stack[top] = '}'
+			top++
+		} else if val == '[' {
+			stack[top] = ']'
+			top++
+		} else {
+			if top == 0 || stack[top-1] != val {
+				return false
+			}
+
+			top--
+		}
+	}
+
+	return top == 0
+}

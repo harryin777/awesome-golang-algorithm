@@ -1,6 +1,8 @@
 package Solution
 
-import "sort"
+import (
+	"sort"
+)
 
 func fourSum(nums []int, target2 int) [][]int {
 	sort.Ints(nums)
@@ -87,4 +89,37 @@ func threeSum(res *[][]int, first int, nums []int, target int) {
 			}
 		}
 	}
+}
+
+// 解法可以,但是超出时间限制
+func fourSum3(nums []int, target int) [][]int {
+	n := len(nums)
+	res := make([][]int, 0, n)
+	sort.Ints(nums)
+	var dfs func(int, int, []int)
+	dfs = func(nextIndex, sum int, curArr []int) {
+		if sum == target && len(curArr) == 4 {
+			tmp := make([]int, len(curArr))
+			copy(tmp, curArr)
+			res = append(res, tmp)
+			return
+		}
+		if len(curArr) >= 4 && sum != target {
+			return
+		}
+		visitedMap := make(map[int]struct{})
+		for i := nextIndex; i < len(nums); i++ {
+			if _, ok := visitedMap[nums[i]]; ok {
+				continue
+			}
+			visitedMap[nums[i]] = struct{}{}
+			curArr = append(curArr, nums[i])
+			dfs(i+1, sum+nums[i], curArr)
+			curArr = curArr[0 : len(curArr)-1]
+		}
+	}
+
+	dfs(0, 0, []int{})
+
+	return res
 }

@@ -58,12 +58,12 @@ func Test_threeSum_2(t *testing.T) {
 		want [][]int
 	}{
 		// TODO: Add test cases.
-		//{name: "TestCase 3", args: []int{-1, 0, 1, 2, -1, -4}, want: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
-		{name: "TestCase 4", args: []int{0, 0, 0, 0}, want: [][]int{{-2, 0, 2}}},
+		{name: "TestCase 3", args: []int{-1, 0, 1, 2, -1, -4}, want: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
+		//{name: "TestCase 4", args: []int{-2, 0, 0, 2, 2}, want: [][]int{{-2, 0, 2}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, threeSum_3(tt.args), "threeSum_3(%v)", tt.args)
+			assert.Equalf(t, tt.want, threeSum_4(tt.args), "threeSum_3(%v)", tt.args)
 		})
 	}
 }
