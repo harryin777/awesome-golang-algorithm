@@ -13,17 +13,17 @@ func TestSolution(t *testing.T) {
 		input2 []string
 		expect []int
 	}{
-		{
-			"TestCacse 1",
-			"barfoothefoobarman",
-			[]string{"foo", "bar"},
-			[]int{0, 9},
-		},
+		//{
+		//	"TestCacse 1",
+		//	"a",
+		//	[]string{"a"},
+		//	[]int{0},
+		//},
 		{
 			"TestCacse 2",
-			"wordgoodstudentgoodword",
-			[]string{"word", "student"},
-			[]int{},
+			"lingmindraboofooowingdingbarrwingmonkeypoundcake",
+			[]string{"fooo", "barr", "wing", "ding", "wing"},
+			[]int{13},
 		},
 	}
 

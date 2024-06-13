@@ -83,42 +83,75 @@ func moveIndex(index, wordLen, count int, s string, remainNum map[string]int) (i
 
 func findSubstring2(s string, words []string) []int {
 	l := len(words)
-	subStrs := make([]string, 0, l)
-	var dfs func(int, string, map[int]struct{})
-	dfs = func(level int, curStr string, dup map[int]struct{}) {
-		if level == l {
-			subStrs = append(subStrs, curStr)
-			return
-		}
-		for i := 0; i < l; i++ {
-			if _, ok := dup[i]; ok {
-				continue
-			}
-			dup[i] = struct{}{}
-			nStr := curStr + words[i]
-			dfs(level+1, nStr, dup)
-			delete(dup, i)
-		}
-	}
-	dup := make(map[int]struct{})
-	dfs(0, "", dup)
-	res := make([]int, 0, l)
-	for i := 0; i < len(subStrs); i++ {
-		x, y, begin := 0, 0, -1
-		for x < len(s) && y < len(subStrs[i]) {
-			if s[x] == subStrs[i][y] {
-				x++
-				y++
-			} else {
-				begin++
-				y = 0
-				x = begin
-			}
-		}
-		if y == len(subStrs[i]) {
-			res = append(res, x-y)
-		}
+	wordsMap := make(map[string]int)
+	for _, word := range words {
+		wordsMap[word]++
 	}
 
+	res := make([]int, 0, l)
+	for begin := 0; begin <= len(s)-l*len(words[0]); begin++ {
+		countMap := make(map[string]int)
+
+		for i := 0; i < l; i++ {
+			left := i*len(words[0]) + begin
+			right := left + len(words[0])
+			if right > len(s) {
+				return res
+			}
+			countMap[s[left:right]]++
+		}
+		for key, val := range wordsMap {
+			if curCount, ok := countMap[key]; !ok {
+				goto end
+			} else {
+				if val == curCount {
+					continue
+				} else {
+					goto end
+				}
+			}
+		}
+		res = append(res, begin)
+	end:
+	}
+
+	return res
+}
+
+func findSubstring3(s string, words []string) []int {
+	if s == "" || len(words) == 0 {
+		return []int{}
+	}
+
+	oneWord := len(words[0])
+	wordNum := len(words)
+	n := len(s)
+	wordsCounter := make(map[string]int)
+	for _, word := range words {
+		wordsCounter[word]++
+	}
+
+	var res []int
+	for i := 0; i < oneWord; i++ {
+		curCnt := 0
+		left := i
+		right := i
+		curCounter := make(map[string]int)
+		for right+oneWord <= n {
+			w := s[right : right+oneWord]
+			right += oneWord
+			curCounter[w]++
+			curCnt++
+			for curCounter[w] > wordsCounter[w] {
+				leftW := s[left : left+oneWord]
+				left += oneWord
+				curCounter[leftW]--
+				curCnt--
+			}
+			if curCnt == wordNum {
+				res = append(res, left)
+			}
+		}
+	}
 	return res
 }
