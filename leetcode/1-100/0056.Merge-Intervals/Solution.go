@@ -10,7 +10,7 @@ type Interval struct {
 	End   int
 }
 
-//	自定义排序规则
+// 自定义排序规则
 type SortByInt []Interval
 
 func (p SortByInt) Len() int {
@@ -32,7 +32,6 @@ func Max(x, y int) int {
 	return y
 }
 
-//
 func merge(intervals []Interval) []Interval {
 	if intervals == nil || len(intervals) <= 1 {
 		return intervals
@@ -56,4 +55,52 @@ func merge(intervals []Interval) []Interval {
 	}
 	ans = append(ans, Interval{Start: start, End: end})
 	return ans
+}
+
+func merge2(intervals [][]int) [][]int {
+	n := len(intervals)
+	if n == 0 {
+		return [][]int{}
+	}
+	sort.Slice(intervals, func(x, y int) bool {
+		return intervals[x][1] < intervals[y][1]
+	})
+	res := make([][]int, 0, len(intervals))
+	for len(intervals) > 1 {
+		pre := intervals[0]
+		last := intervals[1]
+		i, j := pre[0], last[0]
+		for i <= pre[1] {
+			i++
+		}
+		i--
+		if i < j {
+			res = append(res, pre)
+			intervals = intervals[1:]
+			continue
+		} else {
+			newOne := []int{min(pre[0], last[0]), max(pre[1], last[1])}
+			intervals = intervals[2:]
+			intervals = append([][]int{newOne}, intervals...)
+		}
+	}
+	res = append(res, intervals[0])
+
+	return res
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+
+	return y
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
 }

@@ -14,12 +14,13 @@ func TestSolution(t *testing.T) {
 	}{
 		{"1 test 1", 4, 2},
 		{"2 test 2", 8, 2},
+		{"2 test 2", 3, 1},
 	}
 
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := mySqrt(c.inputs)
+			ret := mySqrt2(c.inputs)
 			if !reflect.DeepEqual(ret, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)

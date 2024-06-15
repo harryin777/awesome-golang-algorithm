@@ -25,3 +25,26 @@ func simplifyPath2(path string) string {
 	}
 	return "/" + strings.Join(stack, "/")
 }
+
+func simplifyPath3(path string) string {
+	paths := strings.Split(path, "/")
+	stack := make([]string, 0, len(paths))
+	for _, val := range paths {
+		if len(val) == 0 {
+			continue
+		}
+		if val == "." {
+			continue
+		}
+		if val == ".." {
+			if len(stack) == 0 {
+				continue
+			} else {
+				stack = stack[0 : len(stack)-1]
+				continue
+			}
+		}
+		stack = append(stack, val)
+	}
+	return "/" + strings.Join(stack, "/")
+}

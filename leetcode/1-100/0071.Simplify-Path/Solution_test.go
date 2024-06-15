@@ -18,7 +18,7 @@ func TestSolution(t *testing.T) {
 	}{
 		{"TestCacse 1", "/home/", "/home"},
 		{"TestCacse 2", "/../", "/"},
-		{"TestCacse 3", "/home//foo/", "/home/foo"},
+		{"TestCacse 3", "/home/user/Documents/../Pictures", "/home/user/Pictures"},
 		{"TestCacse 4", "/a/./b/../../c/", "/c"},
 		{"TestCacse 5", "/a/../../b/../c//.//", "/c"},
 		{"TestCacse 6", "/a//b////c/d//././/..", "/a/b/c"},
@@ -27,7 +27,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := simplifyPath(c.inputs)
+			got := simplifyPath3(c.inputs)
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.inputs)
@@ -67,10 +67,10 @@ func TestSolution2(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }
