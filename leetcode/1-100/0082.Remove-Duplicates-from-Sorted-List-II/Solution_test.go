@@ -21,6 +21,13 @@ func TestSolution(t *testing.T) {
 			[]int{1, 1, 1, 2, 3},
 			[]int{2, 3},
 		},
+		{
+			name: "t3",
+			inputs: []int{
+				1, 1,
+			},
+			expect: []int{},
+		},
 	}
 
 	//	开始测试
@@ -36,10 +43,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

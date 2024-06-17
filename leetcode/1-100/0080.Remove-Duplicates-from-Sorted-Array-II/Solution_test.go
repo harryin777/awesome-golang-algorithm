@@ -12,8 +12,8 @@ func TestSolution(t *testing.T) {
 		inputs []int
 		expect int
 	}{
-		{"TestCase1", []int{1}, 1},
-		{"TestCase2", []int{1, 1, 1, 2, 2, 3}, 5},
+		{"TestCase1", []int{1, 1, 1}, 2},
+		{"TestCase2", []int{1, 1, 1, 1, 1, 2, 2, 3}, 5},
 		{"TestCase3", []int{0, 0, 1, 1, 1, 1, 2, 3, 3}, 7},
 		{"TestCase4", []int{1, 2, 3, 4}, 4},
 	}
@@ -21,7 +21,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := Solution(c.inputs)
+			ret := removeDuplicates(c.inputs)
 			if !reflect.DeepEqual(ret, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)
@@ -31,10 +31,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

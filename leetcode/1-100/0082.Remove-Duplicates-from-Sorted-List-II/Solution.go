@@ -1,5 +1,7 @@
 package Solution
 
+import "sort"
+
 /*
  * @lc app=leetcode id=82 lang=golang
  *
@@ -32,4 +34,40 @@ func Solution(head *ListNode) *ListNode {
 		}
 	}
 	return p.Next
+}
+
+func deleteDuplicates2(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	tmp1 := head
+	res := &ListNode{
+		Val:  0,
+		Next: head,
+	}
+	tmp2 := res
+	c := make(map[int]int)
+	for tmp1 != nil {
+		c[tmp1.Val]++
+		tmp1 = tmp1.Next
+	}
+	arr := make([]int, 0, len(c))
+	for key, count := range c {
+		if count > 1 {
+			continue
+		}
+		arr = append(arr, key)
+	}
+	sort.Ints(arr)
+	if len(arr) == 0 {
+		return nil
+	}
+	for _, val := range arr {
+		tmp2.Next = &ListNode{
+			Val: val,
+		}
+		tmp2 = tmp2.Next
+	}
+
+	return res.Next
 }
