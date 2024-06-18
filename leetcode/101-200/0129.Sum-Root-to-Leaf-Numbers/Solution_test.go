@@ -14,8 +14,9 @@ import (
 type SolutionFuncType func(root *TreeNode) int
 
 var SolutionFuncList = []SolutionFuncType{
-	sumNumbers_1,
-	sumNumbers_2,
+	//sumNumbers_1,
+	//sumNumbers_2,
+	sumNumbers2,
 }
 
 // Test case info struct

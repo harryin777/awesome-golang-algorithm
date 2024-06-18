@@ -72,3 +72,31 @@ func pathSum_2(root *TreeNode, targetSum int) (ans [][]int) {
 	}
 	return
 }
+
+func pathSum3(root *TreeNode, targetSum int) [][]int {
+	res := make([][]int, 0, 10)
+	var dfs func(*TreeNode, int, []int)
+	dfs = func(root *TreeNode, curSum int, curArr []int) {
+		if root == nil {
+			return
+		}
+		curSum += root.Val
+		defer func() {
+			curArr = curArr[:len(curArr)-1]
+		}()
+		curArr = append(curArr, root.Val)
+		if root.Left == nil && root.Right == nil && curSum == targetSum {
+			tmp := make([]int, len(curArr))
+			copy(tmp, curArr)
+			res = append(res, tmp)
+			return
+		}
+
+		dfs(root.Left, curSum, curArr)
+		dfs(root.Right, curSum, curArr)
+	}
+
+	dfs(root, 0, []int{})
+
+	return res
+}

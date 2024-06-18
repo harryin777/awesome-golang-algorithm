@@ -14,8 +14,9 @@ import (
 type SolutionFuncType func(*TreeNode, int) [][]int
 
 var SolutionFuncList = []SolutionFuncType{
-	pathSum_1,
-	pathSum_2,
+	//pathSum_1,
+	//pathSum_2,
+	pathSum3,
 }
 
 // Test case info struct
@@ -28,7 +29,7 @@ type Case struct {
 
 // Test case
 var cases = []Case{
-	{"TestCase 1", &TreeNode{Val: 1, Left: &TreeNode{Val: 2}, Right: &TreeNode{Val: 3}}, 0, [][]int{}},
+	//{"TestCase 1", &TreeNode{Val: 1, Left: &TreeNode{Val: 2}, Right: &TreeNode{Val: 3}}, 0, [][]int{}},
 	{"TestCase 2", &TreeNode{
 		Val: 5,
 		Left: &TreeNode{

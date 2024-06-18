@@ -52,3 +52,33 @@ func sumNumbers_2(root *TreeNode) (sum int) {
 	}
 	return
 }
+
+func sumNumbers2(root *TreeNode) int {
+	strArr := make([][]int, 0, 10)
+	var dfs func(*TreeNode, []int)
+	dfs = func(root *TreeNode, curStr []int) {
+		if root == nil {
+			return
+		}
+		curStr = append(curStr, root.Val)
+
+		if root.Left == nil && root.Right == nil {
+			strArr = append(strArr, curStr)
+			return
+		}
+		//defer func() {
+		//	curStr = curStr[:len(curStr)-1]
+		//	fmt.Println(1)
+		//}()
+
+		dfs(root.Left, curStr)
+		dfs(root.Right, curStr)
+	}
+	dfs(root, []int{})
+	res := 0
+	for _, str := range strArr {
+		_ = str
+	}
+
+	return res
+}

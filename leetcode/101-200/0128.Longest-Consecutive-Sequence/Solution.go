@@ -87,3 +87,27 @@ func longestConsecutive1(nums []int) int {
 	}
 	return ans
 }
+
+func longestConsecutive2(nums []int) int {
+	digitMap := make(map[int]bool)
+	for _, val := range nums {
+		digitMap[val] = true
+	}
+
+	longStreak := 0
+	for key, _ := range digitMap {
+		if _, ok := digitMap[key-1]; !ok {
+			cur := key
+			tmp := 1
+			for digitMap[cur+1] {
+				cur++
+				tmp++
+			}
+			if tmp > longStreak {
+				longStreak = tmp
+			}
+		}
+	}
+
+	return longStreak
+}
