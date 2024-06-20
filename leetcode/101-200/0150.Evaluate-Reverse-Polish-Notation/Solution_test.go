@@ -1,39 +1,32 @@
 package Solution
 
 import (
-	"reflect"
-	"strconv"
 	"testing"
 )
 
-func TestSolution(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs bool
-		expect bool
-	}{
-		{"TestCase", true, true},
-		{"TestCase", true, true},
-		{"TestCase", false, false},
+func Test_evalRPN(t *testing.T) {
+	type args struct {
+		tokens []string
 	}
-
-	//	开始测试
-	for i, c := range cases {
-		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := Solution(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				[]string{"2", "1", "+", "3", "*"},
+			},
+			want: 9,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := evalRPN(tt.args.tokens); got != tt.want {
+				t.Errorf("evalRPN() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-//	压力测试
-func BenchmarkSolution(b *testing.B) {
-}
-
-//	使用案列
-func ExampleSolution() {
 }

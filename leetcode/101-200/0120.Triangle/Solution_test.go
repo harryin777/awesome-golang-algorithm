@@ -17,7 +17,7 @@ func TestSolution(t *testing.T) {
 			inputs: [][]int{
 				{-1},
 				{2, 3},
-				{1, -1, 3},
+				{1, -1, -3},
 			},
 			expect: -1,
 		},
@@ -44,7 +44,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := minimumTotal3(c.inputs)
+			got := minimumTotal4(c.inputs)
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.inputs)

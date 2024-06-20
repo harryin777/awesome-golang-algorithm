@@ -22,7 +22,7 @@ func TestSolution(t *testing.T) {
 
 	for _, c := range TestCases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := Solution(UnmarshalListBySlice(c.inputs))
+			ret := insertionSortList2(UnmarshalListBySlice(c.inputs))
 			if !isEqual(ret, UnmarshalListBySlice(c.expect)) {
 				PrintList(ret)
 				PrintList(UnmarshalListBySlice(c.expect))
@@ -32,10 +32,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

@@ -40,3 +40,44 @@ func insertionSortList(head *ListNode) *ListNode {
 	}
 	return dummy.Next
 }
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func insertionSortList2(head *ListNode) *ListNode {
+	arr := make([]*ListNode, 0, 10)
+	for head != nil {
+		arr = append(arr, head)
+		head = head.Next
+	}
+
+	for i := 0; i < len(arr); i++ {
+		min := arr[i]
+		var j int
+		for j = i; j > 0; j-- {
+			if min.Val <= arr[j-1].Val {
+				arr[j] = arr[j-1]
+			} else {
+				break
+			}
+		}
+		arr[j] = min
+	}
+
+	res := &ListNode{}
+	tmp := res
+	for index, val := range arr {
+		tmp.Next = val
+		tmp = tmp.Next
+		if index == len(arr)-1 {
+			tmp.Next = nil
+		}
+	}
+
+	return res.Next
+
+}

@@ -1,7 +1,7 @@
 package Solution
 
 import (
-	"reflect"
+	"fmt"
 	"strconv"
 	"testing"
 )
@@ -10,30 +10,39 @@ func TestSolution(t *testing.T) {
 	//	测试用例
 	cases := []struct {
 		name   string
-		inputs bool
+		inputs [][]byte
 		expect bool
 	}{
-		{"TestCase", true, true},
-		{"TestCase", true, true},
-		{"TestCase", false, false},
+		{
+			name: "t1",
+			inputs: [][]byte{
+				{'X', 'X', 'X', 'X'},
+				{'X', 'O', 'O', 'X'},
+				{'X', 'X', 'O', 'X'},
+				{'X', 'O', 'X', 'X'},
+			},
+			expect: false,
+		},
 	}
 
 	//	开始测试
 	for i, c := range cases {
 		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := Solution(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
+			solve(c.inputs)
+			for i := 0; i < len(c.inputs); i++ {
+				for j := 0; j < len(c.inputs[i]); j++ {
+					fmt.Print(string(c.inputs[i][j]))
+				}
+				fmt.Println()
 			}
 		})
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }
