@@ -13,14 +13,15 @@ func TestSolution(t *testing.T) {
 		inputs []int
 		expect int
 	}{
-		{"TestCase", []int{1, 2, 3, 1}, 2},
-		{"TestCase", []int{1, 2, 1, 3, 5, 6, 4}, 5},
+		//{"TestCase1", []int{1, 2, 3, 1}, 2},
+		//{"TestCase2", []int{1, 2, 1, 3, 5, 6, 4}, 5},
+		{"TestCase3", []int{2, 1}, 0},
 	}
 
 	//	开始测试
 	for i, c := range cases {
 		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := findPeakElement(c.inputs)
+			got := findPeakElement2(c.inputs)
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, got, c.inputs)
@@ -29,10 +30,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

@@ -34,3 +34,17 @@ func reverseSlice(s []string) []string {
 	}
 	return s
 }
+
+func reverseWords3(s string) string {
+	arrs := strings.Split(s, " ")
+	res := make([]string, 0, len(arrs))
+	for _, val := range arrs {
+		if val == "" {
+			continue
+		}
+		afterTrim := strings.Trim(val, " ")
+		res = append([]string{afterTrim}, res...)
+	}
+
+	return strings.Join(res, " ")
+}
