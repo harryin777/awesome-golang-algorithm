@@ -14,6 +14,11 @@ func TestSolution(t *testing.T) {
 		expect []string
 	}{
 		{"TestCase", "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT", []string{"AAAAACCCCC", "CCCCCAAAAA"}},
+		{
+			name:   "t2",
+			inputs: "AAAAAAAAAAA",
+			expect: []string{"AAAAAAAAAA"},
+		},
 	}
 
 	//	开始测试
@@ -28,10 +33,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }
