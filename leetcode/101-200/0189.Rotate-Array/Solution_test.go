@@ -25,7 +25,7 @@ func TestSolution(t *testing.T) {
 	for i, c := range cases {
 		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
 			tmp := c.nums
-			Solution(c.nums, c.k)
+			rotate(c.nums, c.k)
 			if !reflect.DeepEqual(c.nums, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v %v",
 					c.expect, c.nums, tmp, c.k)
@@ -34,10 +34,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

@@ -1,5 +1,7 @@
 package Solution
 
+import "strconv"
+
 func Solution(n int) int {
 	count := 0
 	countOfFive := make(map[int]int)
@@ -19,5 +21,25 @@ func Solution2(n int) int {
 		res += n / 5
 		n /= 5
 	}
+	return res
+}
+
+func trailingZeroes(n int) int {
+	ans := n
+	for n != 1 {
+		ans *= n - 1
+		n--
+	}
+	ansStr := strconv.FormatInt(int64(ans), 10)
+
+	res := 0
+	for i := len(ansStr) - 1; i >= 0; i-- {
+		if ansStr[i] == '0' {
+			res++
+		} else {
+			break
+		}
+	}
+
 	return res
 }

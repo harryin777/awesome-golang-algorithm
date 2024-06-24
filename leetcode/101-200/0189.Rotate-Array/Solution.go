@@ -16,3 +16,21 @@ func reverse(arr []int, x, y int) {
 		arr[i], arr[j] = arr[j], arr[i]
 	}
 }
+
+func rotate(nums []int, k int) {
+	l := len(nums)
+	reminder := k % l
+	if reminder == 0 {
+		return
+	}
+	tmp2 := nums
+	tmp := make([]int, reminder)
+	copy(tmp, tmp2[l-reminder:])
+	tmp2 = tmp2[:l-reminder]
+	tmp2 = append(tmp, tmp2...)
+	for i := 0; i < len(nums); i++ {
+		nums[i] = tmp2[i]
+	}
+
+	return
+}
