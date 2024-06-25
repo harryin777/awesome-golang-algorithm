@@ -123,3 +123,69 @@ func fourSum3(nums []int, target int) [][]int {
 
 	return res
 }
+
+func fourSum4(nums []int, target int) [][]int {
+	l := len(nums)
+	if l < 4 {
+		return [][]int{}
+	}
+
+	sort.Slice(nums, func(x, y int) bool {
+		return nums[x] < nums[y]
+	})
+
+	res := make([][]int, 0, 10)
+	for i := 0; i < len(nums)-3; i++ {
+		if i == 0 || (i > 0 && nums[i] != nums[i-1]) {
+			n2, n3 := i+1, i+2
+			n4 := l - 1
+			for n2 < n4 && n3 < n4 {
+				ans := nums[i] + nums[n2] + nums[n3] + nums[n4]
+				if ans == target {
+					res = append(res, []int{nums[i], nums[n2], nums[n3], nums[n4]})
+					break
+				} else if ans < target {
+					if n3+1 < n4 {
+						n3++
+					} else {
+						n2++
+					}
+				} else if ans > target {
+					n4--
+				}
+			}
+
+		}
+	}
+
+	return res
+}
+
+func fourSum5(nums []int, target int) (quadruplets [][]int) {
+	sort.Ints(nums)
+	n := len(nums)
+	for i := 0; i < n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3] <= target; i++ {
+		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[n-3]+nums[n-2]+nums[n-1] < target {
+			continue
+		}
+		for j := i + 1; j < n-2 && nums[i]+nums[j]+nums[j+1]+nums[j+2] <= target; j++ {
+			if j > i+1 && nums[j] == nums[j-1] || nums[i]+nums[j]+nums[n-2]+nums[n-1] < target {
+				continue
+			}
+			for left, right := j+1, n-1; left < right; {
+				if sum := nums[i] + nums[j] + nums[left] + nums[right]; sum == target {
+					quadruplets = append(quadruplets, []int{nums[i], nums[j], nums[left], nums[right]})
+					for left++; left < right && nums[left] == nums[left-1]; left++ {
+					}
+					for right--; left < right && nums[right] == nums[right+1]; right-- {
+					}
+				} else if sum < target {
+					left++
+				} else {
+					right--
+				}
+			}
+		}
+	}
+	return
+}

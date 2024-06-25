@@ -56,12 +56,20 @@ func TestSolution2(t *testing.T) {
 				{-2, 0, 0, 2},
 			},
 		},
+		{
+			name:   "t2",
+			input1: []int{1, 0, -1, 0, -2, 2},
+			input2: 0,
+			expect: [][]int{
+				{-2, -1, 1, 2}, {-2, 0, 0, 2}, {-1, 0, 0, 1},
+			},
+		},
 	}
 
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			got := fourSum3(c.input1, c.input2)
+			got := fourSum4(c.input1, c.input2)
 			fmt.Println(got)
 			//if !reflect.DeepEqual(ret, c.expect) {
 			//	t.Fatalf("expected: %v, but got: %v, with inputs: %v",
