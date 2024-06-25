@@ -71,3 +71,42 @@ func isValid2(s string) bool {
 
 	return top == 0
 }
+
+func isValid(s string) bool {
+	stack := make([]byte, 0, 10)
+	for _, val := range s {
+		if val == '[' || val == '(' || val == '{' {
+			stack = append([]byte{byte(val)}, stack...)
+		} else if val == '}' {
+			if len(stack) == 0 {
+				return false
+			}
+			if stack[0] != '{' {
+				return false
+			}
+			stack = stack[1:]
+		} else if val == ')' {
+			if len(stack) == 0 {
+				return false
+			}
+			if stack[0] != '(' {
+				return false
+			}
+			stack = stack[1:]
+		} else if val == ']' {
+			if len(stack) == 0 {
+				return false
+			}
+			if stack[0] != '[' {
+				return false
+			}
+			stack = stack[1:]
+		}
+	}
+
+	if len(stack) != 0 {
+		return false
+	}
+
+	return true
+}

@@ -73,3 +73,29 @@ func findCircleNum2(isConnected [][]int) int {
 
 	return res
 }
+
+func findCircleNum3(isConnected [][]int) int {
+	var res int
+	vis := make(map[int]bool)
+	for i := 0; i < len(isConnected); i++ {
+		if _, ok := vis[i]; !ok {
+			res++
+			vis[i] = true
+			queue := make([]int, 0, 10)
+			queue = append(queue, i)
+			for len(queue) > 0 {
+				cur := queue[0]
+				queue = queue[1:]
+				for index, val := range isConnected[cur] {
+					if val == 0 || index == cur || vis[index] {
+						continue
+					}
+					vis[index] = true
+					queue = append(queue, index)
+				}
+			}
+		}
+	}
+
+	return res
+}

@@ -123,3 +123,36 @@ func fourSum3(nums []int, target int) [][]int {
 
 	return res
 }
+
+func fourSum4(nums []int, target int) [][]int {
+	sort.Ints(nums)
+	n := len(nums)
+	res := make([][]int, 0, 10)
+	for i := 0; i < n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3] <= target; i++ {
+		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[i+2]+nums[n-2]+nums[n-1] < target {
+			continue
+		}
+		for j := i + 1; j < n-2 && nums[i]+nums[j]+nums[j+1]+nums[j+2] <= target; j++ {
+			if j > i+1 && nums[j] == nums[j-1] || nums[i]+nums[j]+nums[n-2]+nums[n-1] < target {
+				continue
+			}
+			l, r := j+1, n-1
+			for l < r {
+				sum := nums[i] + nums[j] + nums[l] + nums[r]
+				if sum == target {
+					res = append(res, []int{nums[i], nums[j], nums[l], nums[r]})
+					for l++; l < r && nums[l] == nums[l-1]; l++ {
+					}
+					for r--; l < r && nums[r] == nums[r+1]; r-- {
+					}
+				} else if sum < target {
+					l++
+				} else if sum > target {
+					r--
+				}
+			}
+		}
+	}
+
+	return res
+}
