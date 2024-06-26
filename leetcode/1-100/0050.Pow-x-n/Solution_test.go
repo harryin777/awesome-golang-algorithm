@@ -14,7 +14,7 @@ func TestSolution(t *testing.T) {
 		input2 int
 		expect float64
 	}{
-		//{"Test Case 1", 2.00000, 10, 1024.00000},
+		{"Test Case 1", 2.00000, 10, 1024.00000},
 		//{"Test Case 2", 2.10000, 3, 9.26100},
 		{"Test Case 3", 2.00000, -2, 0.25000},
 	}

@@ -38,7 +38,7 @@ func TestSolution(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			listNode := UnmarshalListBySlice(c.inputs.element)
-			ret := Solution(listNode, c.inputs.k)
+			ret := rotateRight2(listNode, c.inputs.k)
 			if !isEqual(ret, UnmarshalListBySlice(c.expect)) {
 				PrintList(ret)
 				PrintList(UnmarshalListBySlice(c.expect))
@@ -48,10 +48,10 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
 }

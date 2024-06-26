@@ -49,3 +49,30 @@ func rotateRight(head *ListNode, k int) *ListNode {
 	pointer.Next = nil
 	return ans
 }
+
+func rotateRight2(head *ListNode, k int) *ListNode {
+	if k == 0 || head == nil || head.Next == nil {
+		return head
+	}
+	length := 1
+	i := head
+	for i.Next != nil {
+		i = i.Next
+		length++
+	}
+	route := length - k%length
+	if route == length {
+		return head
+	}
+	i.Next = head
+
+	for route > 0 {
+		i = i.Next
+		route--
+	}
+	res := i.Next
+	i.Next = nil
+
+	return res
+
+}

@@ -12,16 +12,15 @@ func mySqrt2(x int) int {
 	if x == 1 || x == 0 {
 		return x
 	}
-	l, r := 1, x
-	for r-l > 1 {
+
+	l, r, precision := 0, x, 1
+	for (r - l) > precision {
 		mid := l + (r-l)/2
-		product := mid * mid
-		if product == x {
-			return mid
-		} else if product < x {
-			l = mid
-		} else {
+		power := mid * mid
+		if power > x {
 			r = mid
+		} else {
+			l = mid
 		}
 	}
 

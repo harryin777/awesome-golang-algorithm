@@ -1,7 +1,5 @@
 package Solution
 
-import "strconv"
-
 func plusOne(digits []int) []int {
 	// add one more slot to head for convenient
 	digits = append([]int{0}, digits...)
@@ -40,17 +38,18 @@ func Solution(digits []int) []int {
 }
 
 func plusOne2(digits []int) []int {
-	var str string
-	for _, val := range digits {
-		str += strconv.Itoa(val)
-	}
-	digit, _ := strconv.ParseInt(str, 0, 64)
-	digit++
-	strRes := strconv.FormatInt(digit, 10)
-	res := make([]int, 0, len(digits))
-	for i := 0; i < len(strRes); i++ {
-		res = append(res, int(strRes[i]-'0'))
+	for i := len(digits) - 1; i >= 0; i-- {
+		if digits[i]+1 == 10 {
+			digits[i] = 0
+			if i == 0 {
+				digits = append([]int{1}, digits...)
+			}
+			continue
+		} else {
+			digits[i] += 1
+			break
+		}
 	}
 
-	return res
+	return digits
 }
