@@ -73,3 +73,51 @@ func reverse(vals []int) *ListNode {
 	}
 	return res
 }
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseKGroup3(head *ListNode, k int) *ListNode {
+	arr := make([][]*ListNode, k)
+	for i := 0; i < len(arr); i++ {
+		arr[i] = make([]*ListNode, 0, 10)
+	}
+	tmp1 := head
+	tmp3 := head
+	total := 0
+	for tmp3 != nil {
+		tmp3 = tmp3.Next
+		total++
+	}
+
+	count := 0
+	reminder := total / k
+	for count < reminder*k {
+		arr[count%k] = append(arr[count%k], &ListNode{
+			Val: tmp1.Val,
+		})
+		tmp1 = tmp1.Next
+		count++
+	}
+
+	newRoot := &ListNode{
+		Val: 0,
+	}
+	tmp2 := newRoot
+	count = 0
+	for count < reminder*k {
+		tmp2.Next = arr[k-count%k-1][0]
+		arr[k-count%k-1] = arr[k-count%k-1][1:]
+		tmp2 = tmp2.Next
+		count++
+	}
+	if tmp1 != nil {
+		tmp2.Next = tmp1
+	}
+
+	return newRoot.Next
+}

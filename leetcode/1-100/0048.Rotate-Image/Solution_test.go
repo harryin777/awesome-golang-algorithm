@@ -38,10 +38,37 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test_rotate180(t *testing.T) {
+	type args struct {
+		matrix [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				matrix: [][]int{
+					{5, 1, 9, 11},
+					{2, 4, 8, 10},
+					{13, 3, 6, 7},
+					{15, 14, 12, 16},
+				}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			rotate180(tt.args.matrix)
+		})
+	}
 }
