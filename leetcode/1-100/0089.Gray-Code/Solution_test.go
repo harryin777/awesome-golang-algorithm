@@ -5,34 +5,29 @@ import (
 	"testing"
 )
 
-func TestSolution(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs bool
-		expect bool
-	}{
-		{"TestCacse 1", true, true},
-		{"TestCacse 1", true, true},
-		{"TestCacse 1", false, false},
+func Test_grayCode(t *testing.T) {
+	type args struct {
+		n int
 	}
-
-	//	开始测试
-	for _, c := range cases {
-		t.Run(c.name, func(t *testing.T) {
-			ret := Solution(c.inputs)
-			if !reflect.DeepEqual(ret, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, ret, c.inputs)
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				2,
+			},
+			want: []int{0, 1, 3, 2},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := grayCode(tt.args.n); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("grayCode() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-//	压力测试
-func BenchmarkSolution(b *testing.B) {
-}
-
-//	使用案列
-func ExampleSolution() {
 }

@@ -82,7 +82,7 @@ func pathSum3(root *TreeNode, targetSum int) [][]int {
 		}
 		curSum += root.Val
 		defer func() {
-			curArr = curArr[:len(curArr)-1]
+			//curArr = curArr[:len(curArr)-1]
 		}()
 		curArr = append(curArr, root.Val)
 		if root.Left == nil && root.Right == nil && curSum == targetSum {
