@@ -104,3 +104,59 @@ func max(x, y int) int {
 
 	return x
 }
+
+func merge3(intervals [][]int) [][]int {
+	if len(intervals) == 0 {
+		return [][]int{}
+	}
+
+	if len(intervals) == 1 {
+		return intervals
+	}
+
+	sort.Slice(intervals, func(x, y int) bool {
+		return intervals[x][0] < intervals[y][0]
+	})
+	i, j := 0, 1
+	ans := make([][]int, 0, len(intervals))
+	ansEmpty := true
+	for j < len(intervals) {
+		var slow []int
+		if ansEmpty {
+			slow = intervals[i]
+		} else {
+			slow = ans[len(ans)-1]
+		}
+		fast := intervals[j]
+		if fast[0] <= slow[1] {
+			newOne := make([]int, 2)
+			if fast[1] <= slow[1] {
+				newOne[1] = slow[1]
+			} else {
+				newOne[1] = fast[1]
+			}
+			newOne[0] = slow[0]
+			if ansEmpty {
+				ans = append(ans, newOne)
+				intervals = intervals[2:]
+			} else {
+				ans = ans[:len(ans)-1]
+				ans = append(ans, newOne)
+				intervals = intervals[1:]
+			}
+
+		} else {
+			if ansEmpty {
+				ans = append(ans, slow)
+			} else {
+				ans = append(ans, fast)
+			}
+			intervals = intervals[1:]
+
+		}
+		j = 0
+		ansEmpty = false
+	}
+
+	return ans
+}

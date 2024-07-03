@@ -76,3 +76,30 @@ func rotateRight2(head *ListNode, k int) *ListNode {
 	return res
 
 }
+
+func rotateRight4(head *ListNode, k int) *ListNode {
+	if k == 0 || head == nil || head.Next == nil {
+		return head
+	}
+	tmp1 := head
+	tmp2 := head
+	count := 1
+	for tmp1.Next != nil {
+		tmp1 = tmp1.Next
+		count++
+	}
+
+	roate := count - k%count
+	if roate == count {
+		return head
+	}
+	tmp1.Next = head
+
+	for i := 1; i < count-k%count; i++ {
+		tmp2 = tmp2.Next
+	}
+	tmp3 := tmp2.Next
+	tmp2.Next = nil
+
+	return tmp3
+}

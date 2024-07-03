@@ -32,13 +32,21 @@ func TestSolution(t *testing.T) {
 			},
 			[]int{2, 0, 1},
 		},
+		{
+			name: "t3",
+			inputs: InputCase{
+				element: []int{1, 2},
+				k:       2,
+			},
+			expect: []int{1, 2},
+		},
 	}
 
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			listNode := UnmarshalListBySlice(c.inputs.element)
-			ret := rotateRight2(listNode, c.inputs.k)
+			ret := rotateRight4(listNode, c.inputs.k)
 			if !isEqual(ret, UnmarshalListBySlice(c.expect)) {
 				PrintList(ret)
 				PrintList(UnmarshalListBySlice(c.expect))
