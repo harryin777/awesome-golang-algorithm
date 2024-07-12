@@ -53,3 +53,29 @@ func plusOne2(digits []int) []int {
 
 	return digits
 }
+
+func plusOne3(digits []int) []int {
+	add := 0
+	for i := len(digits) - 1; i >= 0; i-- {
+		var tmp int
+		if i == len(digits)-1 {
+			tmp = digits[i] + 1 + add
+
+		} else {
+			tmp = digits[i] + add
+		}
+		if tmp >= 10 {
+			add = 1
+		} else {
+			digits[i]++
+			add = 0
+			break
+		}
+		digits[i] = tmp % 10
+	}
+	if add > 0 {
+		digits = append([]int{1}, digits...)
+	}
+
+	return digits
+}

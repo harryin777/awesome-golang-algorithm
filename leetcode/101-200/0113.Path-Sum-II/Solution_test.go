@@ -16,7 +16,7 @@ type SolutionFuncType func(*TreeNode, int) [][]int
 var SolutionFuncList = []SolutionFuncType{
 	//pathSum_1,
 	//pathSum_2,
-	pathSum3,
+	pathSum4,
 }
 
 // Test case info struct
