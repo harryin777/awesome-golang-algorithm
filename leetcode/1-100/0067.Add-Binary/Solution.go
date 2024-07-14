@@ -97,3 +97,31 @@ func addBinary2(a string, b string) string {
 
 	return res
 }
+
+func addBinary3(a string, b string) string {
+	m, n := len(a)-1, len(b)-1
+	add := 0
+	ans := ""
+
+	for ; m >= 0 || n >= 0 || add != 0; m, n = m-1, n-1 {
+		var x, y int
+		if m >= 0 {
+			x = int(a[m] - '0')
+		}
+		if n >= 0 {
+			y = int(b[n] - '0')
+		}
+		sum := 0
+		if x+y+add >= 2 {
+			sum = (x + y + add) % 2
+			add = 1
+		} else {
+			sum = x + y + add
+			add = 0
+		}
+
+		ans = strconv.Itoa(sum) + ans
+	}
+
+	return ans
+}

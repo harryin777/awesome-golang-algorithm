@@ -78,3 +78,36 @@ func MarshalSliceToListNode(nums []int) *ListNode {
 	}
 	return head.Next
 }
+
+func addTwoNumbers4(l1 *ListNode, l2 *ListNode) *ListNode {
+	var num1Str string
+	for l1 != nil {
+		num1Str = strconv.Itoa(l1.Val) + num1Str
+		l1 = l1.Next
+	}
+	var num2Str string
+	for l2 != nil {
+		num2Str = strconv.Itoa(l2.Val) + num2Str
+		l2 = l2.Next
+	}
+	num1, _ := strconv.Atoi(num1Str)
+	num2, _ := strconv.Atoi(num2Str)
+	num3 := num1 + num2
+	if num3 == 0 {
+		return &ListNode{
+			Val: 0,
+		}
+	}
+	res := &ListNode{}
+	tmp := res
+	for ; num3 != 0; num3 /= 10 {
+		cur := num3 % 10
+		node := &ListNode{
+			Val: cur,
+		}
+		tmp.Next = node
+		tmp = tmp.Next
+	}
+
+	return res.Next
+}
