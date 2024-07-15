@@ -16,6 +16,7 @@ type SolutionFuncType func([]int, int) int
 var SolutionFuncList = []SolutionFuncType{
 	findKthLargest_1,
 	findKthLargest_2,
+	findKthLargest,
 }
 
 // Test case info struct

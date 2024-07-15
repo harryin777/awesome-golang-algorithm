@@ -89,3 +89,39 @@ func findKthLargest_2(nums []int, k int) int {
 		}
 	}
 }
+
+func findKthLargest(nums []int, k int) int {
+	if k > len(nums) {
+		return 0
+	}
+
+	sortedNums := quickSort(nums, 0, len(nums)-1)
+	return sortedNums[len(sortedNums)-k]
+}
+
+func quickSort(arr []int, left, right int) []int {
+	if left >= right {
+		return arr
+	}
+
+	i, j := left, right
+	tmp := arr[i]
+	for i < j {
+		for i < j && arr[j] >= tmp {
+			j--
+		}
+		for i < j && arr[i] <= tmp {
+			i++
+		}
+		if i != j {
+			arr[i], arr[j] = arr[j], arr[i]
+		}
+	}
+	arr[left] = arr[i]
+	arr[i] = tmp
+
+	arr = quickSort(arr, left, i-1)
+	arr = quickSort(arr, i+1, right)
+
+	return arr
+}
