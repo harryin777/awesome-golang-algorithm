@@ -101,3 +101,34 @@ func reverseBetween1(head *ListNode, left int, right int) *ListNode {
 
 	return ans.Next
 }
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseBetween3(head *ListNode, left int, right int) *ListNode {
+	arr := make([]int, 0, 10)
+	for head != nil {
+		arr = append(arr, head.Val)
+		head = head.Next
+	}
+	l, r := left-1, right-1
+	for l < r {
+		arr[l], arr[r] = arr[r], arr[l]
+		l++
+		r--
+	}
+
+	newRoot := &ListNode{}
+	for _, val := range arr {
+		newRoot.Next = &ListNode{
+			Val: val,
+		}
+		newRoot = newRoot.Next
+	}
+
+	return newRoot.Next
+}

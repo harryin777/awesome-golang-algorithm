@@ -44,3 +44,36 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	return newHead
 }
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reorderList(head *ListNode) {
+	arr := make([]*ListNode, 0, 10)
+	tmp2 := head
+	for tmp2 != nil {
+		arr = append(arr, tmp2)
+		tmp2 = tmp2.Next
+	}
+
+	tmp := head
+	l, r := 1, len(arr)-1
+	for l <= r {
+		tmp.Next = arr[r]
+		r--
+		tmp = tmp.Next
+		if r < l {
+			break
+		}
+		tmp = tmp.Next
+		tmp.Next = arr[l]
+		l++
+		tmp = tmp.Next
+	}
+	tmp.Next = nil
+
+}

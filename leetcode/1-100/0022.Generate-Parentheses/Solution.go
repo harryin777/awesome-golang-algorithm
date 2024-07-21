@@ -65,3 +65,36 @@ func generateParenthesis2(n int) []string {
 
 	return res
 }
+
+var candidates = []string{
+	"(",
+	")",
+}
+
+func generateParenthesis3(n int) []string {
+	count := n * 2
+	ans := make([]string, 0, 10)
+	var dfs func(string, int, int)
+	dfs = func(data string, open, close int) {
+		if len(data) == count {
+			ans = append(ans, data)
+			return
+		}
+
+		if open < n {
+			data += "("
+			dfs(data, open+1, close)
+			data = data[:len(data)-1]
+		}
+
+		if close < open {
+			data += ")"
+			dfs(data, open, close+1)
+			data = data[:len(data)-1]
+		}
+	}
+
+	dfs("", 0, 0)
+
+	return ans
+}

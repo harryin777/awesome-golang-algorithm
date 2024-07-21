@@ -157,27 +157,31 @@ func check(s string) bool {
 }
 
 func lengthOfLongestSubstring4(s string) int {
-	if len(s) == 0 {
-		return 0
+	if len(s) <= 1 {
+		return len(s)
 	}
-
-	if len(s) == 1 {
-		return 1
-	}
-
-	res := 0
-	left, right := 0, 1
-	for right < len(s) {
-		rightByte := s[right]
-		if strings.Contains(s[left:right], string(rightByte)) {
-			res = max(res, right-left)
-			left++
+	i, j, ans := 0, 1, 1
+	for j < len(s) {
+		if !strings.Contains(s[i:j], string(s[j])) {
+			j++
+			ans = max(ans, len(s[i:j]))
 			continue
 		}
-		right++
+		if j-i > 1 {
+			i++
+		} else {
+			i++
+			j++
+		}
 	}
 
-	res = max(res, right-left)
+	return ans
+}
 
-	return res
+func max2(x, y int) int {
+	if x < y {
+		return y
+	}
+
+	return x
 }

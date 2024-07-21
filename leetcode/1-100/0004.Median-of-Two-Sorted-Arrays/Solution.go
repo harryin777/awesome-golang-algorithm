@@ -122,3 +122,34 @@ func quickSort(arr []int, left, right int) []int {
 
 	return arr
 }
+
+func findMedianSortedArrays3(nums1 []int, nums2 []int) float64 {
+	arr := merge2(nums1, nums2)
+	if len(arr)%2 == 0 {
+		mid := len(arr) / 2
+		return float64(arr[mid]+arr[mid-1]) / 2
+	} else {
+		mid := len(arr) / 2
+		return float64(arr[mid])
+	}
+
+}
+
+func merge2(left, right []int) []int {
+	i, j := 0, 0
+	res := make([]int, 0, len(left)+len(right))
+	for i < len(left) && j < len(right) {
+		if left[i] < right[j] {
+			res = append(res, left[i])
+			i++
+		} else {
+			res = append(res, right[j])
+			j++
+		}
+	}
+
+	res = append(res, left[i:]...)
+	res = append(res, right[j:]...)
+
+	return res
+}

@@ -14,9 +14,7 @@ import (
 type SolutionFuncType func(string) int
 
 var SolutionFuncList = []SolutionFuncType{
-	lengthOfLongestSubstring_1,
-	lengthOfLongestSubstring_2,
-	lengthOfLongestSubstring_3,
+	lengthOfLongestSubstring4,
 }
 
 // Test case info struct

@@ -19,7 +19,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := findMedianSortedArrays2(c.inputs[0], c.inputs[1])
+			ret := findMedianSortedArrays3(c.inputs[0], c.inputs[1])
 			if !reflect.DeepEqual(ret, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)

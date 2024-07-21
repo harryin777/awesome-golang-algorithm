@@ -141,3 +141,68 @@ func check(str1, str2 string, tCount [58]int) bool {
 
 	return true
 }
+
+func minWindow4(s string, t string) string {
+	if len(s) < len(t) || len(s) == 0 {
+		return ""
+	}
+	lowerFlag := false
+	if s[0] < 'a' {
+		s = strings.ToLower(s)
+		t = strings.ToLower(t)
+		lowerFlag = true
+	}
+
+	count := make([][][]int, len(s))
+	for i := 0; i < len(s); i++ {
+		count[i] = make([][]int, len(s)+1)
+	}
+
+	for i := 0; i < len(s); i++ {
+		for j := i + 1; j <= len(s); j++ {
+			count[i][j] = make([]int, 26)
+			for _, val := range s[i:j] {
+				count[i][j][val-'a']++
+			}
+		}
+	}
+
+	res := s + t
+	var tCount [26]int
+	for i := 0; i < len(t); i++ {
+		tCount[t[i]-'a']++
+	}
+	left, right := 0, len(t)
+	for left < right && right <= len(s) {
+		if !check2(count[left][right], t, tCount) {
+			right++
+			continue
+		}
+		res = min(res, s[left:right])
+		left++
+		for left < right && check2(count[left][right], t, tCount) {
+			res = min(res, s[left:right])
+			left++
+		}
+	}
+
+	if res == s+t {
+		return ""
+	}
+
+	if lowerFlag {
+		res = strings.ToUpper(res)
+	}
+
+	return res
+}
+
+func check2(sCount []int, t string, tCount [26]int) bool {
+	for i := 0; i < len(t); i++ {
+		if sCount[t[i]-'a'] < tCount[t[i]-'a'] {
+			return false
+		}
+	}
+
+	return true
+}

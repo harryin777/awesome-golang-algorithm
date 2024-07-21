@@ -33,10 +33,39 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test_isIsomorphic(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				"egg",
+				"add",
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isIsomorphic(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("isIsomorphic() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

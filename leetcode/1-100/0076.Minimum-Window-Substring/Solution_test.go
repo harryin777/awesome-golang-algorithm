@@ -28,15 +28,51 @@ func TestSolution(t *testing.T) {
 	}
 }
 
-// 压力测试
-func BenchmarkSolution(b *testing.B) {
+func Test_minWindow4(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				"ADOBECODEBANC",
+				"ABC",
+			},
+			want: "BANC",
+		},
+		{
+			name: "t2",
+			args: args{
+				"a",
+				"aa",
+			},
+			want: "",
+		},
+		{
+			name: "t2",
+			args: args{
+				"a",
+				"a",
+			},
+			want: "a",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minWindow4(tt.args.s, tt.args.t); got != tt.want {
+				t.Errorf("minWindow4() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
 
-// 使用案列
-func ExampleSolution() {
-}
-
-func Test1(t *testing.T) {
-	fmt.Println(minWindow2("bbaa", "aba"))
-	fmt.Println(minWindow3("a", "a"))
+func Test_4(t *testing.T) {
+	fmt.Println(minWindow4("ADOBECODEBANC", "ABC"))
 }

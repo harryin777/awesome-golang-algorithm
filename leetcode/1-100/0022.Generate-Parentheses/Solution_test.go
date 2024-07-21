@@ -20,12 +20,22 @@ func TestSolution(t *testing.T) {
 			"()(())",
 			"()()()",
 		}},
+		{
+			name:   "t2",
+			inputs: 1,
+			expect: []string{"()"},
+		},
+		{
+			name:   "t3",
+			inputs: 2,
+			expect: []string{"()()", "(())"},
+		},
 	}
 
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := generateParenthesis(c.inputs)
+			ret := generateParenthesis3(c.inputs)
 			if !reflect.DeepEqual(ret, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)

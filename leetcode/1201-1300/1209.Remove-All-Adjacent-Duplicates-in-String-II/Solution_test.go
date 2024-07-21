@@ -1,39 +1,42 @@
 package Solution
 
 import (
-	"reflect"
-	"strconv"
 	"testing"
 )
 
-func TestSolution(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs bool
-		expect bool
-	}{
-		{"TestCase", true, true},
-		{"TestCase", true, true},
-		{"TestCase", false, false},
-	}
-
-	//	开始测试
-	for i, c := range cases {
-		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := Solution(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
-			}
-		})
-	}
-}
-
-//	压力测试
+// 压力测试
 func BenchmarkSolution(b *testing.B) {
 }
 
-//	使用案列
+// 使用案列
 func ExampleSolution() {
+}
+
+func Test_removeDuplicates(t *testing.T) {
+	type args struct {
+		s string
+		k int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				"pbbcggttciiippooaais",
+				2,
+			},
+			want: "ps",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := removeDuplicates(tt.args.s, tt.args.k); got != tt.want {
+				t.Errorf("removeDuplicates() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

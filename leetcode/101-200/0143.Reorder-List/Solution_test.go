@@ -25,7 +25,7 @@ func TestSolution(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			linkedList := UnmarshalListBySlice(c.inputs)
-			Solution(linkedList)
+			reorderList(linkedList)
 			if !isEqual(linkedList, c.expect) {
 				PrintList(linkedList)
 				PrintList(c.expect)
