@@ -85,3 +85,37 @@ func myAtoi2(s string) int {
 	}
 	return num * sign
 }
+
+func myAtoi3(s string) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	res := 0
+	preSign := 1
+	i := 0
+	for ; i < len(s); i++ {
+		if s[i] != ' ' {
+			break
+		}
+	}
+	if s[i] == '-' {
+		preSign = -1
+		i++
+	}
+
+	for ; i < len(s); i++ {
+		if s[i] < '0' || s[i] > '9' {
+			return res * preSign
+		}
+
+		res = res*10 + int(s[i]-'0')
+		if res*preSign > math.MaxInt32 {
+			return math.MaxInt32
+		} else if res*preSign < math.MinInt32 {
+			return math.MinInt32
+		}
+	}
+
+	return preSign * res
+}

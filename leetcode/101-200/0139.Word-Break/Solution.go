@@ -136,3 +136,21 @@ func wordBreak5(s string, wordDict []string) bool {
 
 	return dp[len(s)-1]
 }
+
+func wordBreak6(s string, wordDict []string) bool {
+	wordMap := make(map[string]bool)
+	for i := 0; i < len(wordDict); i++ {
+		wordMap[wordDict[i]] = true
+	}
+
+	dp := make([]bool, len(s)+1)
+	dp[0] = true
+	for i := 1; i < len(dp); i++ {
+		for j := 0; j < i; j++ {
+			sub := s[j:i]
+			dp[i] = dp[i] || (dp[j] && wordMap[sub])
+		}
+	}
+
+	return dp[len(s)]
+}

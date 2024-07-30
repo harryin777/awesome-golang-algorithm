@@ -53,3 +53,35 @@ func wordBreak2(s string, wordDict []string) []string {
 
 	return res
 }
+
+func wordBreak3(s string, wordDict []string) []string {
+	wordMap := make(map[string]bool)
+	for _, word := range wordDict {
+		wordMap[word] = true
+	}
+
+	ans := make([]string, 0, 10)
+	var dfs func(string, []string)
+	dfs = func(curStr string, arr []string) {
+		if len(curStr) == 0 {
+			ansStr := strings.Join(arr, " ")
+			ansStr = strings.TrimSuffix(ansStr, " ")
+			ans = append(ans, ansStr)
+			return
+		}
+
+		for i := 1; i <= len(curStr); i++ {
+			str := curStr[:i]
+			if wordMap[str] {
+				newStr := curStr[:i]
+				arr = append(arr, newStr)
+				dfs(curStr[i:], arr)
+				arr = arr[:len(arr)-1]
+			}
+		}
+	}
+
+	dfs(s, []string{})
+
+	return ans
+}

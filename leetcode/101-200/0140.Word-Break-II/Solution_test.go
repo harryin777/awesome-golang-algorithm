@@ -25,7 +25,7 @@ func TestSolution(t *testing.T) {
 	//	开始测试
 	for i, c := range cases {
 		t.Run(c.name+" "+strconv.Itoa(i), func(t *testing.T) {
-			got := wordBreak(c.input1, c.input2)
+			got := wordBreak3(c.input1, c.input2)
 			if !reflect.DeepEqual(got, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with input1: %v input2: %v",
 					c.expect, got, c.input1, c.input2)

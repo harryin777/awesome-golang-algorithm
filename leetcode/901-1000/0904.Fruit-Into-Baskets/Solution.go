@@ -22,3 +22,19 @@ func max(x, y int) int {
 	}
 	return y
 }
+
+func totalFruit(fruits []int) int {
+	ans := 0
+	for i := 0; i < len(fruits); i++ {
+		m := make(map[int]struct{})
+		for j := 0; j < len(fruits); j++ {
+			m[fruits[j]] = struct{}{}
+			if len(m) > 2 {
+				ans = max(ans, j-1)
+				break
+			}
+		}
+	}
+
+	return ans
+}
