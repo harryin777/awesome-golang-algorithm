@@ -16,12 +16,13 @@ func TestSolution(t *testing.T) {
 		{"TestCase2", []int{1, 1, 1, 1, 1, 2, 2, 3}, 5},
 		{"TestCase3", []int{0, 0, 1, 1, 1, 1, 2, 3, 3}, 7},
 		{"TestCase4", []int{1, 2, 3, 4}, 4},
+		{"TestCase5", []int{1, 1, 1, 2, 2, 3}, 5},
 	}
 
 	//	开始测试
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			ret := removeDuplicates(c.inputs)
+			ret := removeDuplicates2(c.inputs)
 			if !reflect.DeepEqual(ret, c.expect) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)

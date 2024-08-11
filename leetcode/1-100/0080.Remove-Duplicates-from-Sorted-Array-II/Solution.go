@@ -57,3 +57,25 @@ func removeDuplicates(nums []int) int {
 
 	return len(nums)
 }
+
+func removeDuplicates2(nums []int) int {
+	if len(nums) == 1 {
+		return 1
+	}
+
+	fast, slow := 1, 0
+	for fast < len(nums) {
+		if nums[slow] == nums[fast] {
+			fast++
+			if fast-1-slow > 1 {
+				nums = append(nums[:slow+1], nums[fast-1:]...)
+				fast = slow + 1
+			}
+		} else {
+			slow++
+			fast++
+		}
+	}
+
+	return len(nums)
+}

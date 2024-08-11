@@ -88,3 +88,54 @@ func cal(str []byte) (int, []byte) {
 
 	return ans, str
 }
+
+func calculate3(s string) int {
+	_, res := cal3([]byte(s))
+	return res
+}
+
+func cal3(b []byte) (res []byte, num int) {
+	stack := make([]int, 0, 10)
+	preSign := '+'
+	for len(b) > 0 {
+		cur := b[0]
+		b = b[1:]
+		add := 0
+		isDigital := false
+
+		if cur >= '0' && cur <= '9' {
+			add = add*10 + int(cur-'0')
+			isDigital = true
+		}
+
+		if cur == '(' {
+			b, add = cal3(b)
+		}
+
+		if !isDigital && cur != ' ' || len(b) == 0 {
+			switch preSign {
+			case '+':
+				stack = append(stack, add)
+			case '-':
+				stack = append(stack, -add)
+			case '*':
+				stack[len(stack)-1] *= add
+			case '/':
+				stack[len(stack)-1] /= add
+			}
+			add = 0
+			preSign = rune(cur)
+		}
+
+		if cur == ')' {
+			break
+		}
+	}
+
+	ans := 0
+	for _, val := range stack {
+		ans += val
+	}
+
+	return b, ans
+}

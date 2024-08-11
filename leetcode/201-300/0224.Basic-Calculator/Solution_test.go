@@ -38,7 +38,7 @@ func Test_calculate2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := calculate2(tt.args.s); got != tt.want {
+			if got := calculate3(tt.args.s); got != tt.want {
 				t.Errorf("calculate2() = %v, want %v", got, tt.want)
 			}
 		})
