@@ -1,65 +1,32 @@
 package Solution
 
 import (
-	"fmt"
-	"reflect"
 	"testing"
 )
 
-func TestSolution(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs []int
-		expect int
-	}{
-		{"TestCacse 1", []int{10, 9, 2, 5, 3, 7, 101, 18}, 4},
+func Test_lengthOfLIS6(t *testing.T) {
+	type args struct {
+		nums []int
 	}
-
-	//	开始测试
-	for _, c := range cases {
-		t.Run(c.name, func(t *testing.T) {
-			got := lengthOfLIS(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				[]int{1, 3, 6, 7, 9, 4, 10, 5, 6},
+			},
+			want: 6,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLIS1(tt.args.nums); got != tt.want {
+				t.Errorf("lengthOfLIS6() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-func TestSolution2(t *testing.T) {
-	//	测试用例
-	cases := []struct {
-		name   string
-		inputs []int
-		expect int
-	}{
-		{"TestCacse 1", []int{10, 9, 2, 5, 3, 7, 101, 18}, 4},
-	}
-
-	//	开始测试
-	for _, c := range cases {
-		t.Run(c.name, func(t *testing.T) {
-			got := lengthOfLIS2(c.inputs)
-			if !reflect.DeepEqual(got, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, got, c.inputs)
-			}
-		})
-	}
-}
-
-// 压力测试
-func BenchmarkSolution(b *testing.B) {
-}
-
-// 使用案列
-func ExampleSolution() {
-}
-
-func TestLengthOfLIS3(t *testing.T) {
-	//fmt.Println(lengthOfLIS3([]int{10, 9, 2, 5, 3, 7, 101, 18}))
-	fmt.Println(lengthOfLIS4([]int{10, 9, 2, 5, 3, 7, 101, 18}))
-	fmt.Println(lengthOfLIS5([]int{10, 9, 2, 5, 3, 7, 101, 18}))
 }

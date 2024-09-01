@@ -1,62 +1,37 @@
 package Solution
 
 import (
-	"fmt"
-	"reflect"
-	"runtime"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-// solution func Info
-type SolutionFuncType func(int) int
-
-var SolutionFuncList = []SolutionFuncType{
-	fib_1,
-	fib_2,
-	fib_3,
-	fib_4,
-}
-
-// Test info struct
-type Case struct {
-	name   string
-	input  int
-	expect int
-}
-
-// test case
-var cases = []Case{
-	{"TestCase 1", 2, 1},
-	{"TestCase 2", 3, 2},
-	{"TestCase 3", 4, 3},
-	{"TestCase 4", 0, 0},
-	{"TestCase 5", 30, 832040},
-}
-
-// TestSolution Example for solution test cases
-func TestSolution(t *testing.T) {
-	ast := assert.New(t)
-
-	for _, f := range SolutionFuncList {
-		funcName := strings.Split(runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), ".")[1]
-		for _, c := range cases {
-			t.Run(fmt.Sprintf("%s %s", funcName, c.name), func(t *testing.T) {
-				got := f(c.input)
-				ast.Equal(c.expect, got,
-					"func: %v case: %v ", funcName, c.name)
-			})
-		}
+func Test_fib(t *testing.T) {
+	type args struct {
+		n int
 	}
-}
-
-func Test_t1(t *testing.T) {
-	fmt.Println(fib_5(9))
-	fmt.Println(fib_6(9))
-}
-
-func TestFib5(t *testing.T) {
-	fmt.Println(fib_5(30))
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{2},
+			want: 1,
+		},
+		{
+			name: "t2",
+			args: args{
+				4,
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, fib(tt.args.n), "fib(%v)", tt.args.n)
+		})
+	}
 }
