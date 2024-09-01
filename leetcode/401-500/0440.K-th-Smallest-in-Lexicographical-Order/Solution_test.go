@@ -31,3 +31,61 @@ func Test_findKthNumber(t *testing.T) {
 		})
 	}
 }
+
+func Test_findKthNumber2(t *testing.T) {
+	type args struct {
+		n int
+		k int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				n: 13,
+				k: 2,
+			},
+			want: 10,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findKthNumber2(tt.args.n, tt.args.k); got != tt.want {
+				t.Errorf("findKthNumber2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_findKthNumber3(t *testing.T) {
+	type args struct {
+		n int
+		k int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{
+				n: 13,
+				k: 2,
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findKthNumber3(tt.args.n, tt.args.k); got != tt.want {
+				t.Errorf("findKthNumber3() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

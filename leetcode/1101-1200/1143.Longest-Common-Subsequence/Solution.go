@@ -87,7 +87,7 @@ func longestCommonSubsequence3(text1, text2 string) int {
 			}
 		}
 	}
-	fmt.Println(dp)
+
 	return dp[m-1][n-1]
 }
 

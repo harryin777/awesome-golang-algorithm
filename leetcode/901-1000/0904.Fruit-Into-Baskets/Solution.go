@@ -25,19 +25,19 @@ func max(x, y int) int {
 
 func totalFruit(fruits []int) int {
 	ans := 0
-	for i := 0; i < len(fruits); i++ {
-		if i > 1 && fruits[i] == fruits[i-1] {
-			continue
-		}
-		m := make(map[int]struct{})
-		var j = i
-		for ; j < len(fruits); j++ {
-			m[fruits[j]] = struct{}{}
-			if len(m) > 2 {
-				break
+	count := make(map[int]int)
+	left := 0
+	for index, x := range fruits {
+		count[x]++
+		for len(count) > 2 {
+			l := fruits[left]
+			count[l]--
+			if count[l] == 0 {
+				delete(count, l)
 			}
+			left++
 		}
-		ans = max(ans, j-i)
+		ans = max(ans, index-left+1)
 	}
 
 	return ans

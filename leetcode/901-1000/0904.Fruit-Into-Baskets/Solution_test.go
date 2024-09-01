@@ -67,7 +67,7 @@ func Test_totalFruit(t *testing.T) {
 		{
 			name: "t2",
 			args: args{
-				[]int{0, 1, 2, 2},
+				[]int{0, 0, 1, 2, 2, 2},
 			},
 			want: 3,
 		},
