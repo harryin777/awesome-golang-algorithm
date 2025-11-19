@@ -174,3 +174,38 @@ func threeSum(nums []int) [][]int {
 
 	return res
 }
+
+func threeSum6(nums []int) [][]int {
+	if len(nums) < 3 {
+		return nil
+	}
+
+	res := make([][]int, 0, 0)
+	var fn func([]int, int, map[int]struct{}, []int)
+	fn = func(nums []int, startIndex int, dup map[int]struct{}, sli []int) {
+		if len(sli) == 3 {
+			if sli[0]+sli[1]+sli[2] == 0 {
+				tmp := make([]int, 3)
+				copy(tmp, sli)
+				res = append(res, tmp)
+				return
+			}
+		}
+		for i := startIndex; i < len(nums); i++ {
+			if _, ok := dup[nums[i]]; ok {
+				continue
+			}
+			dup[nums[i]] = struct{}{}
+			sli = append(sli, nums[i])
+			fn(nums, i+1, dup, sli)
+			sli = sli[:len(sli)-1]
+			delete(dup, nums[i])
+		}
+	}
+
+	sli := make([]int, 0, 5)
+	dup := make(map[int]struct{})
+	fn(nums, 0, dup, sli)
+
+	return res
+}

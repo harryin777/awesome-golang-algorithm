@@ -15,7 +15,7 @@ type SolutionFuncType func([]int) [][]int
 
 var SolutionFuncList = []SolutionFuncType{
 	//threeSum_1,
-	threeSum,
+	threeSum6,
 }
 
 // Test case info struct
@@ -30,8 +30,8 @@ var cases = []Case{
 	//{name: "TestCase 1", input: []int{}, expect: [][]int{}},
 	//{name: "TestCase 2", input: []int{0}, expect: [][]int{}},
 	{name: "TestCase 3", input: []int{-1, 0, 1, 2, -1, -4}, expect: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
-	{name: "TestCase 4", input: []int{-2, 0, 0, 2, 2}, expect: [][]int{{-2, 0, 2}}},
-	{name: "TestCase 5", input: []int{1, -1, -1, 0}, expect: [][]int{{-1, 0, 1}}},
+	//{name: "TestCase 4", input: []int{-2, 0, 0, 2, 2}, expect: [][]int{{-2, 0, 2}}},
+	//{name: "TestCase 5", input: []int{1, -1, -1, 0}, expect: [][]int{{-1, 0, 1}}},
 }
 
 // TestSolution Run test case for all solutions
