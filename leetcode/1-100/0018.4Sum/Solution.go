@@ -46,108 +46,31 @@ func fourSum(nums []int, target2 int) [][]int {
 
 func fourSum1(nums []int, target int) [][]int {
 	sort.Ints(nums)
-	var res [][]int
+	res := make([][]int, 0, 0)
 	for i := 0; i < len(nums)-3; i++ {
-		if i != 0 && nums[i] == nums[i-1] {
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		threeSum(&res, nums[i], nums[i+1:], target-nums[i])
-	}
-	return res
-}
-
-func threeSum(res *[][]int, first int, nums []int, target int) {
-	nlen := len(nums)
-	for i := 0; i < nlen-2; i++ {
-		if i != 0 && nums[i] == nums[i-1] {
-			continue
-		}
-
-		left, right := i+1, nlen-1
-		for left < right {
-			sum := nums[i] + nums[left] + nums[right]
-			if sum == target {
-				*res = append(*res, []int{first, nums[i], nums[left], nums[right]})
-				for left < right && nums[left] == nums[left+1] {
-					left++
-				}
-				for left < right && nums[right] == nums[right-1] {
-					right--
-				}
-				left++
-				right--
-			} else if sum < target {
-				for left < right && nums[left] == nums[left+1] {
-					left++
-				}
-				left++
-			} else {
-				for left < right && nums[right] == nums[right-1] {
-					right--
-				}
-				right--
-			}
-		}
-	}
-}
-
-// 解法可以,但是超出时间限制
-func fourSum3(nums []int, target int) [][]int {
-	n := len(nums)
-	res := make([][]int, 0, n)
-	sort.Ints(nums)
-	var dfs func(int, int, []int)
-	dfs = func(nextIndex, sum int, curArr []int) {
-		if sum == target && len(curArr) == 4 {
-			tmp := make([]int, len(curArr))
-			copy(tmp, curArr)
-			res = append(res, tmp)
-			return
-		}
-		if len(curArr) >= 4 && sum != target {
-			return
-		}
-		visitedMap := make(map[int]struct{})
-		for i := nextIndex; i < len(nums); i++ {
-			if _, ok := visitedMap[nums[i]]; ok {
+		for j := i + 1; j < len(nums)-2; j++ {
+			if j > i+1 && nums[j] == nums[j-1] {
 				continue
 			}
-			visitedMap[nums[i]] = struct{}{}
-			curArr = append(curArr, nums[i])
-			dfs(i+1, sum+nums[i], curArr)
-			curArr = curArr[0 : len(curArr)-1]
-		}
-	}
-
-	dfs(0, 0, []int{})
-
-	return res
-}
-
-func fourSum4(nums []int, target int) [][]int {
-	sort.Ints(nums)
-	n := len(nums)
-	res := make([][]int, 0, 10)
-	for i := 0; i < n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3] <= target; i++ {
-		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[i+2]+nums[n-2]+nums[n-1] < target {
-			continue
-		}
-		for j := i + 1; j < n-2 && nums[i]+nums[j]+nums[j+1]+nums[j+2] <= target; j++ {
-			if j > i+1 && nums[j] == nums[j-1] || nums[i]+nums[j]+nums[n-2]+nums[n-1] < target {
-				continue
-			}
-			l, r := j+1, n-1
+			l, r := j+1, len(nums)-1
+			dup := make(map[int]struct{})
 			for l < r {
-				sum := nums[i] + nums[j] + nums[l] + nums[r]
-				if sum == target {
+				val := nums[i] + nums[j] + nums[l] + nums[r]
+				if val == target {
+					if _, ok := dup[nums[l]]; ok {
+						l++
+						continue
+					}
+					dup[nums[l]] = struct{}{}
 					res = append(res, []int{nums[i], nums[j], nums[l], nums[r]})
-					for l++; l < r && nums[l] == nums[l-1]; l++ {
-					}
-					for r--; l < r && nums[r] == nums[r+1]; r-- {
-					}
-				} else if sum < target {
 					l++
-				} else if sum > target {
+					r--
+				} else if val < target {
+					l++
+				} else {
 					r--
 				}
 			}

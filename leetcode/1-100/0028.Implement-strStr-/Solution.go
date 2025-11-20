@@ -45,3 +45,19 @@ func strStr2(haystack string, needle string) int {
 
 	return -1
 }
+
+func strStr3(haystack string, needle string) int {
+	if len(needle) > len(haystack) {
+		return -1
+	}
+
+	f := len(needle)
+	for i := 0; i < len(haystack)-len(needle)+1; i++ {
+		tmp := haystack[i : i+f]
+		if tmp == needle {
+			return i
+		}
+	}
+
+	return -1
+}

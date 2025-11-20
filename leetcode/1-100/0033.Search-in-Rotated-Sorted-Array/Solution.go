@@ -22,3 +22,27 @@ func search(nums []int, target int) int {
 	}
 	return -1
 }
+
+func search2(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		mid := (l + r) / 2
+		if nums[mid] == target {
+			return mid
+		} else if nums[mid] >= nums[l] {
+			if nums[l] <= target && target < nums[mid] {
+				r--
+			} else {
+				l++
+			}
+		} else {
+			if nums[mid] < target && target <= nums[r] {
+				l++
+			} else {
+				r--
+			}
+		}
+	}
+
+	return -1
+}

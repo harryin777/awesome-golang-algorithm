@@ -1,9 +1,7 @@
 package Solution
 
 import (
-	"fmt"
 	"math"
-	"time"
 )
 
 func divide(dividend int, divisor int) int {
@@ -55,48 +53,6 @@ func divide(dividend int, divisor int) int {
 
 // 可行，但是超出时间限制
 func divide2(dividend int, divisor int) int {
-	t1 := time.Now()
-	sign := 1
-	if dividend < 0 {
-		sign = -1
-		dividend = abs(dividend)
-
-	}
-	if divisor < 0 {
-		sign = 1
-		divisor = abs(divisor)
-	}
-
-	count := 0
-	for i := divisor; i <= dividend; i += divisor {
-		count++
-	}
-	fmt.Printf("cost11 : %v \n", time.Now().Sub(t1))
-	if sign < 0 {
-		count = -count
-	}
-
-	if count > math.MaxInt32 {
-		count = math.MaxInt32
-	}
-	if count < math.MinInt32 {
-		count = math.MinInt32
-	}
-	fmt.Printf("cost : %v \n", time.Now().Sub(t1))
-	return count
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-
-	return x
-}
-
-// 1010   11
-func divide3(dividend, divisor int) int {
-	t1 := time.Now()
 	if dividend == math.MinInt32 { // 考虑被除数为最小值的情况
 		if divisor == 1 {
 			return math.MinInt32
@@ -140,10 +96,8 @@ func divide3(dividend, divisor int) int {
 			dividend -= candidates[i]
 		}
 	}
-	fmt.Printf("cost2 : %v \n", time.Now().Sub(t1))
 	if rev {
 		return -ans
 	}
-
 	return ans
 }

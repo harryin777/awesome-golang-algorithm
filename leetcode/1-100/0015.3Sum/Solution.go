@@ -42,170 +42,36 @@ func threeSum_1(nums []int) [][]int {
 }
 
 func threeSum_2(nums []int) [][]int {
-	res := make([][]int, 0, len(nums))
-	var dfs func(int, []int, map[int]struct{})
-	dfs = func(count int, currArr []int, visitedMap map[int]struct{}) {
-		if count == 0 && len(currArr) == 3 {
-			tmp := make([]int, len(currArr))
-			copy(tmp, currArr)
-			res = append(res, tmp)
-			return
-		}
-
-		if len(visitedMap) == len(nums) {
-			return
-		}
-
-		for i := 0; i < len(nums); i++ {
-			if _, ok := visitedMap[nums[i]]; ok {
-				continue
-			}
-			visitedMap[nums[i]] = struct{}{}
-			currArr = append(currArr, nums[i])
-			dfs(count+nums[i], currArr, visitedMap)
-			delete(visitedMap, nums[i])
-			currArr = currArr[0 : len(currArr)-1]
-		}
-	}
-	visitedMap := make(map[int]struct{})
-	dfs(0, []int{}, visitedMap)
-
-	return res
-}
-
-// 这个解法可以，但是超出时间限制
-func threeSum_3(nums []int) [][]int {
-	res := make([][]int, 0, len(nums))
-	sort.Slice(nums, func(i, j int) bool {
-		return nums[i] < nums[j]
-	})
-	removeDup := make(map[int]struct{})
-	for i := 0; i < len(nums); i++ {
-		if _, ok := removeDup[nums[i]]; ok {
-			continue
-		}
-		removeDup[nums[i]] = struct{}{}
-		removeDup2 := make(map[int]struct{})
-		for j := i + 1; j < len(nums); j++ {
-
-			if _, ok := removeDup2[nums[j]]; ok {
-				continue
-			}
-			removeDup2[nums[j]] = struct{}{}
-			removeDup3 := make(map[int]struct{})
-			for z := j + 1; z < len(nums); z++ {
-
-				if _, ok := removeDup3[nums[z]]; ok {
-					continue
-				}
-				removeDup3[nums[z]] = struct{}{}
-				if nums[i]+nums[j]+nums[z] == 0 {
-					res = append(res, []int{nums[i], nums[j], nums[z]})
-				}
-			}
-		}
-	}
-
-	return res
-}
-
-func threeSum_4(nums []int) [][]int {
 	sort.Slice(nums, func(x, y int) bool {
 		return nums[x] < nums[y]
 	})
-	res := make([][]int, 0, len(nums))
-	for i := 0; i < len(nums)-2; i++ {
-		if i == 0 || (i > 0 && nums[i] != nums[i-1]) {
-			l, r := i+1, len(nums)-1
-			for l < r {
-				if nums[i]+nums[l]+nums[r] == 0 {
-					res = append(res, []int{nums[i], nums[l], nums[r]})
-					for l < r && nums[l] == nums[l+1] {
-						l++
-					}
-					for l < r && nums[r] == nums[r-1] {
-						r--
-					}
-					l++
-					r--
-				} else if nums[i]+nums[l]+nums[r] < 0 {
-					l++
-				} else {
-					r--
-				}
-			}
-
-		}
-
-	}
-
-	return res
-}
-
-func threeSum(nums []int) [][]int {
-	res := make([][]int, 0, 10)
-	sort.Ints(nums)
-	n := len(nums)
-	for i := 0; i < len(nums)-2; i++ {
-		if nums[i]+nums[n-1]+nums[n-2] < 0 {
-			continue
-		}
-		if i > 0 && nums[i] == nums[i-1] {
-			continue
-		}
-		left, right := i+1, n-1
-		for left < right {
-			sum := nums[i] + nums[left] + nums[right]
-			if sum == 0 {
-				res = append(res, []int{nums[i], nums[left], nums[right]})
-				for left++; left < right && nums[left] == nums[left-1]; {
-					left++
-				}
-				for right--; left < right && nums[right] == nums[right+1]; {
-					right--
-				}
-			} else if sum < 0 {
-				left++
-			} else {
-				right--
-			}
-		}
-	}
-
-	return res
-}
-
-func threeSum6(nums []int) [][]int {
-	if len(nums) < 3 {
-		return nil
-	}
-
 	res := make([][]int, 0, 0)
-	var fn func([]int, int, map[int]struct{}, []int)
-	fn = func(nums []int, startIndex int, dup map[int]struct{}, sli []int) {
-		if len(sli) == 3 {
-			if sli[0]+sli[1]+sli[2] == 0 {
-				tmp := make([]int, 3)
-				copy(tmp, sli)
-				res = append(res, tmp)
-				return
-			}
+	dup := make(map[int]struct{})
+	for i := 0; i < len(nums)-2; i++ {
+		if _, ok := dup[nums[i]]; ok {
+			continue
 		}
-		for i := startIndex; i < len(nums); i++ {
-			if _, ok := dup[nums[i]]; ok {
-				continue
+		dup[nums[i]] = struct{}{}
+		lDup := make(map[int]struct{})
+		l, r := i+1, len(nums)-1
+		for l < r {
+			val := nums[i] + nums[l] + nums[r]
+			if val < 0 {
+				l++
+			} else if val == 0 {
+				if _, ok := lDup[nums[l]]; ok {
+					l++
+					continue
+				}
+				lDup[nums[l]] = struct{}{}
+				res = append(res, []int{nums[i], nums[l], nums[r]})
+				l++
+				r--
+			} else {
+				r--
 			}
-			dup[nums[i]] = struct{}{}
-			sli = append(sli, nums[i])
-			fn(nums, i+1, dup, sli)
-			sli = sli[:len(sli)-1]
-			delete(dup, nums[i])
 		}
 	}
-
-	sli := make([]int, 0, 5)
-	dup := make(map[int]struct{})
-	fn(nums, 0, dup, sli)
 
 	return res
 }

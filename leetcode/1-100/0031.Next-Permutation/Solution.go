@@ -24,3 +24,23 @@ func reverse(nums []int, start int) {
 		j--
 	}
 }
+
+func nextPermutation2(nums []int) {
+	sorted := false
+	for i := len(nums) - 1; i > 0; i-- {
+		if nums[i] > nums[i-1] {
+			nums[i-1], nums[i] = nums[i], nums[i-1]
+			sorted = true
+			break
+		}
+	}
+	if !sorted {
+		i, j := 0, len(nums)-1
+		for i < j {
+			nums[i], nums[j] = nums[j], nums[i]
+			i++
+			j--
+		}
+	}
+
+}

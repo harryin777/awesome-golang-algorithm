@@ -12,7 +12,7 @@ func TestSolution(t *testing.T) {
 		inputs []int
 		expect int
 	}{
-		{"1 test 1", []int{10, 3}, 3},
+		{"1 test 1", []int{10, -3}, -3},
 		//{"1 test 2", []int{7, -3}, -2},
 		//{"1 test 2", []int{-2147483648, 2}, -1073741824},
 	}
@@ -25,16 +25,11 @@ func TestSolution(t *testing.T) {
 				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
 					c.expect, ret, c.inputs)
 			}
-			ret2 := divide3(c.inputs[0], c.inputs[1])
-			if !reflect.DeepEqual(ret2, c.expect) {
-				t.Fatalf("expected: %v, but got: %v, with inputs: %v",
-					c.expect, ret, c.inputs)
-			}
+			//ret2 := divide2(c.inputs[0], c.inputs[1])
+			//if !reflect.DeepEqual(ret2, c.expect) {
+			//	t.Fatalf("expected: %v, but got: %v, with inputs: %v",
+			//		c.expect, ret, c.inputs)
+			//}
 		})
 	}
-}
-
-func Test_t(t *testing.T) {
-	divide2(-2147483648, 2)
-	divide3(-2147483648, 2)
 }

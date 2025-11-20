@@ -14,8 +14,7 @@ import (
 type SolutionFuncType func([]int) [][]int
 
 var SolutionFuncList = []SolutionFuncType{
-	//threeSum_1,
-	threeSum6,
+	threeSum_2,
 }
 
 // Test case info struct
@@ -29,7 +28,9 @@ type Case struct {
 var cases = []Case{
 	//{name: "TestCase 1", input: []int{}, expect: [][]int{}},
 	//{name: "TestCase 2", input: []int{0}, expect: [][]int{}},
-	{name: "TestCase 3", input: []int{-1, 0, 1, 2, -1, -4}, expect: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
+	//{name: "TestCase 3", input: []int{-1, 0, 1, 2, -1, -4}, expect: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
+	//{name: "TestCase 3", input: []int{2, 2, -4}, expect: [][]int{{2, 2, -4}}},
+	{name: "TestCase 3", input: []int{2, -3, 0, -2, -5, -5, -4, 1, 2, -2, 2, 0, 2, -4, 5, 5, -10}, expect: [][]int{{2, 2, -4}}},
 	//{name: "TestCase 4", input: []int{-2, 0, 0, 2, 2}, expect: [][]int{{-2, 0, 2}}},
 	//{name: "TestCase 5", input: []int{1, -1, -1, 0}, expect: [][]int{{-1, 0, 1}}},
 }
@@ -47,25 +48,5 @@ func TestSolution(t *testing.T) {
 					"func: %v case: %v ", funcName, c.name)
 			})
 		}
-	}
-}
-
-func Test_threeSum_2(t *testing.T) {
-	type args struct {
-		nums []int
-	}
-	tests := []struct {
-		name string
-		args []int
-		want [][]int
-	}{
-		// TODO: Add test cases.
-		{name: "TestCase 3", args: []int{-1, 0, 1, 2, -1, -4}, want: [][]int{{-1, -1, 2}, {-1, 0, 1}}},
-		//{name: "TestCase 4", args: []int{-2, 0, 0, 2, 2}, want: [][]int{{-2, 0, 2}}},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, threeSum_4(tt.args), "threeSum_3(%v)", tt.args)
-		})
 	}
 }
