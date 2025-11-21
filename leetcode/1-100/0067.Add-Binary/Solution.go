@@ -91,3 +91,26 @@ func addBinary3(a string, b string) string {
 
 	return ans
 }
+
+func addBinary4(a string, b string) string {
+	add := 0
+	i, j := len(a)-1, len(b)-1
+	res := ""
+	for i < len(a) || j < len(b) || add != 0 {
+		var num1, num2 int
+		if i >= 0 {
+			num1, _ = strconv.Atoi(string(a[i]))
+			i--
+		}
+		if j >= 0 {
+			num2, _ = strconv.Atoi(string(b[j]))
+			j--
+		}
+		cur := num1 + num2 + add
+		add = cur % 2
+		cur = cur / 2
+		res = strconv.Itoa(cur) + res
+	}
+
+	return res
+}
