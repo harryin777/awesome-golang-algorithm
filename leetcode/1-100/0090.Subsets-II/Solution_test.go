@@ -39,6 +39,6 @@ func ExampleSolution() {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(subsetsWithDup([]int{4, 4, 4, 4, 1}))
 	fmt.Println(subsetsWithDup([]int{4, 4, 4, 1, 4}))
+	fmt.Println(subsetsWithDup([]int{4, 4, 4, 4, 1}))
 }

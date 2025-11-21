@@ -103,3 +103,44 @@ func rotateRight4(head *ListNode, k int) *ListNode {
 
 	return tmp3
 }
+
+func rotateRight5(head *ListNode, k int) *ListNode {
+	if head == nil {
+		return nil
+	}
+
+	fNode := head
+	count := head
+	base := 0
+	for count != nil {
+		count = count.Next
+		base++
+	}
+	if k >= base {
+		k = k % base
+	}
+
+	if k == 0 {
+		return head
+	}
+
+	for fNode != nil && base > k+1 {
+		fNode = fNode.Next
+		k++
+	}
+
+	if fNode == nil {
+		return head
+	}
+
+	n := fNode.Next
+	fNode.Next = nil
+
+	res := n
+	for n.Next != nil {
+		n = n.Next
+	}
+	n.Next = head
+
+	return res
+}

@@ -160,3 +160,38 @@ func merge3(intervals [][]int) [][]int {
 
 	return ans
 }
+
+func merge4(intervals [][]int) [][]int {
+	sort.Slice(intervals, func(i, j int) bool {
+		if intervals[i][0] < intervals[j][0] {
+			return true
+		} else if intervals[i][0] == intervals[j][0] {
+			return intervals[i][1] < intervals[j][1]
+		} else {
+			return false
+		}
+	})
+
+	if len(intervals) == 0 {
+		return nil
+	}
+
+	res := make([][]int, 0, 10)
+	stack := make([][]int, 0, 10)
+	stack = append(stack, intervals[0])
+	for i := 1; i < len(intervals); i++ {
+		if stack[0][1] < intervals[i][1] {
+			if stack[0][1] < intervals[i][0] {
+				res = append(res, stack[0])
+				stack = stack[:0]
+				stack = append(stack, intervals[i])
+				continue
+			} else {
+				stack[0][1] = intervals[i][1]
+			}
+		}
+
+	}
+	res = append(res, stack[0])
+	return res
+}

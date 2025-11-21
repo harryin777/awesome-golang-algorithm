@@ -70,7 +70,7 @@ func Test_merge2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := merge3(tt.args.intervals); !reflect.DeepEqual(got, tt.want) {
+			if got := merge4(tt.args.intervals); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("merge2() = %v, want %v", got, tt.want)
 			}
 		})

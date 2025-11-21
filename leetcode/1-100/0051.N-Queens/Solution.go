@@ -109,3 +109,54 @@ func checkUnusedMap(x, y int, used map[string]struct{}) bool {
 
 	return true
 }
+
+func solveNQueens2(n int) [][]string {
+	res := make([][]string, 0, 10)
+
+	var f func(level int, dupColumn map[int]struct{}, cordinates [][]int)
+	f = func(level int, dupColumn map[int]struct{}, cordinates [][]int) {
+		if level == n {
+
+			matrix := make([][]byte, n)
+			for i := 0; i < n; i++ {
+				matrix[i] = make([]byte, n)
+				for j := 0; j < len(matrix[i]); j++ {
+					matrix[i][j] = '.'
+				}
+			}
+
+			for i := 0; i < len(cordinates); i++ {
+				matrix[cordinates[i][0]][cordinates[i][1]] = 'Q'
+			}
+			tmp := make([]string, 0, len(matrix))
+			for i := 0; i < len(matrix); i++ {
+				tmp = append(tmp, string(matrix[i]))
+			}
+			res = append(res, tmp)
+			return
+		}
+
+		for i := 0; i < n; i++ {
+			for j := 0; j < len(cordinates); j++ {
+				if level-cordinates[j][0] == i-cordinates[j][1] || cordinates[j][0]-level == i-cordinates[j][1] {
+					goto end
+				}
+			}
+			if _, ok := dupColumn[i]; ok {
+				continue
+			}
+			dupColumn[i] = struct{}{}
+			cordinates = append(cordinates, []int{level, i})
+			f(level+1, dupColumn, cordinates)
+			delete(dupColumn, i)
+			cordinates = cordinates[:len(cordinates)-1]
+		end:
+		}
+	}
+
+	dupColumn := make(map[int]struct{})
+	coordinates := make([][]int, 0, 10)
+	f(0, dupColumn, coordinates)
+
+	return res
+}

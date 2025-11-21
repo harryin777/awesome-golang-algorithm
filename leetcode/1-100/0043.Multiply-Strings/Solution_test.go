@@ -67,7 +67,7 @@ func BenchmarkSolution(b *testing.B) {
 }
 
 func TestMultiply2(t *testing.T) {
-	fmt.Println(multiply2("25", "32"))
+	fmt.Println(multiply3("0", "0"))
 }
 
 func TestAaddStrings(t *testing.T) {

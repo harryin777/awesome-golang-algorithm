@@ -34,65 +34,31 @@ func addBinary(a, b string) string {
 }
 
 func addBinary2(a string, b string) string {
-	pre := 0
-	x, y := len(a)-1, len(b)-1
 	var res string
-	for x >= 0 && y >= 0 {
-		sub := pre + int(a[x]-'0'+b[y]-'0')
-		if sub > 1 {
-			pre = 1
-			res = strconv.Itoa(sub%2) + res
-
-		} else {
-			res = strconv.Itoa(sub) + res
-			pre = 0
+	m, n := len(a)-1, len(b)-1
+	add := 0
+	for ; m >= 0 || n >= 0 || add > 0; m, n = m-1, n-1 {
+		var x, y int
+		if m >= 0 {
+			x = int(a[m] - '0')
 		}
-		x--
-		y--
-	}
-	if x < 0 && y >= 0 {
-		if pre != 0 {
-			for y >= 0 {
-				sub := pre + int(b[y]-'0')
-				if sub > 1 {
-					pre = 1
-					res = strconv.Itoa(sub%2) + res
-				} else {
-					res = strconv.Itoa(sub) + res
-					pre = 0
-				}
-				y--
-			}
-		} else {
-			if b[:y+1] == "0" {
-				return res
-			}
-			res = b[:y+1] + res
+		if n >= 0 {
+			y = int(b[n] - '0')
 		}
-
-	} else if y < 0 && x >= 0 {
-		if pre != 0 {
-			for x >= 0 {
-				sub := pre + int(a[x]-'0')
-				if sub > 1 {
-					pre = 1
-					res = strconv.Itoa(sub%2) + res
-				} else {
-					res = strconv.Itoa(sub) + res
-					pre = 0
-				}
-				x--
-			}
+		sum := add + x + y
+		if sum == 3 {
+			res = "1" + res
+			add = 1
+		} else if sum == 2 {
+			res = "0" + res
+			add = 1
+		} else if sum == 1 {
+			res = "1" + res
+			add = 0
 		} else {
-			if a[:x+1] == "0" {
-				return res
-			}
-			res = a[:x+1] + res
+			res = "0" + res
+			add = 0
 		}
-
-	}
-	if pre != 0 {
-		res = strconv.Itoa(pre) + res
 	}
 
 	return res

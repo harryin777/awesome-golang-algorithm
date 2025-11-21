@@ -77,3 +77,34 @@ func addStrings(num1, num2 string) string {
 	}
 	return ans
 }
+
+func multiply3(num1 string, num2 string) string {
+	if num1 == "0" || num2 == "0" {
+		return "0"
+	}
+
+	m, n := len(num1), len(num2)
+	res := make([]int, m+n)
+
+	for i := m - 1; i >= 0; i-- {
+		x := int(num1[i] - '0')
+		for j := n - 1; j >= 0; j-- {
+			y := int(num2[j] - '0')
+			sum := res[i+j+1] + x*y
+			res[i+j] += sum / 10
+			res[i+j+1] = sum % 10
+		}
+	}
+
+	b := make([]byte, 0, m+n)
+	var i = 0
+	for i < len(res) && res[i] == 0 {
+		i++
+	}
+
+	for ; i < len(res); i++ {
+		b = append(b, '0'+byte(res[i]))
+	}
+
+	return string(b)
+}

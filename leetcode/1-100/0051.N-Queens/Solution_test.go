@@ -35,5 +35,5 @@ func BenchmarkSolution(b *testing.B) {
 
 // 使用案列
 func TestQQQ(t *testing.T) {
-	fmt.Println(solveNQueens(6))
+	fmt.Println(solveNQueens2(1))
 }
