@@ -49,6 +49,6 @@ func TestSolution(t *testing.T) {
 }
 
 func Test1(t *testing.T) {
-	fmt.Println(lengthOfLongestSubstring4("pwwkew"))
+	fmt.Println(lengthOfLongestSubstring5("pwwkew"))
 
 }

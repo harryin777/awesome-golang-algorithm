@@ -185,3 +185,23 @@ func max2(x, y int) int {
 
 	return x
 }
+
+func lengthOfLongestSubstring5(s string) int {
+	if len(s) == 1 {
+		return 1
+	}
+	ans, slow, fast := 0, 0, 1
+	for fast < len(s) {
+		if strings.Contains(s[slow:fast], string(s[fast])) {
+			slow++
+			continue
+		}
+
+		if fast-slow+1 > ans {
+			ans = fast - slow + 1
+		}
+		fast++
+	}
+
+	return ans
+}
